@@ -1,0 +1,51 @@
+
+<mat-toolbar color="primary" class="pt-3 ">
+    <mat-toolbar-row  >
+        <h1 class="m-0">Administración de Peluquería</h1>
+
+        <button mat-icon-button (click)="sideNav.toggle()">
+        
+            <mat-icon>menu</mat-icon>
+        </button>
+
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container class="side-nav-container">
+
+    <mat-sidenav #sideNav opened="true" mode="side" class="side-nav bg-white">
+        <mat-nav-list >
+
+            <mat-list-item class="mx-5 mt-5 mb-2" routerLink="/pages/dashboard">
+                <div class="d-flex align-items-center item-menu">
+                    
+                    <mat-icon mat-list-icon >dashboard</mat-icon>
+                    <a mat-line class="ms-4">Dashboard</a>
+                </div>
+            </mat-list-item>
+
+            <mat-list-item class="mx-5 mt-5 mb-2" routerLink="/pages/clientes">
+                <div class="d-flex align-items-center item-menu">
+                    
+                    <mat-icon mat-list-icon >group</mat-icon>
+                    <a mat-line class="ms-4">Clientes</a>
+                </div>
+            </mat-list-item>
+
+            <mat-list-item class="mx-5 mt-5 mb-2" routerLink="/pages/turnos">
+                <div class="d-flex align-items-center item-menu">
+                    
+                    <mat-icon mat-list-icon >edit_calendar</mat-icon>
+                    <a mat-line class="ms-4">Turnos</a>
+                </div>
+            </mat-list-item>
+
+        </mat-nav-list>
+
+    </mat-sidenav>
+    <mat-sidenav-content style="height: 91.5vh;">
+        <router-outlet></router-outlet>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
