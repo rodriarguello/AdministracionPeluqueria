@@ -38,6 +38,9 @@ import {MomentDateModule} from '@angular/material-moment-adapter';
 @NgModule({
   declarations: [],
   imports: [
+    CommonModule
+  ],
+  exports:[
     CommonModule,
     ReactiveFormsModule,
     FormsModule,

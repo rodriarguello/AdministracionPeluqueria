@@ -1,7 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LayoutComponent } from './layout.component';
+import { DashboardComponent } from './Pages/dashboard/dashboard.component';
+import { TurnosComponent } from './Pages/turnos/turnos.component';
 
-const routes: Routes = [];
+const routes: Routes = [{
+  path: '', component: LayoutComponent,
+  children:[
+    {path:'dashboard', component: DashboardComponent},
+    {path:'turnos', component: TurnosComponent}
+  ]
+}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
