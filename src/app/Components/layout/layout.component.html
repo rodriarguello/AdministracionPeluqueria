@@ -66,7 +66,7 @@
 
             <!-- LIST ITEM MASCOTAS -->
             
-            <mat-list-item (click)="mostrarMascotas=true" class="ps-4 py-5" >
+            <mat-list-item routerLink="/pages/mascotas" (click)="mostrarMascotas=true" class="ps-4 py-5" >
                 
                 
                 <div class="d-flex justify-content-start fs-4">
@@ -98,7 +98,59 @@
 
             </mat-list-item>
 
+            <!-- LIST ITEM RAZAS -->
+
+            <mat-list-item  class="ps-4 py-5" routerLink="/pages/razas" (click)="mostrarRazas=true" >
+
+                <div class="d-flex justify-content-start fs-4">
+    
+                    <mat-icon mat-list-icon color="primary">stars</mat-icon>
+                        
+                    <div class="ps-3">Razas</div>
+    
+                    <mat-icon mat-list-icon class="fs-2 ms-3" >navigate_next</mat-icon>
+                        
+                </div>
+    
+            </mat-list-item>   
+            
+            
+             <!-- LIST ITEM ALERGIAS-->
+        <mat-list-item  class="ps-4 py-5" routerLink="/pages/alergias" (click)="mostrarAlergias=true" >
+
+            <div class="d-flex justify-content-start fs-4 py-3">
+
+                <mat-icon mat-list-icon color="primary">healing</mat-icon>
+                    
+                <div class="ps-3">Alergias</div>
+
+                <mat-icon mat-list-icon class="fs-2 ms-3" >navigate_next</mat-icon>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <!-- LIST ITEM ENFERMEDADES-->
+        <mat-list-item  class="ps-4 py-5" routerLink="/pages/enfermedades" (click)="mostrarEnfermedades=true" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="primary">local_hospital</mat-icon>
+                    
+                <div class="ps-3">Enfermedades</div>
+
+                <mat-icon mat-list-icon class="fs-2 ms-3" >navigate_next</mat-icon>
+                    
+            </div>
+
+        </mat-list-item>
+
+    
+        
+        
         </mat-nav-list>
+
+
 
     </mat-sidenav>
     
@@ -106,6 +158,7 @@
  
             
     <mat-sidenav-content style="height: 90vh;">
+        
         <router-outlet></router-outlet>
 
     </mat-sidenav-content>
@@ -168,52 +221,8 @@
 
         </mat-list-item>
 
-        <!-- LIST ITEM RAZAS-->
-        <mat-list-item  class="ps-4 py-5" (click)="mostrarRazas=true" >
-
-            <div class="d-flex justify-content-start fs-4">
-
-                <mat-icon mat-list-icon color="primary">stars</mat-icon>
-                    
-                <div class="ps-3">Razas</div>
-
-                <mat-icon mat-list-icon class="fs-2 ms-3" >navigate_next</mat-icon>
-                    
-            </div>
-
-        </mat-list-item>
-
-        <!-- LIST ITEM ALERGIAS-->
-        <mat-list-item  class="ps-4 py-5" (click)="mostrarAlergias=true" >
-
-            <div class="d-flex justify-content-start fs-4 py-3">
-
-                <mat-icon mat-list-icon color="primary">healing</mat-icon>
-                    
-                <div class="ps-3">Alergias</div>
-
-                <mat-icon mat-list-icon class="fs-2 ms-3" >navigate_next</mat-icon>
-                    
-            </div>
-
-        </mat-list-item>
-
-        <!-- LIST ITEM ENFERMEDADES-->
-        <mat-list-item  class="ps-4 py-5" (click)="mostrarEnfermedades=true" >
-
-            <div class="d-flex justify-content-start fs-4">
-
-                <mat-icon mat-list-icon color="primary">local_hospital</mat-icon>
-                    
-                <div class="ps-3">Enfermedades</div>
-
-                <mat-icon mat-list-icon class="fs-2 ms-3" >navigate_next</mat-icon>
-                    
-            </div>
-
-        </mat-list-item>
-
-    
+       
+       
                     
          <!-- LIST ITEM VOLVER -->
         

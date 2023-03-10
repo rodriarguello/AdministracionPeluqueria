@@ -10,8 +10,8 @@ const routes: Routes = [
   {path:'home', component:IndexComponent, pathMatch:'full'},
 
   //Proteger esta ruta
-  {path:'pages', loadChildren:() => import('./Components/layout/layout.module').then(m => m.LayoutModule) },
-  {path:'**', redirectTo:'home',pathMatch:'full'}
+  {path:'pages', loadChildren:() => import('./Components/layout/layout.module').then(m => m.LayoutModule) }
+  
 
 ];
 
