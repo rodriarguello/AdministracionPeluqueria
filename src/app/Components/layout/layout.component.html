@@ -1,51 +1,474 @@
 
-<mat-toolbar color="primary" class="pt-3 ">
-    <mat-toolbar-row  >
-        <h1 class="m-0">Administración de Peluquería</h1>
+<mat-toolbar color="primary">
+
+    <mat-toolbar-row class="py-5">
+        <h1 class="m-0 p-0" >Administración de Peluquería</h1>
 
         <button mat-icon-button (click)="sideNav.toggle()">
         
-            <mat-icon>menu</mat-icon>
+            <mat-icon >menu</mat-icon>
         </button>
-
     </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-sidenav-container class="side-nav-container">
 
-    <mat-sidenav #sideNav opened="true" mode="side" class="side-nav bg-white">
+
+<mat-sidenav-container>
+    
+        <!-- SIDENAV PRINCIPAL -->
+    <mat-sidenav #sideNav opened="true" mode="side" style="width: 300px;">
         <mat-nav-list >
+                
 
-            <mat-list-item class="mx-5 mt-5 mb-2" routerLink="/pages/dashboard">
-                <div class="d-flex align-items-center item-menu">
-                    
-                    <mat-icon mat-list-icon >dashboard</mat-icon>
-                    <a mat-line class="ms-4">Dashboard</a>
+            <!-- LIST ITEM DASHBOARD -->
+            
+            <mat-list-item routerLink="/pages/dashboard" class="ps-4 py-5">
+
+                <div class="d-flex justify-content-start fs-4">
+
+                    <mat-icon color="primary" mat-list-icon >dashboard</mat-icon>
+                        <div mat-line class="ps-3">Dashboard</div> 
+
                 </div>
             </mat-list-item>
 
-            <mat-list-item class="mx-5 mt-5 mb-2" routerLink="/pages/clientes">
-                <div class="d-flex align-items-center item-menu">
-                    
-                    <mat-icon mat-list-icon >group</mat-icon>
-                    <a mat-line class="ms-4">Clientes</a>
-                </div>
+            
+            <!-- LIST ITEM CLIENTES -->
+            
+            <mat-list-item routerLink="/pages/clientes" class="ps-4 py-5">
+            <div class="d-flex justify-content-start fs-4">   
+
+                <mat-icon mat-list-icon color="primary" >group</mat-icon>
+                    <div mat-line class="ps-3">Clientes</div>
+
+            </div>
+            
             </mat-list-item>
 
-            <mat-list-item class="mx-5 mt-5 mb-2" routerLink="/pages/turnos">
-                <div class="d-flex align-items-center item-menu">
+
+            <!-- LIST ITEM TURNOS -->
+            
+            <mat-list-item  routerLink="/pages/turnos"class="ps-4 py-5" >
+                
+                <div class="d-flex justify-content-start fs-4">
+
+                    <mat-icon mat-list-icon color="primary" >
+                        edit_calendar
+                    </mat-icon>
                     
-                    <mat-icon mat-list-icon >edit_calendar</mat-icon>
-                    <a mat-line class="ms-4">Turnos</a>
+                    <div class="ps-3">
+                        Turnos
+                    </div>
+                
                 </div>
+                    
+            </mat-list-item>
+
+            <!-- LIST ITEM MASCOTAS -->
+            
+            <mat-list-item (click)="mostrarMascotas=true" class="ps-4 py-5" >
+                
+                
+                <div class="d-flex justify-content-start fs-4">
+
+                    <mat-icon mat-list-icon color="primary" >pets</mat-icon>
+                    
+                    <div class="ps-3">Mascotas</div>
+
+                    <mat-icon mat-list-icon class="fs-2 ms-3" >navigate_next</mat-icon>
+                    
+                    
+                </div>
+                
+                    
+            </mat-list-item>
+            
+           
+            <!-- LIST ITEM CAJA -->
+            
+            <mat-list-item routerLink="/pages/caja" class="ps-4 py-5" >
+                <div class="d-flex justify-content-start fs-4">
+
+                    <mat-icon mat-list-icon color="primary" >monetization_on</mat-icon>
+                    
+                    <div class="ps-3">Caja</div>
+                    
+
+                </div>
+
             </mat-list-item>
 
         </mat-nav-list>
 
     </mat-sidenav>
-    <mat-sidenav-content style="height: 91.5vh;">
+    
+
+ 
+            
+    <mat-sidenav-content style="height: 90vh;">
         <router-outlet></router-outlet>
 
     </mat-sidenav-content>
+<!-- SIDENAV MASCOTAS -->
+
+
+<mat-sidenav *ngIf="mostrarMascotas" opened="true" mode = "side" style="width: 300px;">
+        
+    <mat-nav-list>             
+            
+
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="accent">pets</mat-icon>
+                    
+                <div class="ps-3" >MASCOTAS</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+         <!-- LIST ITEM NUEVA MASCOTA-->
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4 py-3">
+
+                <mat-icon mat-list-icon  color="primary">add_circle</mat-icon>
+                    
+                <div class="ps-3">Agregar</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <!-- LIST ITEM ACTUALIZAR MASCOTA-->
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon  color="primary">create</mat-icon>
+                    
+                <div class="ps-3">Actualizar</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <!-- LIST ITEM ELIMINAR MASCOTA-->
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="primary" >delete_sweep</mat-icon>
+                    
+                <div class="ps-3">Eliminar</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <!-- LIST ITEM RAZAS-->
+        <mat-list-item  class="ps-4 py-5" (click)="mostrarRazas=true" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="primary">stars</mat-icon>
+                    
+                <div class="ps-3">Razas</div>
+
+                <mat-icon mat-list-icon class="fs-2 ms-3" >navigate_next</mat-icon>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <!-- LIST ITEM ALERGIAS-->
+        <mat-list-item  class="ps-4 py-5" (click)="mostrarAlergias=true" >
+
+            <div class="d-flex justify-content-start fs-4 py-3">
+
+                <mat-icon mat-list-icon color="primary">healing</mat-icon>
+                    
+                <div class="ps-3">Alergias</div>
+
+                <mat-icon mat-list-icon class="fs-2 ms-3" >navigate_next</mat-icon>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <!-- LIST ITEM ENFERMEDADES-->
+        <mat-list-item  class="ps-4 py-5" (click)="mostrarEnfermedades=true" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="primary">local_hospital</mat-icon>
+                    
+                <div class="ps-3">Enfermedades</div>
+
+                <mat-icon mat-list-icon class="fs-2 ms-3" >navigate_next</mat-icon>
+                    
+            </div>
+
+        </mat-list-item>
+
+    
+                    
+         <!-- LIST ITEM VOLVER -->
+        
+        <mat-list-item  (click)="mostrarMascotas=false" class="ps-4 py-5" >
+            <div class="d-flex justify-content-end fs-4">
+
+                <mat-icon>
+                    navigate_before
+                </mat-icon>
+                
+                <div class="ps-1">
+                    Volver
+                </div>
+                
+            </div>
+                
+        </mat-list-item>
+                        
+        
+    </mat-nav-list>          
+</mat-sidenav>
+
+ <!-- SIDENAV RAZAS -->
+ <mat-sidenav *ngIf="mostrarRazas" opened="true" mode = "side" style="width: 300px;">
+        
+    <mat-nav-list>    
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="accent" >stars</mat-icon>
+                    
+                <div class="ps-3">RAZAS</div>
+                    
+            </div>
+
+        </mat-list-item>         
+            
+         <!-- LIST ITEM NUEVA RAZA-->
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4 py-3">
+
+                <mat-icon mat-list-icon color="primary" >add_circle</mat-icon>
+                    
+                <div class="ps-3">Agregar</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <!-- LIST ITEM ACTUALIZAR RAZA-->
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="primary">create</mat-icon>
+                    
+                <div class="ps-3">Actualizar</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <!-- LIST ITEM ELIMINAR RAZA-->
+        <mat-list-item  class="ps-4 py-5">
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="primary">delete_sweep</mat-icon>
+                    
+                <div class="ps-3">Eliminar</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+                  
+         <!-- LIST ITEM VOLVER -->
+        
+        <mat-list-item  (click)="mostrarRazas=false" class="ps-4 py-5" >
+            <div class="d-flex justify-content-end fs-4">
+
+                <mat-icon>
+                    navigate_before
+                </mat-icon>
+                
+                <div class="ps-1">
+                    Volver
+                </div>
+                
+            </div>
+                
+        </mat-list-item>
+                        
+        
+    </mat-nav-list>          
+</mat-sidenav>
+   
+
+ <!-- SIDENAV ALERGIAS -->
+ <mat-sidenav *ngIf="mostrarAlergias" opened="true" mode = "side" style="width: 300px;">
+        
+    <mat-nav-list>     
+        
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="accent">healing</mat-icon>
+                    
+                <div class="ps-3">ALERGIAS</div>
+                    
+            </div>
+
+        </mat-list-item>
+            
+         <!-- LIST ITEM NUEVA ALERGIA-->
+        <mat-list-item  class="ps-4 py-5">
+
+            <div class="d-flex justify-content-start fs-4 py-3">
+
+                <mat-icon mat-list-icon color="primary" >add_circle</mat-icon>
+                    
+                <div class="ps-3">Agregar</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <!-- LIST ITEM ACTUALIZAR ALERGIA-->
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="primary">create</mat-icon>
+                    
+                <div class="ps-3">Actualizar</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <!-- LIST ITEM ELIMINAR ALERGIA-->
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="primary">delete_sweep</mat-icon>
+                    
+                <div class="ps-3">Eliminar</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+        
+         <!-- LIST ITEM VOLVER -->
+        
+        <mat-list-item  (click)="mostrarAlergias=false" class="ps-4 py-5" >
+            <div class="d-flex justify-content-end fs-4">
+
+                <mat-icon>
+                    navigate_before
+                </mat-icon>
+                
+                <div class="ps-1">
+                    Volver
+                </div>
+                
+            </div>
+                
+        </mat-list-item>
+                        
+        
+    </mat-nav-list>          
+</mat-sidenav>
+
+ <!-- SIDENAV ENFERMEDADES -->
+ <mat-sidenav *ngIf="mostrarEnfermedades" opened="true" mode = "side" style="width: 300px;">
+        
+    <mat-nav-list>    
+        
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="accent">local_hospital</mat-icon>
+                    
+                <div class="ps-3">ENFERMEDADES</div>
+                    
+            </div>
+
+        </mat-list-item>         
+            
+         <!-- LIST ITEM NUEVA ENFERMEDAD-->
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4 py-3">
+
+                <mat-icon mat-list-icon color="primary">add_circle</mat-icon>
+                    
+                <div class="ps-3">Agregar</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <!-- LIST ITEM ACTUALIZAR ENFERMEDAD-->
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="primary">create</mat-icon>
+                    
+                <div class="ps-3">Actualizar</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <!-- LIST ITEM ELIMINAR ENFERMEDAD-->
+        <mat-list-item  class="ps-4 py-5" >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="primary">delete_sweep</mat-icon>
+                    
+                <div class="ps-3">Eliminar</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+         
+         <!-- LIST ITEM VOLVER -->
+        
+        <mat-list-item  (click)="mostrarEnfermedades=false" class="ps-4 py-5" >
+            <div class="d-flex justify-content-end fs-4">
+
+                <mat-icon>
+                    navigate_before
+                </mat-icon>
+                
+                <div class="ps-1">
+                    Volver
+                </div>
+                
+            </div>
+                
+        </mat-list-item>
+                        
+        
+    </mat-nav-list>          
+</mat-sidenav>
+
 
 </mat-sidenav-container>

@@ -1,51 +1,12 @@
 .item-menu{
-
-    color: #333333;
-    font-size: 1.8rem;
-    cursor: pointer;
-   
-
+cursor: pointer;
 }
 
 
 
 a{
-    color: inherit;
     text-decoration: none;
 }
 
-.item-menu:hover{
-    color: pink;
-}
 
-.side-nav-container{
-    background-color: aliceblue;
-}
-.side-nav{
-    border-right:  thin solid #999999;
-    width: 300px;
-}
 
-.bg-pink{
-    background-color: #ed7ea4;
-}
-
-.bg-pink-pastel{
-    background-color: #ffb7c2;
-}
-
-.bg-gray{
-    background-color: #333333;
-}
-
-.text-pink{
-    color: #ed7ea4;
-}
-
-.text-pink-pastel{
-    color: #ffb7c2;
-}
-
-.text-gray{
-    color: #333333;
-}
