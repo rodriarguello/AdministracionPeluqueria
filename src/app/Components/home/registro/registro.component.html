@@ -1,9 +1,9 @@
 <mat-card >
 
-    <h2>Login</h2>
+    <h2>REGISTRO</h2>
     <mat-card-content>
 
-        <form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()">
+        <form [formGroup]="formularioRegistro" (ngSubmit)="nuevoUsuario()">
 
             <div class="mb-3">
                 <label class="form-label">Email</label>
@@ -15,14 +15,12 @@
             </div>
               
             <button class="btn btn-primary">
-                Ingresar
+                Registrar
             </button>
-            
-
         </form>
         <br>
-        <button routerLink="/registro" class="btn btn-primary">
-            Registrarme
+        <button routerLink="/home" class="btn btn-primary">
+            Volver a Login
         </button>
     </mat-card-content>
 
