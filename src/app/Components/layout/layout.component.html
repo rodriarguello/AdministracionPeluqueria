@@ -46,7 +46,7 @@
             
             <!-- LIST ITEM CLIENTES -->
             
-            <mat-list-item routerLink="/pages/clientes" (click)="mostrarClientes=true" class="ps-4 py-5">
+            <mat-list-item routerLink="clientes/index" (click)="mostrarClientes=true" class="ps-4 py-5">
             
              
                     <div class="d-flex justify-content-start fs-4">
@@ -265,7 +265,7 @@
         <mat-nav-list>             
                 
     
-            <mat-list-item  class="ps-4 py-5" >
+            <mat-list-item routerLink="clientes/index" class="ps-4 py-5" >
     
                 <div class="d-flex justify-content-start fs-4">
     
@@ -277,8 +277,8 @@
     
             </mat-list-item>
     
-             <!-- LIST ITEM NUEVA CLIENTE-->
-            <mat-list-item  class="ps-4 py-5" >
+             <!-- LIST ITEM NUEVO CLIENTE-->
+            <mat-list-item routerLink="clientes/agregar" class="ps-4 py-5" >
     
                 <div class="d-flex justify-content-start fs-4 py-3">
     
@@ -291,7 +291,7 @@
             </mat-list-item>
     
             <!-- LIST ITEM ACTUALIZAR CLIENTE-->
-            <mat-list-item  class="ps-4 py-5" >
+            <mat-list-item routerLink="clientes/actualizar" class="ps-4 py-5" >
     
                 <div class="d-flex justify-content-start fs-4">
     
@@ -304,7 +304,7 @@
             </mat-list-item>
     
             <!-- LIST ITEM ELIMINAR CLIENTE-->
-            <mat-list-item  class="ps-4 py-5" >
+            <mat-list-item  routerLink="clientes/eliminar" class="ps-4 py-5" >
     
                 <div class="d-flex justify-content-start fs-4">
     
