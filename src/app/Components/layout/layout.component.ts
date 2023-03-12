@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 
 @Component({
@@ -8,9 +9,22 @@ import { Component } from '@angular/core';
 })
 export class LayoutComponent {
 
+  constructor(private usuarioService:UsuariosService){
+
+  }
+  
   mostrarMascotas:boolean = false;
   mostrarEnfermedades:boolean = false;
   mostrarAlergias:boolean = false;
   mostrarRazas:boolean = false;
+  mostrarClientes:boolean=false;
+
+  cerrarSesion():void{
+
+    this.usuarioService.cerrarSesion();
+
+  }
+
+
 
 }

@@ -11,8 +11,8 @@ import { MascotasComponent } from './Pages/mascotas/mascotas.component';
 import { RazasComponent } from './Pages/razas/razas.component';
 import { TurnosComponent } from './Pages/turnos/turnos.component';
 
-const routes: Routes = [{
-  path: '', component: LayoutComponent,
+const routes: Routes = [
+  { path: '', component: LayoutComponent,
   children:[
     {path:'dashboard', component: DashboardComponent},
     {path:'turnos', component: TurnosComponent},
@@ -22,8 +22,8 @@ const routes: Routes = [{
     {path:'enfermedades',component:EnfermedadesComponent},
     {path:'alergias',component:AlergiasComponent},
     {path:'razas', component:RazasComponent}
-  ]
-}];
+  ]},
+  { path:'**', redirectTo:'dashboard'}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

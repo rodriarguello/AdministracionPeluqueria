@@ -1,10 +1,10 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
-import { Usuario } from 'src/app/models/usuario.model';
-import { UsuariosService } from 'src/app/services/usuarios.service';
-import { UtilidadService } from 'src/app/services/utilidad.service';
+import { Usuario } from 'src/app/models/usuario';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UtilidadService } from 'src/app/services/utilidad.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-login',
@@ -42,15 +42,18 @@ export class LoginComponent implements OnInit {
   
   iniciarSesion():void{
 
-  const credencialesUsuario = new Usuario(this.formularioLogin.value.email,this.formularioLogin.value.password);
+  const credencialesUsuario:Usuario = new Usuario(this.formularioLogin.value.email,this.formularioLogin.value.password);
 
   this.usuariosService.iniciarSesion(credencialesUsuario).subscribe({
 
    next:(res)=> {
+
+    
+
     this.router.navigate(['pages']);
     console.log(res.token)
   },
-  error:(error)=>{
+  error:()=>{
     this.utilidadService.mostrarAlerta("Error al iniciar sesion","LOGIN")
   }
   

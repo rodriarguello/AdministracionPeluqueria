@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { IndexComponent } from './Components/home/index/index.component';
 import { RegistroComponent } from './Components/home/registro/registro.component';
+import { AutenticacionGuard } from './seguridad/autenticacion.guard';
 
 
 const routes: Routes = [
@@ -13,8 +14,7 @@ const routes: Routes = [
   {path:'registro', component:RegistroComponent, pathMatch:'full'},
 
   //Proteger esta ruta
-  {path:'pages', loadChildren:() => import('./Components/layout/layout.module').then(m => m.LayoutModule) }
-  
+  {path:'pages', loadChildren:() => import('./Components/layout/layout.module').then(m => m.LayoutModule), canActivate:[AutenticacionGuard] }
 
 ];
 

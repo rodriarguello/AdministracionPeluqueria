@@ -1,13 +1,24 @@
 
 <mat-toolbar color="primary">
 
-    <mat-toolbar-row class="py-5">
-        <h1 class="m-0 p-0" >Administración de Peluquería</h1>
-
-        <button mat-icon-button (click)="sideNav.toggle()">
+    <mat-toolbar-row class="d-flex justify-content-between py-5">
         
-            <mat-icon >menu</mat-icon>
-        </button>
+        <div class="d-flex align-items-center">
+            <mat-card-title class="fs-3 me-2">
+             Administración de Peluquería
+            </mat-card-title> 
+        
+        
+            <button mat-icon-button (click)="sideNav.toggle()">
+            
+                <mat-icon  >menu</mat-icon>
+            </button>
+        </div>
+        <div>
+            <button (click)="cerrarSesion()" class="btn btn-danger text-white me-5">
+                Cerrar Sesión
+            </button>
+        </div>
     </mat-toolbar-row>
 </mat-toolbar>
 
@@ -35,13 +46,19 @@
             
             <!-- LIST ITEM CLIENTES -->
             
-            <mat-list-item routerLink="/pages/clientes" class="ps-4 py-5">
-            <div class="d-flex justify-content-start fs-4">   
+            <mat-list-item routerLink="/pages/clientes" (click)="mostrarClientes=true" class="ps-4 py-5">
+            
+             
+                    <div class="d-flex justify-content-start fs-4">
 
-                <mat-icon mat-list-icon color="primary" >group</mat-icon>
-                    <div mat-line class="ps-3">Clientes</div>
+                        <mat-icon mat-list-icon color="primary" >group</mat-icon>
+                
+                    <div class="ps-3">Clientes</div>
 
-            </div>
+                    <mat-icon mat-list-icon class="fs-2 ms-3" >navigate_next</mat-icon>
+                
+                
+                </div>
             
             </mat-list-item>
 
@@ -241,6 +258,89 @@
         
     </mat-nav-list>          
 </mat-sidenav>
+
+    <!-- SIDE NAV CLIENTES -->
+    <mat-sidenav *ngIf="mostrarClientes" opened="true" mode = "side" style="width: 300px;">
+        
+        <mat-nav-list>             
+                
+    
+            <mat-list-item  class="ps-4 py-5" >
+    
+                <div class="d-flex justify-content-start fs-4">
+    
+                    <mat-icon mat-list-icon color="accent">group</mat-icon>
+                        
+                    <div class="ps-3">CLIENTES</div>
+                        
+                </div>
+    
+            </mat-list-item>
+    
+             <!-- LIST ITEM NUEVA CLIENTE-->
+            <mat-list-item  class="ps-4 py-5" >
+    
+                <div class="d-flex justify-content-start fs-4 py-3">
+    
+                    <mat-icon mat-list-icon  color="primary">person_add</mat-icon>
+                        
+                    <div class="ps-3">Agregar</div>
+                        
+                </div>
+    
+            </mat-list-item>
+    
+            <!-- LIST ITEM ACTUALIZAR CLIENTE-->
+            <mat-list-item  class="ps-4 py-5" >
+    
+                <div class="d-flex justify-content-start fs-4">
+    
+                    <mat-icon mat-list-icon  color="primary">create</mat-icon>
+                        
+                    <div class="ps-3">Actualizar</div>
+                        
+                </div>
+    
+            </mat-list-item>
+    
+            <!-- LIST ITEM ELIMINAR CLIENTE-->
+            <mat-list-item  class="ps-4 py-5" >
+    
+                <div class="d-flex justify-content-start fs-4">
+    
+                    <mat-icon mat-list-icon color="primary" >delete_sweep</mat-icon>
+                        
+                    <div class="ps-3">Eliminar</div>
+                        
+                </div>
+    
+            </mat-list-item>
+    
+           
+           
+                        
+             <!-- LIST ITEM VOLVER -->
+            
+            <mat-list-item  (click)="mostrarClientes=false" class="ps-4 py-5" >
+                <div class="d-flex justify-content-end fs-4">
+    
+                    <mat-icon>
+                        navigate_before
+                    </mat-icon>
+                    
+                    <div class="ps-1">
+                        Volver
+                    </div>
+                    
+                </div>
+                    
+            </mat-list-item>
+                            
+            
+        </mat-nav-list>          
+    </mat-sidenav>
+
+
 
  <!-- SIDENAV RAZAS -->
  <mat-sidenav *ngIf="mostrarRazas" opened="true" mode = "side" style="width: 300px;">

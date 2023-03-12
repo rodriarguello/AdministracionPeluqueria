@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Credencial } from '../models/credencial.interface';
-import { Usuario } from '../models/usuario.model';
+import { Usuario } from '../models/usuario';
 
 
 @Injectable({

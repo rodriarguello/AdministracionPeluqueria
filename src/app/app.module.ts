@@ -10,6 +10,8 @@ import { LoginComponent } from './Components/home/login/login.component';
 import { UsuariosService } from './services/usuarios.service';
 import { UtilidadService } from './services/utilidad.service';
 import { RegistroComponent } from './Components/home/registro/registro.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './Interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,12 @@ import { RegistroComponent } from './Components/home/registro/registro.component
     BrowserAnimationsModule,
     SharedModule
   ],
-  providers: [UsuariosService,UtilidadService],
+  providers: [
+    UsuariosService,
+    UtilidadService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true}
+  ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
