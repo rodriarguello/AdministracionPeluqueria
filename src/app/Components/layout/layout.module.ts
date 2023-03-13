@@ -8,6 +8,8 @@ import { SharedModule } from 'src/app/Reutilizable/shared/shared.module';
 
 import { LayoutComponent } from './layout.component';
 import { CajaComponent } from './Pages/caja/caja.component';
+import { AlergiasComponent } from './Pages/alergias/alergias.component';
+import { AlergiasService } from 'src/app/services/alergias.service';
 
 
 
@@ -16,12 +18,15 @@ import { CajaComponent } from './Pages/caja/caja.component';
     DashboardComponent,
     TurnosComponent,
     LayoutComponent,
-    CajaComponent
+    CajaComponent,
+    AlergiasComponent
   ],
   imports: [
     CommonModule,
     LayoutRoutingModule,
     SharedModule
-  ]
+  ],
+  providers:
+  [AlergiasService]
 })
 export class LayoutModule { }

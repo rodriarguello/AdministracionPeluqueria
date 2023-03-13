@@ -133,16 +133,13 @@
             
             
              <!-- LIST ITEM ALERGIAS-->
-        <mat-list-item  class="ps-4 py-5" routerLink="/pages/alergias" (click)="mostrarAlergias=true" >
+        <mat-list-item  class="ps-4 py-5" routerLink="/pages/alergias">
 
             <div class="d-flex justify-content-start fs-4 py-3">
 
                 <mat-icon mat-list-icon color="primary">healing</mat-icon>
                     
                 <div class="ps-3">Alergias</div>
-
-                <mat-icon mat-list-icon class="fs-2 ms-3" >navigate_next</mat-icon>
-                    
             </div>
 
         </mat-list-item>
@@ -401,85 +398,6 @@
          <!-- LIST ITEM VOLVER -->
         
         <mat-list-item  (click)="mostrarRazas=false" class="ps-4 py-5" >
-            <div class="d-flex justify-content-end fs-4">
-
-                <mat-icon>
-                    navigate_before
-                </mat-icon>
-                
-                <div class="ps-1">
-                    Volver
-                </div>
-                
-            </div>
-                
-        </mat-list-item>
-                        
-        
-    </mat-nav-list>          
-</mat-sidenav>
-   
-
- <!-- SIDENAV ALERGIAS -->
- <mat-sidenav *ngIf="mostrarAlergias" opened="true" mode = "side" style="width: 300px;">
-        
-    <mat-nav-list>     
-        
-        <mat-list-item  class="ps-4 py-5" >
-
-            <div class="d-flex justify-content-start fs-4">
-
-                <mat-icon mat-list-icon color="accent">healing</mat-icon>
-                    
-                <div class="ps-3">ALERGIAS</div>
-                    
-            </div>
-
-        </mat-list-item>
-            
-         <!-- LIST ITEM NUEVA ALERGIA-->
-        <mat-list-item  class="ps-4 py-5">
-
-            <div class="d-flex justify-content-start fs-4 py-3">
-
-                <mat-icon mat-list-icon color="primary" >add_circle</mat-icon>
-                    
-                <div class="ps-3">Agregar</div>
-                    
-            </div>
-
-        </mat-list-item>
-
-        <!-- LIST ITEM ACTUALIZAR ALERGIA-->
-        <mat-list-item  class="ps-4 py-5" >
-
-            <div class="d-flex justify-content-start fs-4">
-
-                <mat-icon mat-list-icon color="primary">create</mat-icon>
-                    
-                <div class="ps-3">Actualizar</div>
-                    
-            </div>
-
-        </mat-list-item>
-
-        <!-- LIST ITEM ELIMINAR ALERGIA-->
-        <mat-list-item  class="ps-4 py-5" >
-
-            <div class="d-flex justify-content-start fs-4">
-
-                <mat-icon mat-list-icon color="primary">delete_sweep</mat-icon>
-                    
-                <div class="ps-3">Eliminar</div>
-                    
-            </div>
-
-        </mat-list-item>
-
-        
-         <!-- LIST ITEM VOLVER -->
-        
-        <mat-list-item  (click)="mostrarAlergias=false" class="ps-4 py-5" >
             <div class="d-flex justify-content-end fs-4">
 
                 <mat-icon>
