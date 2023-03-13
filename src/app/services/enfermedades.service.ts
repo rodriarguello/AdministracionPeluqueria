@@ -30,16 +30,20 @@ export class EnfermedadesService {
     const enfermedad = new Enfermedad();
     enfermedad.nombre = nombre;
 
-    return this.http.post(this.urlApi,enfermedad,);
+    return this.http.post<ResponseApi>(this.urlApi,enfermedad, this.httpOptions);
+  }
+
+  modificarEnfermedad(enfermedad:Enfermedad):Observable<ResponseApi>{
 
 
+    return this.http.put<ResponseApi>(this.urlApi, enfermedad,this.httpOptions);
 
   }
 
-  modificarEnfermedad(){  }
+  eliminarEnfermedad(id:number):Observable<ResponseApi>{
 
-  eliminarEnfermedad(){}
+    return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`, this.httpOptions);
 
-
+  }
 
 }
