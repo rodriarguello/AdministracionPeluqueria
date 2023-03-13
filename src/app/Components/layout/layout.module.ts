@@ -11,9 +11,8 @@ import { CajaComponent } from './Pages/caja/caja.component';
 import { AlergiasComponent } from './Pages/alergias/alergias.component';
 import { AlergiasService } from 'src/app/services/alergias.service';
 import { ModalAlergiasComponent } from './modales/modal-alergias/modal-alergias.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from 'src/app/Interceptors/jwt.interceptor';
-
+import { ModalEnfermedadesComponent } from './modales/modal-enfermedades/modal-enfermedades.component';
+import { EnfermedadesComponent } from './Pages/enfermedades/enfermedades.component';
 
 
 @NgModule({
@@ -23,7 +22,9 @@ import { JwtInterceptor } from 'src/app/Interceptors/jwt.interceptor';
     LayoutComponent,
     CajaComponent,
     AlergiasComponent,
-    ModalAlergiasComponent
+    ModalAlergiasComponent,
+    ModalEnfermedadesComponent,
+    EnfermedadesComponent
   ],
   imports: [
     CommonModule,

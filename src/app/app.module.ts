@@ -13,13 +13,14 @@ import { RegistroComponent } from './Components/home/registro/registro.component
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './Interceptors/jwt.interceptor';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
     LoginComponent,
-    RegistroComponent
-  ],
+    RegistroComponent,
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,

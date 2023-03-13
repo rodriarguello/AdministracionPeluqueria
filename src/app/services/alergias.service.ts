@@ -21,16 +21,16 @@ export class AlergiasService {
 
 urlApi:string = 'https://localhost:7026/api/alergias';
 
-  httpOptions={ headers:new HttpHeaders({
+httpOptions={ headers:new HttpHeaders({
     'Content-Type':'application/json'
    
-  })}
+})}
 
 
 
   mostrarAlergias():Observable<ResponseApi>{
 
-    return this.http.get<ResponseApi>(`${this.urlApi}`, this.httpOptions);
+    return this.http.get<ResponseApi>(this.urlApi, this.httpOptions);
   }
 
   cargarAlergia(nombre:string):Observable<ResponseApi>{
