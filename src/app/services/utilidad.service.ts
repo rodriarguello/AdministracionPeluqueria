@@ -21,24 +21,7 @@ export class UtilidadService {
     })
   }
 
-  guardarSesionUsuario(token:Credencial):void{
-
-    localStorage.setItem("tokenUsuario",JSON.stringify(token));
-  }
-
-  obtenerSesionUsuario():Credencial{
-
-    const dataUsuario = localStorage.getItem("tokenUsuario");
-
-    const tokenUsuario= JSON.parse(dataUsuario!);
-
-    return tokenUsuario;
-  }
-
-  eliminarSesionUsuario():void{
-    
-    localStorage.removeItem("tokenUsuario");
-  }
+  
 
 
 }

@@ -23,6 +23,7 @@ urlApi:string = 'https://localhost:7026/api/alergias';
 
   httpOptions={ headers:new HttpHeaders({
     'Content-Type':'application/json'
+   
   })}
 
 
@@ -34,12 +35,15 @@ urlApi:string = 'https://localhost:7026/api/alergias';
 
   cargarAlergia(nombre:string):Observable<ResponseApi>{
 
-    return this.http.post<ResponseApi>(this.urlApi, nombre,this.httpOptions);
+    const alergia = new Alergia();
+    alergia.nombre = nombre;
+
+    return this.http.post<ResponseApi>(this.urlApi, alergia,this.httpOptions);
   }
 
   modificarAlergia(alergia:Alergia): Observable<ResponseApi>{
 
-    return this.http.put<ResponseApi>(this.urlApi,this.httpOptions);
+    return this.http.put<ResponseApi>(this.urlApi,alergia,this.httpOptions);
 
   }
 
