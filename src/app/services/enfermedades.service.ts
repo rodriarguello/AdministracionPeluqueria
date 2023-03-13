@@ -1,0 +1,45 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Enfermedad } from '../models/enfermedad';
+import { ResponseApi } from '../models/response-api';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class EnfermedadesService {
+
+  constructor(private http:HttpClient) { }
+
+
+  urlApi:string = 'https://localhost:7026/api/enfermedades';
+
+  httpOptions = {headers: new HttpHeaders({
+    'Content-Type':'application/json'
+  })};
+
+
+  mostrarEnfermedades():Observable<ResponseApi>{
+
+  return this.http.get<ResponseApi>(this.urlApi,this.httpOptions);
+
+  }
+
+  cargarEnfermedad(nombre:string):Observable<ResponseApi>{
+
+    const enfermedad = new Enfermedad();
+    enfermedad.nombre = nombre;
+
+    return this.http.post(this.urlApi,enfermedad,);
+
+
+
+  }
+
+  modificarEnfermedad(){  }
+
+  eliminarEnfermedad(){}
+
+
+
+}
