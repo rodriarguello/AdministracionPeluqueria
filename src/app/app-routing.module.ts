@@ -10,10 +10,7 @@ const routes: Routes = [
   
   {path:'', component: IndexComponent, pathMatch:'full'},
   {path:'home', component:IndexComponent, pathMatch:'full'},
-  
-  {path:'registro', component:RegistroComponent, pathMatch:'full'},
-
-  //Proteger esta ruta
+  {path:'registro', component:RegistroComponent},
   {path:'pages', loadChildren:() => import('./Components/layout/layout.module').then(m => m.LayoutModule), canActivate:[AutenticacionGuard] }
 
 ];

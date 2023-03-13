@@ -14,7 +14,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class LoginComponent implements OnInit {
   
   formularioLogin:FormGroup;
-  ocultarPassword:boolean = true;
+  ocultarPassword:boolean;
   mostrarLoading:boolean= false;
   
   constructor(private router:Router, private fb:FormBuilder, private utilidadService:UtilidadService, private usuariosService:UsuariosService){
@@ -24,12 +24,9 @@ export class LoginComponent implements OnInit {
       email:['',Validators.required],
       
       password:['',Validators.required]
-
-
-    }
+    });
     
-    );
-
+    this.ocultarPassword = true;
     
   }
   
@@ -38,8 +35,6 @@ export class LoginComponent implements OnInit {
     
   }
 
-
-  
   iniciarSesion():void{
 
   const credencialesUsuario:Usuario = new Usuario(this.formularioLogin.value.email,this.formularioLogin.value.password);
@@ -51,7 +46,7 @@ export class LoginComponent implements OnInit {
     
 
     this.router.navigate(['pages']);
-    console.log(res.token)
+   
   },
   error:()=>{
     this.utilidadService.mostrarAlerta("Error al iniciar sesion","LOGIN")

@@ -12,7 +12,7 @@ import { UtilidadService } from 'src/app/services/utilidad.service';
 export class RegistroComponent {
 
 formularioRegistro:FormGroup;
-
+ocultarPassword:boolean;
 
 constructor(private fb:FormBuilder, private usuarioService:UsuariosService, private utilidadService:UtilidadService){
 
@@ -20,6 +20,7 @@ constructor(private fb:FormBuilder, private usuarioService:UsuariosService, priv
     email:['',Validators.required],
     password:['',Validators.required]
   })
+  this.ocultarPassword = true;
 }
 
 

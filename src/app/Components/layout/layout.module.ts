@@ -10,6 +10,9 @@ import { LayoutComponent } from './layout.component';
 import { CajaComponent } from './Pages/caja/caja.component';
 import { AlergiasComponent } from './Pages/alergias/alergias.component';
 import { AlergiasService } from 'src/app/services/alergias.service';
+import { ModalAlergiasComponent } from './modales/modal-alergias/modal-alergias.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from 'src/app/Interceptors/jwt.interceptor';
 
 
 
@@ -19,7 +22,8 @@ import { AlergiasService } from 'src/app/services/alergias.service';
     TurnosComponent,
     LayoutComponent,
     CajaComponent,
-    AlergiasComponent
+    AlergiasComponent,
+    ModalAlergiasComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +31,7 @@ import { AlergiasService } from 'src/app/services/alergias.service';
     SharedModule
   ],
   providers:
-  [AlergiasService]
+  [AlergiasService
+  ]
 })
 export class LayoutModule { }
