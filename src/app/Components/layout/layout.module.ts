@@ -13,6 +13,7 @@ import { AlergiasService } from 'src/app/services/alergias.service';
 import { ModalAlergiasComponent } from './modales/modal-alergias/modal-alergias.component';
 import { ModalEnfermedadesComponent } from './modales/modal-enfermedades/modal-enfermedades.component';
 import { EnfermedadesComponent } from './Pages/enfermedades/enfermedades.component';
+import { EnfermedadesService } from 'src/app/services/enfermedades.service';
 
 
 @NgModule({
@@ -31,8 +32,9 @@ import { EnfermedadesComponent } from './Pages/enfermedades/enfermedades.compone
     LayoutRoutingModule,
     SharedModule
   ],
-  providers:
-  [AlergiasService
+  providers:[
+    AlergiasService,
+    EnfermedadesService
   ]
 })
 export class LayoutModule { }
