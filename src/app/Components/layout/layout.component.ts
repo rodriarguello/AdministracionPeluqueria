@@ -13,10 +13,7 @@ export class LayoutComponent {
 
   }
   
-  mostrarMascotas:boolean = false;
-  mostrarEnfermedades:boolean = false;
-  mostrarAlergias:boolean = false;
-  mostrarRazas:boolean = false;
+ 
   mostrarClientes:boolean=false;
 
   cerrarSesion():void{
