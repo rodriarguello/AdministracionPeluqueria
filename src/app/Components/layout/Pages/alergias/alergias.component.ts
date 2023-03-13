@@ -17,12 +17,15 @@ import { UtilidadService } from 'src/app/services/utilidad.service';
 })
 export class AlergiasComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
+
+    
     this.mostrarAlergias();
   }
   
   constructor(private alergiasService:AlergiasService, private  matDialog:MatDialog, 
     private utilidadService:UtilidadService){
-    
+      
+      this.sinDatos = true;
 
   }
   ngAfterViewInit(): void {
@@ -37,6 +40,7 @@ columnasTabla:string[] = ['Nombre', 'Acciones'];
 
 @ViewChild(MatPaginator)paginacionTabla!:MatPaginator;
 
+sinDatos:boolean;
 
 mostrarAlergias():void{
 
@@ -52,6 +56,8 @@ this.alergiasService.mostrarAlergias().subscribe({
   }
 });
 
+console.log(this.dataListaAlergias.data);
+if(this.dataListaAlergias.data.length != 0) this.sinDatos = false;  
 }
 
 
