@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>{{tituloAccion}}</h2>
+
+<mat-dialog-content>
+
+    <form [formGroup]="formAlergia" >
+
+        <mat-grid-list cols="1" rowHeight="100px">
+
+            <mat-grid-tile >
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Alergia" autocomplete="off" formControlName="nombre">
+                    <mat-icon matSuffix>healing</mat-icon>
+                    
+                  </mat-form-field>                
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" [disabled]="formAlergia.invalid" (click)="crearActualizarAlergia()">
+        {{botonAccion}}
+    </button>
+    <button mat-raised-button mat-dialog-close color="warn" >
+        Cerrar
+    </button>
+
+</mat-dialog-actions>
