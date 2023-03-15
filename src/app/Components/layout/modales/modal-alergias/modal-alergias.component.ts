@@ -21,12 +21,15 @@ export class ModalAlergiasComponent implements OnInit {
         nombre:['', Validators.required]
       });
 
-     
-
+     this.tituloAccion = "Agregar Alergia";
+     this.botonAccion = "Agregar";
+      this.nombreAlergia = "";
     }
   
   ngOnInit(): void {
     if(this.dataAlergia!=null){
+
+      this.nombreAlergia = this.dataAlergia.nombre;
       this.botonAccion="Actualizar";
       this.tituloAccion = "Actualizar Alergia";
       this.formAlergia.patchValue({
@@ -36,9 +39,9 @@ export class ModalAlergiasComponent implements OnInit {
   }
 
 formAlergia:FormGroup;
-tituloAccion:string = "Agregar Alergia"
-botonAccion:string = "Agregar";
-
+tituloAccion:string;  
+botonAccion:string;  
+nombreAlergia:string;
 
 crearActualizarAlergia(){
 
@@ -50,19 +53,19 @@ crearActualizarAlergia(){
     this.servicioAlergias.modificarAlergia(alergia).subscribe({
       next:(res)=>{
         if(res.resultado===1){
-          this.servicioUtilidad.mostrarAlerta("Se actualizó correctamente", "Exito");
+          this.servicioUtilidad.mostrarAlerta("La Alergia se modificó con éxito", "Exito");
           this.modalActual.close("true");
           
         }
         else
         {
        
-          this.servicioUtilidad.mostrarAlerta("No se pudo actualizar", "Error");
+          this.servicioUtilidad.mostrarAlerta("No se pudo modificar la Alergia", "Error");
         }
         
       },
       error:(error)=>{
-        this.servicioUtilidad.mostrarAlerta("No se pudo actualizar", "Error");
+        this.servicioUtilidad.mostrarAlerta("No se pudo modificar la Alergia", "Error");
         
       }
 
@@ -72,7 +75,7 @@ crearActualizarAlergia(){
   this.servicioAlergias.cargarAlergia(this.formAlergia.value.nombre).subscribe({
     next:(res)=>{
       if(res.resultado===1){
-        this.servicioUtilidad.mostrarAlerta("La alergia se agregó correctamente","Exito");
+        this.servicioUtilidad.mostrarAlerta("Se agregó una nueva Alergia","Exito");
         this.modalActual.close("true");
       }
       else

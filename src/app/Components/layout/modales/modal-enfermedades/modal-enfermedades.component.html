@@ -9,7 +9,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Nombre</mat-label>
                     <input matInput placeholder="Enfermedad" autocomplete="off" formControlName="nombre">
-                    <mat-icon matSuffix>local_hospital</mat-icon>
+                    <mat-icon matSuffix >local_hospital</mat-icon>
                         
                 </mat-form-field>
             </mat-grid-tile>
@@ -18,7 +18,7 @@
    
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-raised-button color="primary" >
+    <button mat-raised-button #button  [disabled]="formEnfermedades.invalid||nombreEnfermedad == formEnfermedades.value.nombre " color="primary" (click)="agregarActualizarEnfermedad()">
         {{botonAccion}}
     </button>
     <button mat-raised-button mat-dialog-close color="warn" >
