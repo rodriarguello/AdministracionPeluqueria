@@ -28,6 +28,7 @@ export class AlergiasComponent implements OnInit, AfterViewInit {
       this.sinDatos = true;
 
   }
+
   ngAfterViewInit(): void {
     this.dataListaAlergias.paginator = this.paginacionTabla;
   }
@@ -56,7 +57,7 @@ this.alergiasService.mostrarAlergias().subscribe({
   }
 });
 
-console.log(this.dataListaAlergias.data);
+
 if(this.dataListaAlergias.data.length != 0) this.sinDatos = false;  
 }
 
@@ -89,6 +90,7 @@ eliminarAlergia(alergia:Alergia){
     title:"¿Desea eliminar la alergia?",
     text: alergia.nombre,
     icon:"warning",
+    iconColor:'red',
     confirmButtonColor:"#3085d6",
     confirmButtonText:"Si, Eliminar",
     showCancelButton:true,
@@ -99,21 +101,22 @@ eliminarAlergia(alergia:Alergia){
       this.alergiasService.eliminarAlergia(alergia.id).subscribe({
         next:(res)=>{
           if(res.resultado===1){
-            this.utilidadService.mostrarAlerta("La alergia fue eliminada","Listo");
+            this.utilidadService.mostrarAlerta("La Alergia se eliminó con éxito","Exito");
             this.mostrarAlergias();
-            return;
+            
           }
-          this.utilidadService.mostrarAlerta("La alergia no pudo ser eliminada","Error");
-          return;
+          else
+          this.utilidadService.mostrarAlerta("No se pudo eliminar la Alergia","Error");
+          
         },
         error:()=>{
-          this.utilidadService.mostrarAlerta("La alergia no pudo ser eliminada","Error");
+          this.utilidadService.mostrarAlerta("No se pudo eliminar la Alergia","Error");
         }
 
       }
       );
     }
-
+    
    });
 
   
