@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 
 import { CajaComponent } from './Pages/caja/caja.component';
-import { ClientesComponent } from '../clientes/clientes.component';
+import { ClientesComponent } from './Pages/clientes/clientes.component';
 
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { EnfermedadesComponent } from './Pages/enfermedades/enfermedades.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
   children:[
     {path:'dashboard', component: DashboardComponent},
     {path:'turnos', component: TurnosComponent},
-    {path:'clientes',loadChildren:()=> import('../clientes/clientes.module').then(m=>m.ClientesModule)},
+    {path:'clientes',component:ClientesComponent},
     {path:'alergias',component:AlergiasComponent},
     {path:'caja', component:CajaComponent},
     {path:'mascotas', component:MascotasComponent},

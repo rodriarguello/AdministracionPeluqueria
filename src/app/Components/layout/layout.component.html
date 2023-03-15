@@ -46,7 +46,7 @@
             
             <!-- LIST ITEM CLIENTES -->
             
-            <mat-list-item routerLink="clientes/index" (click)="mostrarClientes=true" class="ps-4 py-5">
+            <mat-list-item routerLink="/pages/clientes"  class="ps-4 py-5">
             
              
                     <div class="d-flex justify-content-start fs-4">
@@ -55,7 +55,7 @@
                 
                     <div class="ps-3">Clientes</div>
 
-                    <mat-icon mat-list-icon class="fs-2 ms-3" >navigate_next</mat-icon>
+                    
                 
                 
                 </div>
@@ -170,7 +170,7 @@
 
     </mat-sidenav-content>
 
-    <!-- SIDE NAV CLIENTES -->
+    <!-- SIDE NAV MASCOTAS -->
     <mat-sidenav *ngIf="mostrarClientes" opened="true" mode = "side" style="width: 300px;">
         
         <mat-nav-list>             

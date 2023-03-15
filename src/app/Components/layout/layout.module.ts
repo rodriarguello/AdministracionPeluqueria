@@ -16,6 +16,8 @@ import { EnfermedadesComponent } from './Pages/enfermedades/enfermedades.compone
 import { EnfermedadesService } from 'src/app/services/enfermedades.service';
 import { ModalRazasComponent } from './modales/modal-razas/modal-razas.component';
 import { RazasComponent } from './Pages/razas/razas.component';
+import { ModalClientesComponent } from './modales/modal-clientes/modal-clientes.component';
+import { ClientesComponent } from './Pages/clientes/clientes.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { RazasComponent } from './Pages/razas/razas.component';
     ModalEnfermedadesComponent,
     EnfermedadesComponent,
     ModalRazasComponent,
-    RazasComponent
+    RazasComponent,
+    ModalClientesComponent,
+    ClientesComponent
   ],
   imports: [
     CommonModule,
