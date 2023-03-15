@@ -44,6 +44,7 @@ export class RazasComponent implements OnInit,AfterViewInit{
       next:(res)=>{
         if(res.resultado===1){
           this.razaTableDataSource.data = res.data;
+          if(this.razaTableDataSource.data.length !=0) this.sinDatos = false;
         }
         else{
           console.log(res);
@@ -54,7 +55,7 @@ export class RazasComponent implements OnInit,AfterViewInit{
       }
   });
 
-  if(this.razaTableDataSource.data.length !=0) this.sinDatos = false; 
+  
 
   }
 

@@ -50,6 +50,7 @@ this.alergiasService.mostrarAlergias().subscribe({
     if(res.resultado === 1){
       
       this.dataListaAlergias.data = res.data;
+      if(this.dataListaAlergias.data.length != 0) this.sinDatos = false;  
     }
     else{
       console.log(res.mensaje);
@@ -58,7 +59,7 @@ this.alergiasService.mostrarAlergias().subscribe({
 });
 
 
-if(this.dataListaAlergias.data.length != 0) this.sinDatos = false;  
+
 }
 
 

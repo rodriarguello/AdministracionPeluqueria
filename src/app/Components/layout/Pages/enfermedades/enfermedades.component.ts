@@ -48,6 +48,7 @@ export class EnfermedadesComponent implements OnInit,AfterViewInit {
       next:(res)=>{
         if(res.resultado === 1){
           this.matDataSource.data = res.data;
+          if(this.matDataSource.data.length != 0) this.sinDatos = false;
         }
         else{
           console.log(res.mensaje);
@@ -59,7 +60,7 @@ export class EnfermedadesComponent implements OnInit,AfterViewInit {
       }
     });
 
-    if(this.matDataSource.data.length != 0) this.sinDatos = false;
+    
 
   }
 
