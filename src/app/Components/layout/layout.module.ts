@@ -14,6 +14,8 @@ import { ModalAlergiasComponent } from './modales/modal-alergias/modal-alergias.
 import { ModalEnfermedadesComponent } from './modales/modal-enfermedades/modal-enfermedades.component';
 import { EnfermedadesComponent } from './Pages/enfermedades/enfermedades.component';
 import { EnfermedadesService } from 'src/app/services/enfermedades.service';
+import { ModalRazasComponent } from './modales/modal-razas/modal-razas.component';
+import { RazasComponent } from './Pages/razas/razas.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { EnfermedadesService } from 'src/app/services/enfermedades.service';
     AlergiasComponent,
     ModalAlergiasComponent,
     ModalEnfermedadesComponent,
-    EnfermedadesComponent
+    EnfermedadesComponent,
+    ModalRazasComponent,
+    RazasComponent
   ],
   imports: [
     CommonModule,
