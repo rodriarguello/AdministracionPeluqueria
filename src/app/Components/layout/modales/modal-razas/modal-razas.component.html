@@ -3,13 +3,19 @@
 <mat-dialog-content>
 
     <form [formGroup]="formRazas">
-        <mat-grid-list cols="1" rowHeight="100px">
+        <mat-grid-list cols="1" rowHeight="110px">
             <mat-grid-tile>
             
                 <mat-form-field appearance="outline">
                     <mat-label>Nombre</mat-label>
                     <input matInput placeholder="Enfermedad" autocomplete="off" formControlName="nombre">
                     <mat-icon matSuffix >pets</mat-icon>
+                    <mat-hint *ngIf="formRazas.get('nombre')?.touched && formRazas.get('nombre')?.errors?.['required']" 
+                    class="text-danger">El campo es requerido</mat-hint>
+
+                    <mat-hint *ngIf="formRazas.get('nombre')?.touched && formRazas.get('nombre')?.errors?.['minlength']" 
+                    class="text-danger">El nombre debe tener como mínimo 3 caracteres</mat-hint>
+                
                         
                 </mat-form-field>
             </mat-grid-tile>

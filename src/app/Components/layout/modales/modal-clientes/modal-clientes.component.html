@@ -3,17 +3,23 @@
 <mat-dialog-content>
 
     <form [formGroup]="formClientes">
-        <mat-grid-list cols="1" rowHeight="100px">
+        <mat-grid-list cols="1" rowHeight="110px">
             <mat-grid-tile>
             
                 <mat-form-field appearance="outline">
                     <mat-label>Nombre</mat-label>
                     <input matInput placeholder="Cliente" autocomplete="off" formControlName="nombre">
                     <mat-icon matSuffix >group</mat-icon>
-                        
-                </mat-form-field>
-            </mat-grid-tile>
+                    <mat-hint *ngIf="formClientes.get('nombre')?.touched && formClientes.get('nombre')?.errors?.['required']" 
+                    class="text-danger">El campo es requerido</mat-hint>
 
+                    <mat-hint *ngIf="formClientes.get('nombre')?.touched && formClientes.get('nombre')?.errors?.['minlength']" 
+                    class="text-danger">El nombre debe tener como minimo 2 caracteres</mat-hint>
+                
+                </mat-form-field>
+
+            </mat-grid-tile>
+          
 
             <mat-grid-tile>
             
@@ -21,7 +27,9 @@
                     <mat-label>Teléfono</mat-label>
                     <input matInput placeholder="Teléfono" type="number" autocomplete="off" formControlName="telefono">
                     <mat-icon matSuffix >phone</mat-icon>
-                        
+                    <mat-hint *ngIf="formClientes.get('telefono')?.touched && formClientes.get('telefono')?.errors?.['required']" 
+                    class="text-danger">El campo es requerido</mat-hint>
+                
                 </mat-form-field>
             </mat-grid-tile>
 
@@ -32,7 +40,8 @@
                     <mat-label>Email</mat-label>
                     <input matInput placeholder="Email" autocomplete="off" formControlName="mail">
                     <mat-icon matSuffix >email</mat-icon>
-                        
+                    <mat-hint *ngIf="formClientes.get('mail')?.touched && formClientes.value.mail!='' && formClientes.get('mail')?.errors?.['email']" 
+                    class="text-danger">Ingrese un email válido</mat-hint>
                 </mat-form-field>
             </mat-grid-tile>
 

@@ -17,7 +17,7 @@ export class ModalRazasComponent implements OnInit {
     private utilidadService:UtilidadService){
 
     this.formRazas = fb.group({
-      nombre:['',Validators.required]
+      nombre:['',[Validators.required,Validators.minLength(3)]]
     });
     this.tituloAccion="Agregar Raza";
     this.botonAccion="Agregar";

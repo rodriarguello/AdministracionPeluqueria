@@ -18,7 +18,7 @@ export class ModalAlergiasComponent implements OnInit {
     private servicioAlergias:AlergiasService, private servicioUtilidad:UtilidadService)
     {
       this.formAlergia = this.fb.group({
-        nombre:['', Validators.required]
+        nombre:['', [Validators.required,Validators.minLength(3)]]
       });
 
      this.tituloAccion = "Agregar Alergia";

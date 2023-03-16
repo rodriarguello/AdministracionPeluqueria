@@ -18,7 +18,7 @@ export class ModalEnfermedadesComponent implements OnInit {
     private serviceEnfermedades:EnfermedadesService, private serviceUtilidades:UtilidadService){
 
   this.formEnfermedades = fb.group({
-    nombre:['',Validators.required]
+    nombre:['',[Validators.required,Validators.minLength(3)]]
   });
   this.tituloAccion="Agregar Enfermedad";
   this.botonAccion="Agregar";
