@@ -25,6 +25,11 @@ export class ClientesService {
     return this.http.get<ResponseApi>(this.urlApi,this.httpOptions);
 
   }
+
+  mostrarUnCliente(idCliente:number):Observable<ResponseApi>{
+
+    return this.http.get<ResponseApi>(`${this.urlApi}/${idCliente}`,this.httpOptions);
+  }
   
   agregarCliente(cliente:Cliente):Observable<ResponseApi>{
 
