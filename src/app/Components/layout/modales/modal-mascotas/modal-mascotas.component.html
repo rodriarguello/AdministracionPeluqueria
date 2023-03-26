@@ -1,0 +1,126 @@
+<h2 mat-dialog-title>{{tituloAccion}}</h2>
+
+<mat-dialog-content>
+
+    <form [formGroup]="formMascotas">
+        <mat-grid-list cols="2" rowHeight="110px">
+            <mat-grid-tile>
+            
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Cliente" autocomplete="off" formControlName="nombre">
+                    
+                    <mat-hint *ngIf="formMascotas.get('nombre')?.touched && formMascotas.get('nombre')?.errors?.['required']" 
+                    class="text-danger">El campo es requerido</mat-hint>
+
+                    <mat-hint *ngIf="formMascotas.get('nombre')?.touched && formMascotas.get('nombre')?.errors?.['minlength']" 
+                    class="text-danger">El nombre debe tener como minimo 2 caracteres</mat-hint>
+                
+                </mat-form-field>
+                <button mat-line mat-mini-fab type="button" color="primary" class="mb-3 ms-2" style="cursor:auto;">
+                    <mat-icon>pets</mat-icon>
+                </button>
+
+            </mat-grid-tile>
+      
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Fecha de Nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+                    <mat-hint>DD/MM/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                
+
+                
+
+                
+                <mat-form-field appearance="outline" >
+                    <mat-label>Propietario</mat-label>
+                   
+                    <mat-select  formControlName="cliente">
+                    <mat-option *ngFor="let cliente of listClientes" [value]="cliente.id">
+                        {{cliente.nombre}}
+                    </mat-option>
+                    </mat-select>
+                    
+                </mat-form-field>
+                <button mat-line mat-mini-fab matTooltip="Agregar Cliente" color="primary" class="mb-3 ms-2" (click)="agregarCliente()">
+                    <mat-icon>add</mat-icon>
+                </button>
+           
+        
+                
+            </mat-grid-tile>
+
+            
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Raza</mat-label>
+                    <mat-select formControlName="raza">
+                    <mat-option *ngFor="let raza of listRazas" [value]="raza.id" >
+                        {{raza.nombre}}
+                    </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <button mat-line mat-mini-fab matTooltip="Agregar Raza" color="primary" class="mb-3 ms-2" (click)="agregarRaza()">
+                    <mat-icon>add</mat-icon>
+                </button>
+
+
+            </mat-grid-tile>
+
+
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Enfermedad</mat-label>
+                    <mat-select formControlName="enfermedad">
+                    <mat-option *ngFor="let enfermedad of listEnfermedades" [value]="enfermedad.id" >
+                        {{enfermedad.nombre}}
+                    </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <button mat-line mat-mini-fab matTooltip="Agregar Enfermedad" color="primary" class="mb-3 ms-2" (click)="agregarEnfermedad()" >
+                    <mat-icon>add</mat-icon>
+                </button>
+
+            </mat-grid-tile>
+
+
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Alergia</mat-label>
+                    <mat-select formControlName="alergia">
+                    <mat-option *ngFor="let alergia of listAlergias" [value]="alergia.id" >
+                        {{alergia.nombre}}
+                    </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <button mat-line mat-mini-fab matTooltip="Agregar Alergia" color="primary" class="mb-3 ms-2" (click)="agregarAlergia()">
+                    <mat-icon>add</mat-icon>
+                </button>
+
+            </mat-grid-tile>
+
+
+        </mat-grid-list>
+    </form>
+   
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button class="mx-4 mb-4 " mat-raised-button #button  color="primary" (click)="agregarActualizarMascota()" [disabled]="formMascotas.invalid">
+        {{botonAccion}}
+    </button>
+    <button class="me-5 mb-4" mat-raised-button mat-dialog-close color="warn" >
+        Cerrar
+    </button>
+
+</mat-dialog-actions>
