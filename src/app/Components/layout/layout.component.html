@@ -93,8 +93,6 @@
                     <div class="ps-3">Mascotas</div>
 
                     
-                    
-                    
                 </div>
                 
                     
@@ -170,86 +168,7 @@
 
     </mat-sidenav-content>
 
-    <!-- SIDE NAV MASCOTAS -->
-    <mat-sidenav *ngIf="mostrarClientes" opened="true" mode = "side" style="width: 300px;">
-        
-        <mat-nav-list>             
-                
-    
-            <mat-list-item routerLink="clientes/index" class="ps-4 py-5" >
-    
-                <div class="d-flex justify-content-start fs-4">
-    
-                    <mat-icon mat-list-icon color="accent">group</mat-icon>
-                        
-                    <div class="ps-3">CLIENTES</div>
-                        
-                </div>
-    
-            </mat-list-item>
-    
-             <!-- LIST ITEM NUEVO CLIENTE-->
-            <mat-list-item routerLink="clientes/agregar" class="ps-4 py-5" >
-    
-                <div class="d-flex justify-content-start fs-4 py-3">
-    
-                    <mat-icon mat-list-icon  color="primary">person_add</mat-icon>
-                        
-                    <div class="ps-3">Agregar</div>
-                        
-                </div>
-    
-            </mat-list-item>
-    
-            <!-- LIST ITEM ACTUALIZAR CLIENTE-->
-            <mat-list-item routerLink="clientes/actualizar" class="ps-4 py-5" >
-    
-                <div class="d-flex justify-content-start fs-4">
-    
-                    <mat-icon mat-list-icon  color="primary">create</mat-icon>
-                        
-                    <div class="ps-3">Actualizar</div>
-                        
-                </div>
-    
-            </mat-list-item>
-    
-            <!-- LIST ITEM ELIMINAR CLIENTE-->
-            <mat-list-item  routerLink="clientes/eliminar" class="ps-4 py-5" >
-    
-                <div class="d-flex justify-content-start fs-4">
-    
-                    <mat-icon mat-list-icon color="primary" >delete_sweep</mat-icon>
-                        
-                    <div class="ps-3">Eliminar</div>
-                        
-                </div>
-    
-            </mat-list-item>
-    
-           
-           
-                        
-             <!-- LIST ITEM VOLVER -->
-            
-            <mat-list-item  (click)="mostrarClientes=false" class="ps-4 py-5" >
-                <div class="d-flex justify-content-end fs-4">
-    
-                    <mat-icon>
-                        navigate_before
-                    </mat-icon>
-                    
-                    <div class="ps-1">
-                        Volver
-                    </div>
-                    
-                </div>
-                    
-            </mat-list-item>
-                            
-            
-        </mat-nav-list>          
-    </mat-sidenav>
+   
 
 
 
