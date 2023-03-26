@@ -7,6 +7,7 @@ import { ClientesService } from 'src/app/services/clientes.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
 import { ModalClientesComponent } from '../../modales/modal-clientes/modal-clientes.component';
 import swal from 'sweetalert2';
+import { ModalClienteDetalleComponent } from '../../modales/modal-cliente-detalle/modal-cliente-detalle.component';
 
 @Component({
   selector: 'app-clientes',
@@ -107,10 +108,12 @@ export class ClientesComponent implements OnInit, AfterViewInit{
               this.mostrarClientes();
             }
             else{
+              console.log(res);
               this.utilidadService.mostrarAlerta("No se pudo eliminar el cliente","Error");
             }
           },
-          error:()=>{
+          error:(error)=>{
+            console.log(error);
             this.utilidadService.mostrarAlerta("No se pudo eliminar el cliente","Error");
           }
         });
@@ -126,6 +129,18 @@ export class ClientesComponent implements OnInit, AfterViewInit{
     const valor = (event.target as HTMLInputElement).value;
 
     this.dataTableCliente.filter = valor.trim().toLocaleLowerCase();
+  }
+
+
+  mostrarDetalles(cliente:Cliente):void{
+
+    this.matDialog.open(ModalClienteDetalleComponent,{disableClose:true,data:cliente}).afterClosed().subscribe((res)=>{
+      if(res){
+        this.mostrarClientes();
+      }
+    });
+
+
   }
 
 
