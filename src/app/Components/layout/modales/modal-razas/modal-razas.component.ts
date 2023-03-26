@@ -25,7 +25,9 @@ export class ModalRazasComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    if(this.dataRaza!=null){
+    //Se controla si es distinto de -1 porque ese parametro se pasa cuando se va a agregar desde el formulario de Mascota
+    //Es para agregar una nueva raza, pero se le pasa data especifica por parametro DATA para despues diferenciar el tipo de respuesta
+    if(this.dataRaza!=null && this.dataRaza.id !=(-1)){
       this.nombreRaza = this.dataRaza.nombre;
       this.tituloAccion = "Actualizar Raza";
       this.botonAccion = "Actualizar";
@@ -41,8 +43,9 @@ export class ModalRazasComponent implements OnInit {
   nombreRaza:string;
 
   agregarActualizarRaza():void{
-
-    if(this.dataRaza!=null){
+     //Se controla si es distinto de -1 porque ese parametro se pasa cuando se va a agregar desde el formulario de Mascota
+    //Es para agregar una nueva raza, pero se le pasa data especifica por parametro DATA para despues diferenciar el tipo de respuesta
+    if(this.dataRaza!=null && this.dataRaza.id !=(-1)){
       //Metodo modificar
       const raza = new Raza();
       raza.id = this.dataRaza.id;
@@ -73,7 +76,15 @@ export class ModalRazasComponent implements OnInit {
       this.razaService.cargarRaza(this.formRazas.value.nombre).subscribe({
         next:(res)=>{
           if(res.resultado===1){
-            this.modalActual.close("true");
+            //Aca se da una respuesta diferenciada segun el parametro pasado
+            if(this.dataRaza.id===(-1)){
+              //Se le pasa el id del nuevo usuario para que se seleccione en el comboBox
+              this.modalActual.close(res.data.id)
+            }
+            else{
+              
+              this.modalActual.close("true");
+            }
             this.utilidadService.mostrarAlerta("Se agregó una nueva Raza","Exito");
           }
           else{

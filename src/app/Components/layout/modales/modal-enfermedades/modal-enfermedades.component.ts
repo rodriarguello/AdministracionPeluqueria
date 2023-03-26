@@ -26,7 +26,7 @@ export class ModalEnfermedadesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.dataEnfermedad!=null){
+    if(this.dataEnfermedad!=null && this.dataEnfermedad.id != (-1)){
       this.nombreEnfermedad = this.dataEnfermedad.nombre;
       this.tituloAccion = "Actualizar Enfermedad"
       this.botonAccion = "Actualizar"  
@@ -46,7 +46,7 @@ export class ModalEnfermedadesComponent implements OnInit {
   agregarActualizarEnfermedad(){
 
     //Metodo Modificar
-    if(this.dataEnfermedad!=null){
+    if(this.dataEnfermedad!=null && this.dataEnfermedad.id != (-1)){
        
       const enfermedad = new Enfermedad();
       enfermedad.id = this.dataEnfermedad.id;
@@ -78,8 +78,15 @@ export class ModalEnfermedadesComponent implements OnInit {
 
         next:(res)=>{
           if(res.resultado === 1){
+
+            if(this.dataEnfermedad.id === (-1)){
+              this.modalActual.close(res.data.id);
+            }
+            else{
+
+              this.modalActual.close("true");
+            }
             this.serviceUtilidades.mostrarAlerta("Se agregó una nueva Enfermedad", "Exito");
-            this.modalActual.close("true");
 
           }
           else{

@@ -8,7 +8,7 @@
             
                 <mat-form-field appearance="outline">
                     <mat-label>Nombre</mat-label>
-                    <input matInput placeholder="Enfermedad" autocomplete="off" formControlName="nombre">
+                    <input matInput placeholder="Raza" autocomplete="off" formControlName="nombre">
                     <mat-icon matSuffix >pets</mat-icon>
                     <mat-hint *ngIf="formRazas.get('nombre')?.touched && formRazas.get('nombre')?.errors?.['required']" 
                     class="text-danger">El campo es requerido</mat-hint>

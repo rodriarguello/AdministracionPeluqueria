@@ -27,7 +27,7 @@ export class ModalAlergiasComponent implements OnInit {
     }
   
   ngOnInit(): void {
-    if(this.dataAlergia!=null){
+    if(this.dataAlergia!=null && this.dataAlergia.id != (-1)){
 
       this.nombreAlergia = this.dataAlergia.nombre;
       this.botonAccion="Actualizar";
@@ -45,7 +45,7 @@ nombreAlergia:string;
 
 crearActualizarAlergia(){
 
-  if(this.dataAlergia != null){
+  if(this.dataAlergia != null && this.dataAlergia.id != (-1)){
     const alergia = new Alergia();
     alergia.id = this.dataAlergia.id;
     alergia.nombre = this.formAlergia.value.nombre;
@@ -75,8 +75,14 @@ crearActualizarAlergia(){
   this.servicioAlergias.cargarAlergia(this.formAlergia.value.nombre).subscribe({
     next:(res)=>{
       if(res.resultado===1){
+        if(this.dataAlergia.id===(-1)){
+          this.modalActual.close(res.data.id);
+        }
+        else{
+
+          this.modalActual.close("true");
+        }
         this.servicioUtilidad.mostrarAlerta("Se agregó una nueva Alergia","Exito");
-        this.modalActual.close("true");
       }
       else
         this.servicioUtilidad.mostrarAlerta("No se pudo agregar la Alergia","Error")

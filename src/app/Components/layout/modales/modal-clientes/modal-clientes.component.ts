@@ -30,19 +30,19 @@ export class ModalClientesComponent  implements OnInit{
   }
   ngOnInit(): void {
 
-    if(this.dataCliente != null)
+    if(this.dataCliente != null && this.dataCliente.id !=(-1))
     {
       this.tituloAccion = "Actualizar Cliente";
       this.botonAccion = "Actualizar";
 
       this.nombreCliente = this.dataCliente.nombre;
       this.telefonoCliente=this.dataCliente.telefono.toString();
-      this.mailCliente = this.dataCliente.mail;
+      this.mailCliente = this.dataCliente.email;
 
       this.formClientes.patchValue({
         nombre: this.dataCliente.nombre,
         telefono:this.dataCliente.telefono,
-        mail: this.dataCliente.mail
+        mail: this.dataCliente.email
       });
 
     }
@@ -58,13 +58,16 @@ export class ModalClientesComponent  implements OnInit{
 
   agregarActualizarCliente(){
 
-    if(this.dataCliente!=null){
+
+    if(this.dataCliente!=null && this.dataCliente.id !=(-1)){
       //Metodo modificar
+      
+      
       const cliente = new Cliente();
       cliente.id = this.dataCliente.id;
       cliente.nombre = this.formClientes.value.nombre;
       cliente.telefono = this.formClientes.value.telefono;
-      cliente.mail = this.formClientes.value.mail;
+      cliente.email = this.formClientes.value.mail;
  
 
       this.clientesService.actualizarCliente(cliente).subscribe({
@@ -89,12 +92,17 @@ export class ModalClientesComponent  implements OnInit{
       const cliente = new Cliente();
       cliente.nombre = this.formClientes.value.nombre;
       cliente.telefono = this.formClientes.value.telefono;
-      cliente.mail = this.formClientes.value.mail;
+      cliente.email = this.formClientes.value.mail;
 
       this.clientesService.agregarCliente(cliente).subscribe({
         next:(res)=>{
           if(res.resultado ===1){ 
             this.utilidadService.mostrarAlerta("Se agregó un nuevo Cliente","Exito");
+            if(this.dataCliente.id===(-1)){
+              this.modalActual.close(res.data.id);
+              
+            }
+            else
             this.modalActual.close("true");
           }
           else{
