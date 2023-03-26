@@ -1,8 +1,11 @@
+import { Mascota } from "./mascota";
+
 export class Cliente{
 
     id!:number;
     nombre!:string;
     telefono!:number;
-    mail!:string;
+    email!:string;
+    mascotas!:Mascota[];
 
 }
