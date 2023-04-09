@@ -1,4 +1,4 @@
-import { Mascota } from "./mascota";
+import { Mascota } from "./mascota/mascota";
 
 export class Cliente{
 
