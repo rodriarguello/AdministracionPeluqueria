@@ -1,7 +1,7 @@
-import { Alergia } from "./alergia";
-import { Cliente } from "./cliente";
-import { Enfermedad } from "./enfermedad";
-import { Raza } from "./raza";
+import { Alergia } from "../alergia";
+import { Cliente } from "../cliente";
+import { Enfermedad } from "../enfermedad";
+import { Raza } from "../raza";
 
 export class Mascota{
     

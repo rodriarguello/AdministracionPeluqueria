@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Mascota } from 'src/app/models/mascota';
+import { Mascota } from 'src/app/models/mascota/mascota';
 
 @Component({
   selector: 'app-modal-mascotas-detalle',

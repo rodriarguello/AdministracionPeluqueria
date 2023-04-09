@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AgregarMascota } from '../models/agregarMascota';
-import { Mascota } from '../models/mascota';
+import { AgregarMascota } from '../models/mascota/agregarMascota';
+import { Mascota } from '../models/mascota/mascota';
 import { ResponseApi } from '../models/response-api';
 
 @Injectable({
