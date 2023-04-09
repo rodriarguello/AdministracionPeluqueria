@@ -1,1 +1,60 @@
-<h1 class="text-center text-danger mt-5 pt-5">TURNOS Component</h1>
+<div class="container">
+
+    <h2 class="text-center m-5 fs-2">TURNOS</h2>
+        
+        <button  mat-raised-button color="primary" (click)="nuevoCalendario()">
+            Nuevo Calendario
+            <mat-icon>add</mat-icon>
+        </button>
+    
+    
+        <div *ngFor="let calendario of listCalendario" class="d-flex justify-content-center m-5">
+            <mat-card style="width: 350px;cursor: pointer;" class="d-flex flex-column align-items-center" >
+                <mat-card-title class="m-3">
+                    {{calendario.nombre}}
+                </mat-card-title>
+                <mat-card-content>
+                    <mat-list-item>
+                        <span style="font-weight: 600;">Desde: </span>{{calendario.fechaInicio | date:'dd/MM/yyyy'}}
+                    </mat-list-item>
+    
+                    <mat-list-item>
+                        <span style="font-weight: 600;">Hasta: </span>{{calendario.fechaFin | date:'dd/MM/yyyy'}}
+                    </mat-list-item>
+    
+                    <mat-list-item>
+                        <span style="font-weight: 600;">Hora de Inicio: </span>{{calendario.horaInicioTurnos.toString() | slice:0:5}} hs.
+                    </mat-list-item>
+    
+                    
+                    <mat-list-item>
+                        <span style="font-weight: 600;">Hora de Fin: </span>{{calendario.horaFinTurnos.toString()|slice:0:5}} hs.
+                    </mat-list-item>
+    
+                    
+                    <mat-list-item *ngIf="calendario.intervaloTurnos.toString()[1] ==='0' ;else hora ">
+                        <span style="font-weight: 600;">Intervalo entre turnos: </span>{{ calendario.intervaloTurnos.toString() | slice:3:5}} min.
+                    </mat-list-item>
+    
+                    <ng-template #hora>
+                        <mat-list-item>
+                            <span style="font-weight: 600;">Intervalo entre turnos: </span>{{ (calendario.intervaloTurnos.toString())   |slice:1:2}} hs.
+                        </mat-list-item>
+                        
+                    </ng-template>
+                </mat-card-content>
+                
+                
+                <button  mat-raised-button color="primary"  (click)="irCalendario(calendario.id)" class="m-3 w-75">
+                    Ver Calendario
+                    <mat-icon>search</mat-icon>
+                </button>
+                
+                <button  mat-raised-button color="warn" (click)="eliminarCalendario(calendario)" class="m-3 w-75">
+                    Eliminar Calendario
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-card>    
+        </div>
+
+</div>
