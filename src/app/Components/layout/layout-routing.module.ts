@@ -9,21 +9,19 @@ import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { EnfermedadesComponent } from './Pages/enfermedades/enfermedades.component';
 import { MascotasComponent } from './Pages/mascotas/mascotas.component';
 import { RazasComponent } from './Pages/razas/razas.component';
-import { TurnosComponent } from './Pages/turnos/turnos.component';
 import { AlergiasComponent } from './Pages/alergias/alergias.component';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent,
   children:[
     {path:'dashboard', component: DashboardComponent},
-    {path:'turnos', component: TurnosComponent},
     {path:'clientes',component:ClientesComponent},
     {path:'alergias',component:AlergiasComponent},
     {path:'caja', component:CajaComponent},
     {path:'mascotas', component:MascotasComponent},
     {path:'enfermedades',component:EnfermedadesComponent},
-    
-    {path:'razas', component:RazasComponent}
+    {path:'razas', component:RazasComponent},
+    {path:'turnos', loadChildren:()=>import('./Pages/turnos/turnos.module').then(m=>m.TurnosModule)}
   ]},
   { path:'**', redirectTo:'dashboard'}];
 
