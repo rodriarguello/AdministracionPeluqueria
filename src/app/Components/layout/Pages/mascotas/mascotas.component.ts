@@ -2,7 +2,7 @@ import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Mascota } from 'src/app/models/mascota';
+import { Mascota } from 'src/app/models/mascota/mascota';
 import { MascotasService } from 'src/app/services/mascotas.service';
 import { ModalMascotasDetalleComponent } from '../../modales/modal-mascotas-detalle/modal-mascotas-detalle.component';
 import { ModalMascotasComponent } from '../../modales/modal-mascotas/modal-mascotas.component';
