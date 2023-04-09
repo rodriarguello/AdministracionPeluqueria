@@ -78,9 +78,11 @@ export class ModalEnfermedadesComponent implements OnInit {
 
         next:(res)=>{
           if(res.resultado === 1){
+            if(this.dataEnfermedad != null){
 
-            if(this.dataEnfermedad.id === (-1)){
-              this.modalActual.close(res.data.id);
+              if(this.dataEnfermedad.id === (-1)){
+                this.modalActual.close(res.data.id);
+              }
             }
             else{
 

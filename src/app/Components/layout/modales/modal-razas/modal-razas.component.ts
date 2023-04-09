@@ -77,10 +77,14 @@ export class ModalRazasComponent implements OnInit {
         next:(res)=>{
           if(res.resultado===1){
             //Aca se da una respuesta diferenciada segun el parametro pasado
-            if(this.dataRaza.id===(-1)){
-              //Se le pasa el id del nuevo usuario para que se seleccione en el comboBox
-              this.modalActual.close(res.data.id)
+            if(this.dataRaza != null){
+
+              if(this.dataRaza.id===(-1)){
+                //Se le pasa el id del nuevo usuario para que se seleccione en el comboBox
+                this.modalActual.close(res.data.id)
+              }
             }
+            
             else{
               
               this.modalActual.close("true");

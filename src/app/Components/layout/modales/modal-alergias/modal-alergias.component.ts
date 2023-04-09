@@ -75,8 +75,11 @@ crearActualizarAlergia(){
   this.servicioAlergias.cargarAlergia(this.formAlergia.value.nombre).subscribe({
     next:(res)=>{
       if(res.resultado===1){
-        if(this.dataAlergia.id===(-1)){
-          this.modalActual.close(res.data.id);
+        if(this.dataAlergia != null){
+          
+          if(this.dataAlergia.id===(-1)){
+            this.modalActual.close(res.data.id);
+          }
         }
         else{
 

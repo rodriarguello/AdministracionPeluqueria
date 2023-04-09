@@ -18,14 +18,14 @@ export class ModalClientesComponent  implements OnInit{
       this.formClientes = fb.group({
         nombre:['',[Validators.required,Validators.minLength(2)]],
         telefono:['',[Validators.required,Validators.minLength(7)]],
-        mail:['',[Validators.email]]
+        email:['',[Validators.email,Validators.required]]
       });
 
       this.tituloAccion="Agregar Cliente";
       this.botonAccion = "Agregar";
 
       this.nombreCliente = '';
-      this.mailCliente = '';
+      this.emailCliente = '';
       this.telefonoCliente = '';
   }
   ngOnInit(): void {
@@ -37,12 +37,13 @@ export class ModalClientesComponent  implements OnInit{
 
       this.nombreCliente = this.dataCliente.nombre;
       this.telefonoCliente=this.dataCliente.telefono.toString();
-      this.mailCliente = this.dataCliente.email;
+      this.emailCliente = this.dataCliente.email;
+      
 
       this.formClientes.patchValue({
         nombre: this.dataCliente.nombre,
         telefono:this.dataCliente.telefono,
-        mail: this.dataCliente.email
+        email: this.dataCliente.email
       });
 
     }
@@ -53,7 +54,7 @@ export class ModalClientesComponent  implements OnInit{
   botonAccion:string;
   nombreCliente:string;
   telefonoCliente:string;
-  mailCliente:string;
+  emailCliente:string;
 
 
   agregarActualizarCliente(){
@@ -67,7 +68,8 @@ export class ModalClientesComponent  implements OnInit{
       cliente.id = this.dataCliente.id;
       cliente.nombre = this.formClientes.value.nombre;
       cliente.telefono = this.formClientes.value.telefono;
-      cliente.email = this.formClientes.value.mail;
+      cliente.email = this.formClientes.value.email;
+      cliente.mascotas = this.dataCliente.mascotas;
  
 
       this.clientesService.actualizarCliente(cliente).subscribe({
@@ -75,12 +77,15 @@ export class ModalClientesComponent  implements OnInit{
           if(res.resultado ===1){
             this.utilidadService.mostrarAlerta("El cliente se modificó con éxito","Exito");
             this.modalActual.close("true");
+            
           }
           else{
+            console.log(res);
             this.utilidadService.mostrarAlerta("No se pudo modificar el Cliente","Error");
           }
         },
-        error:()=>{
+        error:(error)=>{
+          console.log(error);
           this.utilidadService.mostrarAlerta("No se pudo modificar el Cliente","Error");
         }
       });
@@ -92,25 +97,29 @@ export class ModalClientesComponent  implements OnInit{
       const cliente = new Cliente();
       cliente.nombre = this.formClientes.value.nombre;
       cliente.telefono = this.formClientes.value.telefono;
-      cliente.email = this.formClientes.value.mail;
+      cliente.email = this.formClientes.value.email;
 
       this.clientesService.agregarCliente(cliente).subscribe({
         next:(res)=>{
           if(res.resultado ===1){ 
             this.utilidadService.mostrarAlerta("Se agregó un nuevo Cliente","Exito");
-            if(this.dataCliente.id===(-1)){
-              this.modalActual.close(res.data.id);
-              
+            if(this.dataCliente != null){
+              if(this.dataCliente.id===(-1))
+                this.modalActual.close(res.data.id);
             }
-            else
-            this.modalActual.close("true");
+            else{
+              
+              this.modalActual.close("true");
+            }
           }
           else{
             this.utilidadService.mostrarAlerta("No se pudo agregar el Cliente","Error");
+            console.log(res);
           }
         },
-        error:()=>{
+        error:(error)=>{
           this.utilidadService.mostrarAlerta("No se pudo agregar el Cliente","Error");
+          console.log(error);
         }
 
       });
