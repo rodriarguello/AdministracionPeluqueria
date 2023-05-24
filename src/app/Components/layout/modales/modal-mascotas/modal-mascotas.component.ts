@@ -76,7 +76,7 @@ export class ModalMascotasComponent implements OnInit {
 
   ngOnInit(): void {
     
-    if(this.dataMascota!=null){
+    if(this.dataMascota!=null && this.dataMascota.id != -1){
      
       
       this.tituloAccion = "Actualizar Mascota";
@@ -172,7 +172,7 @@ export class ModalMascotasComponent implements OnInit {
 
   agregarActualizarMascota(){
 
-   if(this.dataMascota !=null){
+   if(this.dataMascota !=null && this.dataMascota.id != -1){
     const mascota = new Mascota();
     mascota.id = this.dataMascota.id;
     mascota.nombre = this.formMascotas.value.nombre;
@@ -214,9 +214,16 @@ export class ModalMascotasComponent implements OnInit {
        next:(res)=>{
          
          if(res.resultado===1){
-           
-          this.dialogoActual.close("true");
+          
+          if(this.dataMascota.id===-1){
+            this.dialogoActual.close(res.data.id);
+          }
+          else{
+            
+            this.dialogoActual.close("true");
+          }
           this.utilidadService.mostrarAlerta("Se agrego una nueva Mascota","Exito");
+
         }
          
          else{
