@@ -212,25 +212,28 @@ export class ModalMascotasComponent implements OnInit {
     
     this.mascotaService.agregarMascota(mascota).subscribe({
        next:(res)=>{
-         
+
          if(res.resultado===1){
           
-          if(this.dataMascota.id===-1){
-            this.dialogoActual.close(res.data.id);
-          }
-          else{
-            
-            this.dialogoActual.close("true");
-          }
-          this.utilidadService.mostrarAlerta("Se agrego una nueva Mascota","Exito");
+              if(this.dataMascota && this.dataMascota.id===-1){
+                console.log(res.data.id);
+                this.dialogoActual.close(res.data.id);
+              }
+              else{
+                
+                this.dialogoActual.close("true");
+              }
+              this.utilidadService.mostrarAlerta("Se agrego una nueva Mascota","Exito");
 
         }
          
-         else{
+        else
+        {
+          
           this.utilidadService.mostrarAlerta("No se pudo agregar la Mascota","Error"); 
           console.log(res);
            
-         }
+        }
        },
        error:(error)=>{
         this.utilidadService.mostrarAlerta("No se pudo agregar la Mascota","Error");
