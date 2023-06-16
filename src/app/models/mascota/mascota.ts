@@ -12,9 +12,9 @@ export class Mascota{
     cliente!:Cliente;
     idRaza!:number;
     raza!:Raza;
-    idEnfermedad!:number;
-    enfermedad!:Enfermedad;
-    idAlergia!:number;
-    alergia!:Alergia;
+    idEnfermedades!:number[];
+    enfermedades!:Enfermedad[];
+    idAlergias!:number[];
+    alergias!:Alergia[];
     idTurno!:number;
 }
