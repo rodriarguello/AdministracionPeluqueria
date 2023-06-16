@@ -1,0 +1,118 @@
+  <mat-dialog-content>
+    
+    <mat-card-title> Nuevo Calendario </mat-card-title>
+      
+    <form [formGroup]="formCalendario">
+      
+      <mat-grid-list cols="2" rowHeight="110px">
+      
+        <mat-grid-tile>
+      
+          <mat-form-field appearance="outline">
+      
+            <mat-label>Nombre Calendario</mat-label>
+      
+            <input
+              matInput
+              placeholder="Ingrese el nombre"
+              formControlName="nombre"
+            />
+          </mat-form-field>
+        </mat-grid-tile>
+
+
+
+        <mat-grid-tile>
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha de Inicio</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="fechaInicio"
+            />
+            <mat-hint >DD/MM/YYYY</mat-hint>
+            
+            <ng-template #errorFecha>
+              <mat-hint class="text-danger">Debe ingresar una fecha mayor a: {{formCalendario.value.fechaInicio|date:'dd/MM/yyyy'}}</mat-hint>
+            </ng-template>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        
+
+
+
+        <mat-grid-tile>
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha de Fin</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker2"
+              formControlName="fechaFin"
+             
+            />
+            
+            <mat-hint *ngIf="!formCalendario.get('fechaFin')?.touched || !(formCalendario.value.fechaInicio >=formCalendario.value.fechaFin);else errorFecha">DD/MM/YYYY</mat-hint>
+         
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker2"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Hora Inicio</mat-label>
+            <mat-select formControlName="horaInicio">
+              <mat-option *ngFor="let horario of listHorarios" [value]="horario">{{horario|enteroAHora}} hs.</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        
+        <mat-grid-tile>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Hora Fin</mat-label>
+            <mat-select formControlName="horaFin">
+              <mat-option *ngFor="let horario of listHorarios" [value]="horario">{{horario|enteroAHora}} hs.</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+
+        
+        <mat-grid-tile>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Intervalo entre turnos</mat-label>
+            <mat-select formControlName="intervaloTurnos">
+              <mat-option *ngFor="let intervalo of listInvervaloTurnos" [value]="intervalo">{{intervalo|formatearMinutos}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+
+
+      </mat-grid-list>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="d-flex justify-content-evenly"> 
+    <button mat-raised-button color="primary" [disabled]="formCalendario.invalid" (click)="crearCalendario()"> 
+      Crear
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>
+      Cerrar
+    </button>
+    <button (click)="mostrarDatos()">Mostrar Datos</button>
+
+  </mat-dialog-actions>
