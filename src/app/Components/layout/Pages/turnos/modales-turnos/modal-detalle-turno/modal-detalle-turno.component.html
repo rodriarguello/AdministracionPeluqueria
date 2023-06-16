@@ -1,0 +1,47 @@
+<mat-dialog-content>
+    
+   
+        <mat-card-title>
+            <span>Dia: </span>{{dataTurno.fecha.dia|date:'dd/MM/yyyy'}}
+        </mat-card-title>
+
+        <mat-card-title>
+            <span>Hora: </span>{{dataTurno.horario.hora.toString()|slice:0:5}}
+        </mat-card-title>
+
+
+        <mat-card-title>
+            <span>Mascota: </span>{{dataTurno.mascota.nombre}}
+        </mat-card-title>
+
+        <mat-card-title>
+            
+                
+                <span>Precio: </span>
+                
+                <input type="number" disabled #inputPrecio [(ngModel)]="precio" >
+                <button mat-icon-button color="primary" (click)="inputPrecio.disabled=!inputPrecio.disabled">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <br>
+                <mat-hint *ngIf="precio<1"  class="text-danger" >
+                    El precio debe ser mayor a 0
+                </mat-hint>
+                
+        </mat-card-title>
+
+        <mat-card-title>
+            <span>Asistió: {{dataTurno.asistio?'Si':'No'}} </span>
+            
+        </mat-card-title>
+   
+    
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" #buttonActualizar [disabled]="precio===dataTurno.precio" (click)="modificarPrecio()">
+        Actualizar
+    </button>
+    <button mat-raised-button color="warn" matDialogClose>
+        Cerrar
+    </button>
+</mat-dialog-actions>

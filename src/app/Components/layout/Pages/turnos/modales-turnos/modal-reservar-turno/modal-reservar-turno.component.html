@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Reservar Turno del dia {{dataTurno.fecha.dia}} y hora {{dataTurno.horario.hora}}</h2>
+
+<mat-dialog-content>
+
+    <form [formGroup]="formReserva">
+        <mat-grid-list cols="1" rowHeight="110px">
+       
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Mascota</mat-label>
+                    <mat-select formControlName="idMascota" placeholder="Seleccione la Mascota" >
+                    <mat-option *ngFor="let mascota of listMascotas" [value]="mascota.id" >
+                        {{mascota.nombre}}
+                    </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+
+                 
+                <button mat-line mat-mini-fab matTooltip="Agregar Mascota" color="primary" class="mb-3 ms-2" (click)="agregarMascota()">
+                    <mat-icon>add</mat-icon>
+                </button> 
+
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Precio</mat-label>
+                    <input  matInput type="number" formControlName="precio" placeholder="Ingrese el Precio" >
+                </mat-form-field>
+            </mat-grid-tile>
+
+        </mat-grid-list>
+    </form>
+   
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button class="mx-4 mb-4 " mat-raised-button #button  color="primary" (click)="reservarTurno()" [disabled]="formReserva.invalid">
+        Reservar
+    </button>
+    <button class="me-5 mb-4" mat-raised-button mat-dialog-close color="warn" >
+        Cerrar
+    </button>
+
+</mat-dialog-actions>
