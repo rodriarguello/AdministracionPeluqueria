@@ -61,8 +61,8 @@ export class ModalMascotasComponent implements OnInit {
         fechaNacimiento:['',Validators.required],
         cliente:['',Validators.required],
         raza:['',Validators.required],
-        alergia:['',Validators.required],
-        enfermedad:['',Validators.required],      
+        alergias:['',Validators.required],
+        enfermedades:['',Validators.required],      
       
       });
         
@@ -86,9 +86,8 @@ export class ModalMascotasComponent implements OnInit {
         fechaNacimiento:this.dataMascota.fechaNacimiento,
         cliente:this.dataMascota.cliente.id,
         raza:this.dataMascota.raza.id,
-        enfermedad:this.dataMascota.enfermedad.id,
-        alergia:this.dataMascota.alergia.id
-
+        enfermedades:this.dataMascota.enfermedades,
+        alergias:this.dataMascota.alergias
       });
 
     }
@@ -97,6 +96,7 @@ export class ModalMascotasComponent implements OnInit {
     
 
   }
+
 
 
 
@@ -119,6 +119,11 @@ export class ModalMascotasComponent implements OnInit {
 
     this.mostrarAlergias();
   }
+
+  compareFn(alergia1: Alergia, alergia2: Alergia): boolean {
+    return alergia1 && alergia2 ? alergia1.nombre === alergia2.nombre : alergia1 === alergia2;
+  }
+
 
   mostrarClientes():void{
     this.clienteService.mostrarClientes().subscribe({next:(res)=>{
@@ -179,8 +184,14 @@ export class ModalMascotasComponent implements OnInit {
     mascota.fechaNacimiento = this.formMascotas.value.fechaNacimiento;
     mascota.idRaza = this.formMascotas.value.raza;
     mascota.idCliente = this.formMascotas.value.cliente;
-    mascota.idAlergia = this.formMascotas.value.alergia;
-    mascota.idEnfermedad = this.formMascotas.value.enfermedad; 
+
+    const listIdAlergias:Alergia[] = this.formMascotas.value.alergias;
+    mascota.idAlergias = listIdAlergias.map(alergia=> alergia.id);
+
+
+    const listIdEnfermedades:Enfermedad[] = this.formMascotas.value.enfermedades;
+    mascota.idEnfermedades = listIdEnfermedades.map(enfermedad=> enfermedad.id);
+   
     
     
 
@@ -207,8 +218,14 @@ export class ModalMascotasComponent implements OnInit {
     mascota.fechaNacimiento = this.formMascotas.value.fechaNacimiento;
     mascota.idRaza = this.formMascotas.value.raza;
     mascota.idCliente = this.formMascotas.value.cliente;
-    mascota.idAlergia = this.formMascotas.value.alergia;
-    mascota.idEnfermedad = this.formMascotas.value.enfermedad; 
+
+    const listAlergias:Alergia[] = this.formMascotas.value.alergias;
+
+    mascota.idAlergias = listAlergias.map(alergia=> alergia.id);
+
+    const listEnfermedades:Enfermedad[] = this.formMascotas.value.enfermedades;
+    
+    mascota.idEnfermedades = listEnfermedades.map(enfermedad=> enfermedad.id);
     
     this.mascotaService.agregarMascota(mascota).subscribe({
        next:(res)=>{
@@ -216,7 +233,6 @@ export class ModalMascotasComponent implements OnInit {
          if(res.resultado===1){
           
               if(this.dataMascota && this.dataMascota.id===-1){
-                console.log(res.data.id);
                 this.dialogoActual.close(res.data.id);
               }
               else{

@@ -82,7 +82,7 @@
                 <mat-card class="card">
                      <mat-card-header>
                      <mat-card-title>Enfermedad</mat-card-title>
-                     <mat-card-subtitle>{{mascota.enfermedad.nombre}}</mat-card-subtitle>
+                     <mat-card-subtitle *ngFor="let enfermedad of mascota.enfermedades">{{enfermedad.nombre}}</mat-card-subtitle>
                      </mat-card-header>
                      
                  </mat-card>
@@ -94,7 +94,7 @@
                 <mat-card class="card">
                      <mat-card-header>
                      <mat-card-title>Alergia</mat-card-title>
-                     <mat-card-subtitle>{{mascota.alergia.nombre }}</mat-card-subtitle>
+                     <mat-card-subtitle *ngFor="let alergia of mascota.alergias">{{alergia.nombre}}</mat-card-subtitle>
                      </mat-card-header>
                      
                  </mat-card>

@@ -78,31 +78,43 @@
 
 
             <mat-grid-tile>
+                
                 <mat-form-field appearance="outline">
-                    <mat-label>Enfermedad</mat-label>
-                    <mat-select formControlName="enfermedad">
-                    <mat-option *ngFor="let enfermedad of listEnfermedades" [value]="enfermedad.id" >
-                        {{enfermedad.nombre}}
-                    </mat-option>
+                    <mat-label>Enfermedades</mat-label>
+                    <mat-select formControlName="enfermedades" multiple [compareWith]="compareFn">
+                      <mat-select-trigger>
+                        {{ formMascotas.value.enfermedades[0]?.nombre || ''}}
+                        <span *ngIf="(formMascotas.value.enfermedades.length || 0) > 1" class="example-additional-selection">
+                          (+{{(formMascotas.value.enfermedades?.length || 0) - 1}} más)
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option *ngFor="let enfermedad of listEnfermedades" [value]="enfermedad">{{enfermedad.nombre}}</mat-option>
                     </mat-select>
-                </mat-form-field>
+                  </mat-form-field>
 
                 <button mat-line mat-mini-fab matTooltip="Agregar Enfermedad" color="primary" class="mb-3 ms-2" (click)="agregarEnfermedad()" >
                     <mat-icon>add</mat-icon>
                 </button>
+
+               
+
 
             </mat-grid-tile>
 
 
             <mat-grid-tile>
                 <mat-form-field appearance="outline">
-                    <mat-label>Alergia</mat-label>
-                    <mat-select formControlName="alergia">
-                    <mat-option *ngFor="let alergia of listAlergias" [value]="alergia.id" >
-                        {{alergia.nombre}}
-                    </mat-option>
+                    <mat-label>Alergias</mat-label>
+                    <mat-select formControlName="alergias" multiple [compareWith]="compareFn">
+                      <mat-select-trigger>
+                        {{ formMascotas.value.alergias[0]?.nombre || ''}}
+                        <span *ngIf="(formMascotas.value.alergias.length || 0) > 1" class="example-additional-selection">
+                          (+{{(formMascotas.value.alergias?.length || 0) - 1}} más)
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option *ngFor="let alergia of listAlergias" [value]="alergia">{{alergia.nombre}}</mat-option>
                     </mat-select>
-                </mat-form-field>
+                  </mat-form-field>
 
                 <button mat-line mat-mini-fab matTooltip="Agregar Alergia" color="primary" class="mb-3 ms-2" (click)="agregarAlergia()">
                     <mat-icon>add</mat-icon>

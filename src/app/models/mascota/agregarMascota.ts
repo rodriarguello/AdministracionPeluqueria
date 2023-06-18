@@ -4,7 +4,7 @@ export class AgregarMascota{
     fechaNacimiento!:string;
     idCliente!:number;
     idRaza!:number;
-    idEnfermedad!:number;
-    idAlergia!:number;
+    idEnfermedades!:number[];
+    idAlergias!:number[];
 
 }
