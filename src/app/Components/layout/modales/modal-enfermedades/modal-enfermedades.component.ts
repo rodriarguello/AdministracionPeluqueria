@@ -31,7 +31,7 @@ export class ModalEnfermedadesComponent implements OnInit {
       this.tituloAccion = "Actualizar Enfermedad"
       this.botonAccion = "Actualizar"  
       this.formEnfermedades.patchValue({
-        nombre:[this.dataEnfermedad.nombre]
+        nombre:this.dataEnfermedad.nombre
       });
     }
     
