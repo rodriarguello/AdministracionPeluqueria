@@ -12,6 +12,7 @@ import { UtilidadService } from './services/utilidad.service';
 import { RegistroComponent } from './Components/home/registro/registro.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './Interceptors/jwt.interceptor';
+import { SpinnerInterceptor } from './Interceptors/spinner.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { JwtInterceptor } from './Interceptors/jwt.interceptor';
   providers: [
     UsuariosService,
     UtilidadService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true}
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true},
+    {provide:HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi:true}
   ],
   
   bootstrap: [AppComponent]

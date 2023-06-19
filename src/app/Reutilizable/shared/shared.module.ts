@@ -32,12 +32,15 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import {MatNativeDateModule} from '@angular/material/core';
 import {MomentDateModule} from '@angular/material-moment-adapter';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SpinnerComponent
+  ],
   imports: [
     CommonModule
   ],
@@ -67,7 +70,8 @@ import {MomentDateModule} from '@angular/material-moment-adapter';
     MatDatepickerModule,
     MatNativeDateModule,
     MomentDateModule,
-    MatMenuModule
+    MatMenuModule,
+    SpinnerComponent
   ],
   providers:[
       MatDatepickerModule,
