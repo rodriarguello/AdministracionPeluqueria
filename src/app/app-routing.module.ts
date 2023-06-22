@@ -8,10 +8,11 @@ import { AutenticacionGuard } from './seguridad/autenticacion.guard';
 
 const routes: Routes = [
   
-  {path:'', component: IndexComponent, pathMatch:'full'},
-  {path:'home', component:IndexComponent, pathMatch:'full'},
+  {path:'', redirectTo: 'index',pathMatch:'full'},
+  {path:'index', component:IndexComponent, pathMatch:'full'},
   {path:'registro', component:RegistroComponent},
-  {path:'pages', loadChildren:() => import('./Components/layout/layout.module').then(m => m.LayoutModule), canActivate:[AutenticacionGuard] }
+  {path:'pages', loadChildren:() => import('./Components/layout/layout.module').then(m => m.LayoutModule), canActivate:[AutenticacionGuard] },
+  {path:'**', redirectTo:'index'}
 
 ];
 
