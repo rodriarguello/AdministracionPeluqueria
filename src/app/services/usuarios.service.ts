@@ -65,4 +65,11 @@ export class UsuariosService {
     
   }
 
+
+  validarToken():Observable<boolean>{
+    
+    return this.http.post<boolean>(`${this.urlApi}/validacion`, this.httpOptions);
+  
+  }
+
 }
