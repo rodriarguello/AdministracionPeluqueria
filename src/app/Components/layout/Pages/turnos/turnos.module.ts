@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { TurnosRoutingModule } from './turnos-routing.module';
 import { TurnosComponent } from './turnos.component';
-import { ModalCalendarioComponent } from './modales-turnos/modal-calendario/modal-calendario.component';
+import { ModalCalendarioComponent } from './modales-turnos/modal-crear-calendario/modal-crear-calendario.component';
 import { SharedModule } from 'src/app/Reutilizable/shared/shared.module';
 import { enteroAHoraPipe } from 'src/app/Reutilizable/enteroAHora.pipe';
 import { FormatearMinutosPipe } from 'src/app/Reutilizable/formatear-minutos.pipe';

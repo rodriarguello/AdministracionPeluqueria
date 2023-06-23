@@ -9,8 +9,8 @@ import { UtilidadService } from 'src/app/services/utilidad.service';
 
 @Component({
   selector: 'app-modal-calendario',
-  templateUrl: './modal-calendario.component.html',
-  styleUrls: ['./modal-calendario.component.css'],
+  templateUrl: './modal-crear-calendario.component.html',
+  styleUrls: ['./modal-crear-calendario.component.css'],
   providers:[
     {provide: MAT_DATE_FORMATS, useValue:MY_DATA_FORMATS}
   ]
