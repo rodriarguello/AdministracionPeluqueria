@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
@@ -9,12 +10,12 @@ import { UtilidadService } from 'src/app/services/utilidad.service';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
-export class RegistroComponent {
+export class RegistroComponent implements OnInit{
 
 formularioRegistro:FormGroup;
 ocultarPassword:boolean;
 
-constructor(private fb:FormBuilder, private usuarioService:UsuariosService, private utilidadService:UtilidadService){
+constructor(private router:Router,private fb:FormBuilder, private usuarioService:UsuariosService, private utilidadService:UtilidadService){
 
   this.formularioRegistro = fb.group({
     email:['',Validators.required],
@@ -22,6 +23,10 @@ constructor(private fb:FormBuilder, private usuarioService:UsuariosService, priv
   })
   this.ocultarPassword = true;
 }
+  ngOnInit(): void {
+
+    this.validarToken();
+  }
 
 
 nuevoUsuario(){
@@ -30,15 +35,37 @@ const usuario = new Usuario(this.formularioRegistro.value.email,this.formularioR
 
 this.usuarioService.crearUsuario(usuario).subscribe({
   next: (res)=>{
-  
-  console.log(res,"hola1");
+    
+    this.utilidadService.mostrarAlerta("Registro Exitoso", "REGISTRO");
+    this.formularioRegistro.patchValue({
+      email:'',
+      password:''
+    });
 
+    this.formularioRegistro.reset();
+    
+    setTimeout(() => {
+      
+      this.router.navigate(['index']);
+    }, 2000);
+    
   },
-  error:(error)=>{
+  error:()=>{
    this.utilidadService.mostrarAlerta("Error al registrarse","REGISTRO");
   }
 });
 
+}
+
+validarToken(){
+  this.usuarioService.validarToken().subscribe({
+    next:()=>{
+      this.router.navigate(['pages']);
+    },
+    error:()=>{
+
+    }
+  });
 }
 
 
