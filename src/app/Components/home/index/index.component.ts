@@ -1,10 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent {
+export class IndexComponent implements OnInit{
+
+  constructor(private router:Router, private usuarioService:UsuariosService){
+
+  }
+  ngOnInit(): void {
+
+    this.validarToken();
+  }
+
+
+
+  validarToken(){
+
+    this.usuarioService.validarToken().subscribe({
+      next:()=>{
+        this.router.navigate(['/pages']);
+      },
+      error:()=>{
+        
+      }
+      
+    }
+    );
+  }
 
 }
