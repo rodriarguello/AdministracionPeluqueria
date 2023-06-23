@@ -108,6 +108,17 @@ export class EnfermedadesComponent implements OnInit,AfterViewInit {
               this.utilidadesService.mostrarAlerta("La Enfermedad se eliminó con éxito","Exito");
               this.mostrarEnfermedades();
             }
+            else if(res.resultado==2){
+              swal.fire({
+                title:'Error al eliminar',
+                text: `Para eliminar la enfermedad: "${enfermedad.nombre}", primero debe eliminar todas las mascotas que están asociadas a ella.`,
+                
+                width:'300px'
+                
+
+              });
+            }
+
             else{
               this.utilidadesService.mostrarAlerta("No se pudo eliminar la Enfermedad","Error");
             }

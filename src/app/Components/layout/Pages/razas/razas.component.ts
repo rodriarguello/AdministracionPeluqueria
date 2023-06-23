@@ -97,6 +97,16 @@ export class RazasComponent implements OnInit,AfterViewInit{
               this.utilidadService.mostrarAlerta("La Raza se eliminó con éxito","Exito");
               this.mostrarRazas();
             } 
+            else if(res.resultado==2){
+              swal.fire({
+                title:'Error al eliminar',
+                text: `Para eliminar la raza: "${raza.nombre}", primero debe eliminar todas las mascotas que están asociadas a ella.`,
+                
+                width:'300px'
+                
+
+              });
+            }
             else this.utilidadService.mostrarAlerta("No se pudo eliminar la Raza","Error");
           
           },
