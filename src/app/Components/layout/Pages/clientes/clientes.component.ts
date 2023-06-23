@@ -107,6 +107,16 @@ export class ClientesComponent implements OnInit, AfterViewInit{
               this.utilidadService.mostrarAlerta("El cliente se eliminó con éxito","Exito");
               this.mostrarClientes();
             }
+            else if(res.resultado==2){
+              swal.fire({
+                title:'Error al eliminar',
+                text: `Para eliminar el/la cliente: "${cliente.nombre}", primero debe eliminar todas las mascotas que están asociadas a el/ella.`,
+                
+                width:'300px'
+                
+
+              });
+            }
             else{
               console.log(res);
               this.utilidadService.mostrarAlerta("No se pudo eliminar el cliente","Error");
