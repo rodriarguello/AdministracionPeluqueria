@@ -57,7 +57,6 @@ export class CalendarioComponent implements OnInit{
   
 
 
-
   fecha!:any;
   fechaFin!:any;
   fechaInicio!:any;
@@ -81,6 +80,16 @@ export class CalendarioComponent implements OnInit{
     
   }
 
+  inicializacionListas(){
+    this.listLunes = [];
+    this.listMartes = [];
+    this.listMiercoles = [];
+    this.listJueves = [];
+    this.listViernes = [];
+    this.listSabado = [];
+    this.listDomingo = [];
+  }
+  
   semanaAnterior():void{
     this.fecha = moment.utc(this.fecha).subtract(7,'days');
     this.mostrarTurnos();
@@ -159,13 +168,7 @@ export class CalendarioComponent implements OnInit{
           
 
           this.listTurnos = res.data;
-          this.listLunes = [];
-          this.listMartes = [];
-          this.listMiercoles = [];
-          this.listJueves = [];
-          this.listViernes = [];
-          this.listSabado = [];
-          this.listDomingo = []; 
+          this.inicializacionListas();
 
           let cantidadHorarios = this.listHorarios.length; 
         
@@ -236,13 +239,7 @@ export class CalendarioComponent implements OnInit{
           
 
           
-          this.listLunes = [];
-          this.listMartes = [];
-          this.listMiercoles = [];
-          this.listJueves = [];
-          this.listViernes = [];
-          this.listSabado = [];
-          this.listDomingo = []; 
+          this.inicializacionListas();
           
         }
       },
@@ -359,16 +356,5 @@ export class CalendarioComponent implements OnInit{
     
     
     }
-
-    gridColum:string ="repeat(8,auto)"; 
-    gridRow:string =  `repeat(${this.listHorarios.length},100px)`;
-    
-    styleGrid = {
-      "display":"grid",
-      "grid-template-columns": this.gridColum,
-      "grid-template-rows":this.gridRow
-    }
-  
-
 
 }
