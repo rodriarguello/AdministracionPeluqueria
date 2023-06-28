@@ -2,6 +2,7 @@ import { Alergia } from "../alergia";
 import { Cliente } from "../cliente";
 import { Enfermedad } from "../enfermedad";
 import { Raza } from "../raza";
+import { Turno } from "../turno/turno";
 
 export class Mascota{
     
@@ -16,5 +17,5 @@ export class Mascota{
     enfermedades!:Enfermedad[];
     idAlergias!:number[];
     alergias!:Alergia[];
-    idTurno!:number;
+    turnos!:Turno[];
 }
