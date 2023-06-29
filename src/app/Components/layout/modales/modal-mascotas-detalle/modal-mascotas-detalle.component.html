@@ -1,8 +1,8 @@
 <h2 mat-dialog-title class="text-center">Detalles Mascota</h2>
 
-<mat-dialog-content >
+<mat-dialog-content>
 
-    <form>
+   
         <mat-grid-list cols="2" rowHeight="110px">
             
             
@@ -78,10 +78,10 @@
 
              
             
-             <mat-grid-tile>
+             <mat-grid-tile rowspan="{{mascota.enfermedades.length > 2 ?'2':'1'}}">
                 <mat-card class="card">
                      <mat-card-header>
-                     <mat-card-title>Enfermedad</mat-card-title>
+                     <mat-card-title>Enfermedades</mat-card-title>
                      <mat-card-subtitle *ngFor="let enfermedad of mascota.enfermedades">{{enfermedad.nombre}}</mat-card-subtitle>
                      </mat-card-header>
                      
@@ -90,19 +90,32 @@
             
              
             
-             <mat-grid-tile>
-                <mat-card class="card">
+             <mat-grid-tile rowspan="{{mascota.alergias.length>2?'2':'1'}}">
+                <mat-card class="card" >
                      <mat-card-header>
-                     <mat-card-title>Alergia</mat-card-title>
+                     <mat-card-title>Alergias</mat-card-title>
                      <mat-card-subtitle *ngFor="let alergia of mascota.alergias">{{alergia.nombre}}</mat-card-subtitle>
                      </mat-card-header>
                      
                  </mat-card>
              </mat-grid-tile>    
 
+             <mat-grid-tile colspan="2" rowspan="{{mascota.turnos.length>2?'2':'1'}}">
+                <mat-card class="card">
+                     <mat-card-header>
+                     <mat-card-title>Turnos</mat-card-title>
+                     <mat-card-subtitle *ngFor="let turno of mascota.turnos">Fecha:{{turno.fecha.dia| date:'dd/MM/yyyy'}} - Asistió: {{turno.asistio?'Si':'No'}}</mat-card-subtitle>
+                     </mat-card-header>
+                     
+                 </mat-card>
+             </mat-grid-tile> 
+
+
+
 
         </mat-grid-list>
-    </form>
+     
+   
    
 </mat-dialog-content>
 
