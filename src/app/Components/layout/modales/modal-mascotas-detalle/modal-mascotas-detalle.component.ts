@@ -1,6 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Mascota } from 'src/app/models/mascota/mascota';
+import { Turno } from 'src/app/models/turno/turno';
+import { ModalDetalleTurnoComponent } from '../../Pages/turnos/modales-turnos/modal-detalle-turno/modal-detalle-turno.component';
+import { MascotaSinDetalles } from 'src/app/models/mascota/mascotaSinDetalles';
 
 @Component({
   selector: 'app-modal-mascotas-detalle',
@@ -9,7 +12,8 @@ import { Mascota } from 'src/app/models/mascota/mascota';
 })
 export class ModalMascotasDetalleComponent {
 
- constructor(private dialogoActual:MatDialogRef<ModalMascotasDetalleComponent>,@Inject(MAT_DIALOG_DATA)public dataMascota:Mascota,
+ constructor(private dialogoActual:MatDialogRef<ModalMascotasDetalleComponent>,@Inject(MAT_DIALOG_DATA)private dataMascota:Mascota,
+ private dialogoDetalleTurno:MatDialog
  ){
 
   this.mascota = dataMascota;
@@ -17,4 +21,17 @@ export class ModalMascotasDetalleComponent {
  }
 
   mascota:Mascota = new Mascota();
+
+
+  verDetalleTurno(turno:Turno){
+
+    const mascota = new MascotaSinDetalles();
+    mascota.nombre = this.dataMascota.nombre;
+    turno.mascota = mascota;
+
+    
+
+    this.dialogoDetalleTurno.open(ModalDetalleTurnoComponent, {data:turno});
+    
+  }
 }
