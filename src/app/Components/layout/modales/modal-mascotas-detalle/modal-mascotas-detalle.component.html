@@ -104,11 +104,17 @@
                 <mat-card class="card">
                      <mat-card-header>
                      <mat-card-title>Turnos</mat-card-title>
-                     <mat-card-subtitle *ngFor="let turno of mascota.turnos">Fecha:{{turno.fecha.dia| date:'dd/MM/yyyy'}} - Asistió: {{turno.asistio?'Si':'No'}}
-                        <button mat-icon-button  color="primary" (click)="verDetalleTurno(turno)">
-                            <mat-icon >search</mat-icon>
-
-                        </button></mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="mascota.turnos.length<1;else turnos">
+                        La mascota no posee Turnos.
+                    </mat-card-subtitle>
+                     <ng-template #turnos>
+                         <mat-card-subtitle *ngFor="let turno of mascota.turnos">Fecha:{{turno.fecha.dia| date:'dd/MM/yyyy'}} - Asistió: {{turno.asistio?'Si':'No'}}
+                            <button mat-icon-button  color="primary" (click)="verDetalleTurno(turno)">
+                                <mat-icon >search</mat-icon>
+    
+                            </button></mat-card-subtitle>
+                         
+                    </ng-template>
                         
                      </mat-card-header>
                      
