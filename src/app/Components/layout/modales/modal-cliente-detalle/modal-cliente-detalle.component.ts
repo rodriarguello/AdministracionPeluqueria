@@ -8,6 +8,8 @@ import { UtilidadService } from 'src/app/services/utilidad.service';
 import swal from 'sweetalert2';
 import { ModalMascotasDetalleComponent } from '../modal-mascotas-detalle/modal-mascotas-detalle.component';
 import { ModalMascotasComponent } from '../modal-mascotas/modal-mascotas.component';
+import { TurnosService } from 'src/app/services/turnos.service';
+import { ModalTurnosClienteComponent } from '../modal-turnos-cliente/modal-turnos-cliente.component';
 
 @Component({
   selector: 'app-modal-cliente-detalle',
@@ -139,6 +141,13 @@ export class ModalClienteDetalleComponent implements OnInit {
 
   cerrarModal():void{
     this.modalActual.close(this.modificoDato);
+  }
+
+  mostrarHistorialTurnos():void{
+
+    this.dialog.open(ModalTurnosClienteComponent,{data:this.dataCliente});
+
+    
   }
 
 }
