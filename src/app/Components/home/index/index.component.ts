@@ -11,26 +11,29 @@ export class IndexComponent implements OnInit{
 
   constructor(private router:Router, private usuarioService:UsuariosService){
 
+    this.mostrarLogin = true;
   }
   ngOnInit(): void {
 
-    this.validarToken();
+    this.verificarSesion();
+    
   }
 
+  mostrarLogin!:boolean;
 
 
-  validarToken(){
+  verificarSesion(){
 
-    this.usuarioService.validarToken().subscribe({
-      next:()=>{
-        this.router.navigate(['/pages']);
-      },
-      error:()=>{
+    if(localStorage.getItem('token')){
+      
+      this.usuarioService.validarToken().subscribe({
+        next:()=>{
+          this.router.navigate(['/pages']);
+        }
         
       }
-      
+      );
     }
-    );
   }
 
 }

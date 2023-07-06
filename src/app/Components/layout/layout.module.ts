@@ -21,6 +21,7 @@ import { MascotasComponent } from './Pages/mascotas/mascotas.component';
 import { ModalMascotasComponent } from './modales/modal-mascotas/modal-mascotas.component';
 import { ModalMascotasDetalleComponent } from './modales/modal-mascotas-detalle/modal-mascotas-detalle.component';
 import { ModalClienteDetalleComponent } from './modales/modal-cliente-detalle/modal-cliente-detalle.component';
+import { ModalTurnosClienteComponent } from './modales/modal-turnos-cliente/modal-turnos-cliente.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ModalClienteDetalleComponent } from './modales/modal-cliente-detalle/mo
     MascotasComponent,
     ModalMascotasComponent,
     ModalMascotasDetalleComponent,
-    ModalClienteDetalleComponent
+    ModalClienteDetalleComponent,
+    ModalTurnosClienteComponent
   ],
   imports: [
     CommonModule,
