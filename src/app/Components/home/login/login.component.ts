@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   formularioLogin:FormGroup;
   ocultarPassword:boolean;
   mostrarLoading:boolean= false;
+
+  @Output() mostrarLogin = new EventEmitter<boolean>();
   
   constructor(private router:Router, private fb:FormBuilder, private utilidadService:UtilidadService, private usuariosService:UsuariosService){
 
@@ -55,6 +57,10 @@ export class LoginComponent implements OnInit {
   
   });
 
+  }
+
+  mostrarRegistro():void{
+    this.mostrarLogin.emit(false);
   }
 
 

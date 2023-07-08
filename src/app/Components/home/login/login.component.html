@@ -1,4 +1,4 @@
-<div class="body">
+
     <div class="mat-elevation-z15">
     <mat-card class="loginCard pt-4">
         <div >
@@ -6,7 +6,7 @@
         </div>
         <mat-card-content class="pb-5">
 
-            <form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()">
+            <form [formGroup]="formularioLogin">
                 
             
                 <mat-form-field class="full-width" appearance="outline">
@@ -27,12 +27,12 @@
                 
 
                 <div class="mt-3">
-                    <button class="me-4 fs-5 px-4 py-4" mat-raised-button color="primary" type="submit" [disabled]="formularioLogin.invalid">
+                    <button class="me-4 fs-5 px-4 py-4" mat-raised-button color="primary" type="submit" [disabled]="formularioLogin.invalid" (click)="iniciarSesion()">
                         Ingresar  
                         
                         <mat-icon>login</mat-icon>
                     </button>
-                    <button class="ms-4 fs-5 py-4" routerLink="/registro" mat-raised-button color="primary" >
+                    <button class="ms-4 fs-5 py-4" mat-raised-button color="primary" (click)="mostrarRegistro()" >
                         Registrarme
                     </button>
                 </div>
@@ -44,5 +44,4 @@
         </mat-card-content>
 
     </mat-card>
-</div>
 </div>
