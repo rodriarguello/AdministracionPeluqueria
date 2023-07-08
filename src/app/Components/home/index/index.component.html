@@ -2,7 +2,9 @@
 <div class="container d-flex flex-column align-items-center justify-content-center vh-100">
     <h1 style="margin-bottom: 10vh;text-align: center;">ADMINISTRACION DE PELUQUERIAS CANINAS</h1>
         
-    <app-login></app-login>
+    <app-login *ngIf="mostrarLogin" (mostrarLogin)="mostrarLogin=$event"></app-login>
+
+    <app-registro *ngIf="!mostrarLogin" (mostrarLogin)="mostrarLogin=$event"></app-registro>
         
     
 </div>
