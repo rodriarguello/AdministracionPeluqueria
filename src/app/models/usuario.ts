@@ -1,13 +1,18 @@
 export class Usuario{
 
-constructor(email:string,password:string){
-    this.email = email;
-    this.password=password;
-}
+    email!:string;
 
-email:string;
+    password!:string;
 
-password:string;
+    nombres!:string;
+
+    apellido!:string;
+
+    nombrePeluqueria!:string;
+
+    fechaCreacion!:Date;
+
+
 
 
 
