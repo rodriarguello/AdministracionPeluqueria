@@ -21,7 +21,7 @@ export class JwtInterceptor implements HttpInterceptor {
     request = request.clone({
 
       setHeaders:{
-        Authorization : `Bearer ${JSON.parse(localStorage.getItem('token')!).token}`
+        Authorization : `Bearer ${credencialesUsuario.token}`
       }
 
     });
@@ -36,7 +36,9 @@ export class JwtInterceptor implements HttpInterceptor {
       }, 
       (error)=>{
         if(error.status ==401){
-          
+
+          localStorage.removeItem('token');
+          this.usuarioService.setCredencialesUsuario = null;
           this.router.navigate(['index']);
 
         }
