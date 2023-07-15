@@ -4,9 +4,15 @@
     <mat-toolbar-row class="d-flex justify-content-between py-5">
         
         <div class="d-flex align-items-center">
-            <mat-card-title class="fs-3 me-2">
-             Administración de Peluquería
-            </mat-card-title> 
+            <div class="d-flex flex-column">
+                <mat-card-title class="fs-3 me-2">
+                 Administración de Peluquería 
+                </mat-card-title> 
+                <mat-card-title class="fs-4">
+                    "{{(datosUsuario$|async)?.nombrePeluqueria}}"
+                </mat-card-title>
+            </div>
+            
         
         
             <button mat-icon-button (click)="sideNav.toggle()">

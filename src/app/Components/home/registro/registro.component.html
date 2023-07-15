@@ -1,4 +1,4 @@
-<div class="body">
+
 
     <div class="mat-elevation-z15">
     <mat-card class="loginCard">
@@ -8,7 +8,23 @@
         <mat-card-content class="pb-5">
 
             <form [formGroup]="formularioRegistro">
-                
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Nombres</mat-label>
+                    <input formControlName="nombres" autocomplete="off" type="text" matInput placeholder="Ingresa tu nombre">
+                    <mat-icon matSuffix>user</mat-icon>
+                  </mat-form-field>
+
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Apellido</mat-label>
+                    <input formControlName="apellido" autocomplete="off" type="text" matInput placeholder="Ingresa tu apellido">
+                    <mat-icon matSuffix>user</mat-icon>
+                  </mat-form-field>
+
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Nombre de la Peluqueria</mat-label>
+                    <input formControlName="nombrePeluqueria" autocomplete="off" type="text" matInput placeholder="Ingresa el nombre de tu Peluqueria">
+                    <mat-icon matSuffix>pets</mat-icon>
+                  </mat-form-field>
             
                 <mat-form-field class="full-width" appearance="outline">
                   <mat-label>Email</mat-label>
@@ -46,4 +62,4 @@
 
     </mat-card>
     </div>
-</div>
+

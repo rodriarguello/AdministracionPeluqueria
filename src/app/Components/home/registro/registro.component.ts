@@ -14,11 +14,15 @@ export class RegistroComponent implements OnInit{
 formularioRegistro:FormGroup;
 ocultarPassword:boolean;
 
-constructor(private fb:FormBuilder, private usuarioService:UsuariosService, private utilidadService:UtilidadService){
+constructor(fb:FormBuilder, private usuarioService:UsuariosService, private utilidadService:UtilidadService){
 
   this.formularioRegistro = fb.group({
-    email:['',Validators.required],
+    nombres:['',Validators.required],
+    apellido:['',Validators.required],
+    nombrePeluqueria:['',Validators.required],
+    email:['',[Validators.required, Validators.email]],
     password:['',Validators.required]
+
   })
   this.ocultarPassword = true;
 }
@@ -31,7 +35,17 @@ constructor(private fb:FormBuilder, private usuarioService:UsuariosService, priv
 
 registrarUsuario():void{
 
-const usuario = new Usuario(this.formularioRegistro.value.email,this.formularioRegistro.value.password);
+const usuario = new Usuario();
+
+usuario.email = this.formularioRegistro.value.email;
+
+usuario.password = this.formularioRegistro.value.password;
+
+usuario.nombres = this.formularioRegistro.value.nombres;
+
+usuario.apellido = this.formularioRegistro.value.apellido;
+
+usuario.nombrePeluqueria = this.formularioRegistro.value.nombrePeluqueria;
 
 this.usuarioService.crearUsuario(usuario).subscribe({
   next: ()=>{

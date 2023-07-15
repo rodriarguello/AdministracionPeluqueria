@@ -15,20 +15,26 @@ export class IndexComponent implements OnInit{
   }
   ngOnInit(): void {
 
-    this.verificarSesion();
+    this.obtenerDatosUsuario();
     
   }
 
   mostrarLogin!:boolean;
 
 
-  verificarSesion(){
+  obtenerDatosUsuario(){
 
     if(localStorage.getItem('token')){
       
-      this.usuarioService.validarToken().subscribe({
+      this.usuarioService.obtenerDatosUsuario().subscribe({
+
         next:()=>{
+            
           this.router.navigate(['/pages']);
+          
+        },
+        error:()=>{
+
         }
         
       }

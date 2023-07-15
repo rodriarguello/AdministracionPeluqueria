@@ -16,7 +16,7 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor(private usuarioService:UsuariosService, private router:Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-   const credencialesUsuario = this.usuarioService.credencialesUsuario;
+   const credencialesUsuario = this.usuarioService.getCredencialesUsuario;
    if(credencialesUsuario) {
     request = request.clone({
 

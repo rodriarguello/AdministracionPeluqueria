@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Credencial } from '../models/credencial.interface';
 import { Usuario } from '../models/usuario';
 import {map} from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { ResponseApi } from '../models/response-api';
 
 
 
@@ -17,6 +18,9 @@ export class UsuariosService {
   constructor(private http:HttpClient, private router:Router) { 
 
     this.credUsuarioSubject = new BehaviorSubject<Credencial>(JSON.parse(localStorage.getItem('token')!));
+    const usuario = new Usuario();
+
+    this.datosUsuario = new BehaviorSubject<Usuario>(usuario);
 
 
   }
@@ -30,8 +34,22 @@ export class UsuariosService {
 
   private credUsuarioSubject:BehaviorSubject<Credencial>;
 
-  public get credencialesUsuario():Credencial{
+  private datosUsuario:BehaviorSubject<Usuario>;
+
+  public get getDatosUsuario():Observable<Usuario>{
+     return this.datosUsuario.asObservable();
+  }
+
+  public set setDatosUsuario(usuario:Usuario){
+    this.datosUsuario.next(usuario);
+  }
+
+  public get getCredencialesUsuario():Credencial{
     return this.credUsuarioSubject.value;
+  }
+
+  public set setCredencialesUsuario(value:any){
+    this.credUsuarioSubject.next(value);
   }
   
 
@@ -47,10 +65,12 @@ export class UsuariosService {
       map(res=>{
         if(res.token != null){
           const credenciales:Credencial = res;
-
           localStorage.setItem('token',JSON.stringify(credenciales));
 
           this.credUsuarioSubject.next(credenciales);
+        }
+        else{
+          console.log(res);
         }
         return res;
       })
@@ -66,9 +86,18 @@ export class UsuariosService {
   }
 
 
-  validarToken():Observable<boolean>{
+  obtenerDatosUsuario():Observable<ResponseApi>{
     
-    return this.http.get<boolean>(`${this.urlApi}/validacion`, this.httpOptions);
+    return this.http.get<ResponseApi>(this.urlApi, this.httpOptions).pipe(
+      map(res=>{
+
+        this.setDatosUsuario = res.data
+
+        
+        
+        return res;
+      })
+    );
   
   }
 
