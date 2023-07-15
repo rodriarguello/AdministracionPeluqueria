@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Usuario } from 'src/app/models/usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 
@@ -14,11 +16,14 @@ export class LayoutComponent implements OnInit{
 
   }
   ngOnInit(): void {
-
+    
+    this.obtenerDatosUsuario();
     this.router.navigate(['pages/dashboard']);
+    this.datosUsuario$ = this.usuarioService.getDatosUsuario;
     
   }
   
+  datosUsuario$!:Observable<Usuario>;
 
   cerrarSesion():void{
 
@@ -26,6 +31,15 @@ export class LayoutComponent implements OnInit{
 
   }
 
+  obtenerDatosUsuario(){
+
+    if(localStorage.getItem('token')){
+      
+      this.usuarioService.obtenerDatosUsuario().subscribe();
+      
+
+    }
+  }
 
 
 }
