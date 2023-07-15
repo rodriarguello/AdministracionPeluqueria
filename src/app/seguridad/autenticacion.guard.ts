@@ -15,7 +15,7 @@ export class AutenticacionGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.usuarioService.credencialesUsuario) return true;
+      if(this.usuarioService.getCredencialesUsuario) return true;
 
       this.router.navigate(['home']);
     
