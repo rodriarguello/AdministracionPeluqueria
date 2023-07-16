@@ -1,0 +1,29 @@
+<div class="mat-elevation-z8 my-3">
+
+  <mat-card class="py-3 px-1">
+    <mat-card-header>
+      <mat-card-title>Resumen de Ingresos</mat-card-title>
+      <mat-card-subtitle>Resumen Diario</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      
+      <mat-form-field color="accent">
+        <mat-label>Inherited calendar color</mat-label>
+        <input matInput [matDatepicker]="picker1" [min]="minDate" [max]="maxDate" [(ngModel)]="fechaSeleccionada">
+        <mat-hint>DD/MM/AAAA</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      
+      
+      
+      <button mat-raised-button color="primary" class="ms-2" (click)="mostrarIngresoDiario()">Mostrar</button>
+    </mat-card-actions>
+    <mat-card-content *ngIf="ingresoDiario">
+      <p>Cantidad de Ingresos: <span style="font-weight: bold;">{{ingresoDiario.cantidadIngresos}}</span></p>
+      <p>Ingreso total: <span style="font-weight: bold;">${{ingresoDiario.total}}</span></p>
+    </mat-card-content>
+  </mat-card>
+  
+</div>
+  
