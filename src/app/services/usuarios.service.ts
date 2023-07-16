@@ -17,10 +17,10 @@ export class UsuariosService {
 
   constructor(private http:HttpClient, private router:Router) { 
 
-    this.credUsuarioSubject = new BehaviorSubject<Credencial>(JSON.parse(localStorage.getItem('token')!));
-    const usuario = new Usuario();
+    this.credUsuarioSubject = new BehaviorSubject<Credencial>(JSON.parse(localStorage.getItem('token')! || null!));
+    
 
-    this.datosUsuario = new BehaviorSubject<Usuario>(usuario);
+    this.datosUsuario = new BehaviorSubject<Usuario>(null!);
 
 
   }
@@ -59,19 +59,20 @@ export class UsuariosService {
 
   }
 
-  iniciarSesion(credenciales:Usuario):Observable<Credencial>{
+  iniciarSesion(credenciales:Usuario):Observable<ResponseApi>{
 
-    return this.http.post<Credencial>(`${this.urlApi}/login`,credenciales,this.httpOptions).pipe(
+    return this.http.post<ResponseApi>(`${this.urlApi}/login`,credenciales,this.httpOptions).pipe(
       map(res=>{
-        if(res.token != null){
-          const credenciales:Credencial = res;
+        if(res.resultado === 1){
+          const credenciales:Credencial = res.data.credenciales;
+          const usuario:Usuario = res.data.usuario;
           localStorage.setItem('token',JSON.stringify(credenciales));
 
           this.credUsuarioSubject.next(credenciales);
+          this.datosUsuario.next(usuario);
+
         }
-        else{
-          console.log(res);
-        }
+        
         return res;
       })
     );
