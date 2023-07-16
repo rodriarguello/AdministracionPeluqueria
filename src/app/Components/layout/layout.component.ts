@@ -14,16 +14,18 @@ export class LayoutComponent implements OnInit{
 
   constructor(private usuarioService:UsuariosService,private router:Router){
 
+    this.datosUsuario$ = this.usuarioService.getDatosUsuario;
   }
   ngOnInit(): void {
-    
+
     this.obtenerDatosUsuario();
+
+    
     this.router.navigate(['pages/dashboard']);
-    this.datosUsuario$ = this.usuarioService.getDatosUsuario;
     
   }
   
-  datosUsuario$!:Observable<Usuario>;
+  datosUsuario$:Observable<Usuario>;
 
   cerrarSesion():void{
 
@@ -31,13 +33,26 @@ export class LayoutComponent implements OnInit{
 
   }
 
-  obtenerDatosUsuario(){
+  obtenerDatosUsuario():void{
 
-    if(localStorage.getItem('token')){
+
+    //Se verifica si ya existe la data del usuario
+    let existeData;
+    this.datosUsuario$.subscribe({
+      next:(data)=>{
+        
+        existeData = data;
+
+      }
+    });
+
+    //Si NO existe la data del usuario y SI existen las credenciales del usuario se ejecuta el metodo para obtener la data de la api
+    //(Es para cuando ya hay un token guardado y se inicia la aplicación en desde /pages);
+    
+    if(existeData==null && this.usuarioService.getCredencialesUsuario!=null){
       
       this.usuarioService.obtenerDatosUsuario().subscribe();
       
-
     }
   }
 
