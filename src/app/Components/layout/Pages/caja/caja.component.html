@@ -1,2 +1,12 @@
-<h1 style="background-color: black;color:aliceblue; font-size:30px;">CAJA COMPONENTS</h1>
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum iure architecto, at consequuntur porro temporibus voluptas. Explicabo rerum corporis excepturi error blanditiis, quos, distinctio, vitae sint recusandae repellat vero nesciunt.</p>
+<h2 class="text-center my-5 fs-3">Resumen de Caja de Peluqueria Canina</h2>
+<h3 class="text-center fs-4 mb-5">{{(dataUsuario$|async)?.nombrePeluqueria}}</h3>
+
+<div class="d-flex justify-content-around flex-wrap">
+    <app-resumen-caja-diario></app-resumen-caja-diario>
+    
+    
+    <app-resumen-caja-mensual></app-resumen-caja-mensual>
+    
+    <app-resumen-caja-anual></app-resumen-caja-anual>
+
+</div>

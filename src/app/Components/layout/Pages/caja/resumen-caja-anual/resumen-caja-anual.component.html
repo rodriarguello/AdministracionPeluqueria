@@ -1,0 +1,26 @@
+<div class="mat-elevation-z8 my-3">
+
+
+<mat-card  class="py-3 px-1">
+    <mat-card-header>
+      <mat-card-title>Resumen de Ingresos</mat-card-title>
+      <mat-card-subtitle>Resumen Anual</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+        <mat-form-field>
+            <mat-label>Año</mat-label>
+            <mat-select [(ngModel)]="anioSeleccionado" name="anio" >
+              <mat-option *ngFor="let anio of listAnios" [value]="anio" >
+                {{anio}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" class="ms-2" (click)="mostrarIngresoAnual()">Mostrar</button>
+    </mat-card-actions>
+    <mat-card-content *ngIf="ingresoAnual">
+        <p>Cantidad de Ingresos: <span style="font-weight: bold;">{{ingresoAnual.cantidadIngresos}}</span></p>
+        <p>Ingreso total: <span style="font-weight: bold;">${{ingresoAnual.total}}</span></p>
+    </mat-card-content>
+  </mat-card>
+</div>
