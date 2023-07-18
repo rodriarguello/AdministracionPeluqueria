@@ -1,9 +1,8 @@
-import { Component,  OnInit } from '@angular/core';
+import { Component,  Input,  OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Turno } from 'src/app/models/turno/turno';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { ModalReservarTurnoComponent } from '../modales-turnos/modal-reservar-turno/modal-reservar-turno.component';
-import { ActivatedRoute, Params } from '@angular/router';
 import swal from 'sweetalert2';
 import { ModalDetalleTurnoComponent } from '../modales-turnos/modal-detalle-turno/modal-detalle-turno.component';
 import { UtilidadService } from 'src/app/services/utilidad.service';
@@ -34,17 +33,16 @@ export const MY_DATA_FORMATS={
 
 export class CalendarioComponent implements OnInit{
   
-  constructor(private turnosService:TurnosService, private dialog:MatDialog, private activatedRoute:ActivatedRoute, private utilidadService:UtilidadService,
+  constructor(private turnosService:TurnosService, private dialog:MatDialog, private utilidadService:UtilidadService,
     private horarioService:HorariosService){
     
       this.turnoMenu = new Turno();
      
   }
   
-  
+  @Input() idCalendario!:number;
   
   listTurnos:Turno[]=[];
-  idCalendario!:number;
   listHorarios:Horario[] =[];
   listLunes:Turno[]= [];
   listMartes:Turno[]=[];
@@ -65,11 +63,7 @@ export class CalendarioComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.activatedRoute.queryParams.subscribe((params:Params)=>{
-      this.idCalendario = params['id'];
-      
-      
-    });
+    
     this.fecha = new Date(Date.now());
     
     this.mostrarHorarios();
