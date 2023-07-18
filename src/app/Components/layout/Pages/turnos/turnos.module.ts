@@ -12,6 +12,7 @@ import { CalendarioComponent } from './calendario/calendario.component';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { ModalReservarTurnoComponent } from './modales-turnos/modal-reservar-turno/modal-reservar-turno.component';
 import { ModalDetalleTurnoComponent } from './modales-turnos/modal-detalle-turno/modal-detalle-turno.component';
+import { ModalDetalleCalendarioComponent } from './modales-turnos/modal-detalle-calendario/modal-detalle-calendario.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ModalDetalleTurnoComponent } from './modales-turnos/modal-detalle-turno
     FormatearMinutosPipe,
     CalendarioComponent,
     ModalReservarTurnoComponent,
-    ModalDetalleTurnoComponent
+    ModalDetalleTurnoComponent,
+    ModalDetalleCalendarioComponent
   ],
   imports: [
     CommonModule,
