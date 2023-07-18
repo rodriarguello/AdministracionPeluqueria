@@ -46,7 +46,7 @@ export class ModalCalendarioComponent {
     calendario.horaInicioTurnos = this.formCalendario.value.horaInicio;
     calendario.horaFinTurnos = this.formCalendario.value.horaFin;
     calendario.intervaloTurnos = this.formCalendario.value.intervaloTurnos;
-    console.log(calendario);
+    
     this.calendarioService.crearCalendario(calendario).subscribe({
       next:(res)=>{
         if(res.resultado ===1){
@@ -55,27 +55,18 @@ export class ModalCalendarioComponent {
         }
         else{
           this.utilidadService.mostrarAlerta("No se pudo crear el calendario", "ERROR");
-          console.log(res);
+          
         }
       },
-      error:(error)=>{
+      error:()=>{
         this.utilidadService.mostrarAlerta("No se pudo crear el calendario", "ERROR");
-        console.log(error);
+        
       }
     });
     
 
   }
 
-  mostrarDatos():void{
-    console.log("Fecha de Inicio");
-    console.log(this.formCalendario.value.fechaInicio);
-    console.log("Fecha de Fin");
-    console.log(this.formCalendario.value.fechaFin);
-    console.log("Valor del toched fechaFin");
-    console.log(this.formCalendario.get("fechaFin")?.touched);
-
-
-  }
+ 
 
 }
