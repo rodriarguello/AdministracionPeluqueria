@@ -5,7 +5,7 @@ import { Calendario } from 'src/app/models/calendario';
 import { CalendarioService } from 'src/app/services/calendario.service';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ModalDetalleCalendarioComponent } from './modales-turnos/modal-detalle-calendario/modal-detalle-calendario.component';
 
 @Component({
   selector: 'app-turnos',
@@ -16,7 +16,7 @@ export class TurnosComponent implements OnInit{
 
   constructor(private dialog:MatDialog, private calendarioService:CalendarioService, private router:Router){
 
-    this.calendario = new Calendario();
+    //this.calendario = new Calendario();
   }
   
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class TurnosComponent implements OnInit{
     
   }
 
-  calendario:Calendario; 
+  calendario!:Calendario; 
   
   
 
@@ -54,42 +54,15 @@ export class TurnosComponent implements OnInit{
     });
   }
 
-  eliminarCalendario(calendario:Calendario){
+ 
 
-    swal.fire({
+  mostrarDetallesCalendario(){
+    this.dialog.open(ModalDetalleCalendarioComponent, {data:this.calendario}).afterClosed().subscribe((res)=>{
 
-      title:"¿Desea eliminar el Calendario?",
-      text: calendario.nombre,
-      icon:"warning",
-      iconColor:'red',
-      confirmButtonColor:"#3085d6",
-      confirmButtonText:"Si, Eliminar",
-      showCancelButton:true,
-      cancelButtonColor:"#d33",
-      cancelButtonText:"No,volver"
+      if(res.eliminado){
+        this.calendario = null!;
       }
-
-    ).then(((res)=>{
-      if(res.isConfirmed){
-
-        this.calendarioService.eliminarCalendario(calendario.id).subscribe({
-          next:(res)=>{
-            if(res.resultado===1){
-              this.mostrarCalendario();
-            }
-            else{
-              console.log(res);
-            }
-          },
-          error:(error)=>{
-            console.log(error);
-          }
-        });
-
-      }
-    }));
-    
-
+    });
   }
 
 }
