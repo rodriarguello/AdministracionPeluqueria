@@ -5,6 +5,7 @@ import { Calendario } from 'src/app/models/calendario';
 import { CalendarioService } from 'src/app/services/calendario.service';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-turnos',
@@ -15,30 +16,33 @@ export class TurnosComponent implements OnInit{
 
   constructor(private dialog:MatDialog, private calendarioService:CalendarioService, private router:Router){
 
-    
+    this.calendario = new Calendario();
   }
-
+  
   ngOnInit(): void {
-
-    this.mostrarCalendarios();
+    
+    
+    this.mostrarCalendario();
+    
     
   }
 
-  listCalendario:Calendario[] = [];
+  calendario:Calendario; 
   
   
 
   nuevoCalendario():void{
     this.dialog.open(ModalCalendarioComponent,{disableClose:true}).afterClosed().subscribe((res)=>{
-      if(res===true) this.mostrarCalendarios();
+      if(res===true) this.mostrarCalendario();
     });
   }
   
-  mostrarCalendarios():void{
+  mostrarCalendario():void{
     this.calendarioService.mostrarCalendario().subscribe({
       next:(res)=>{
         if(res.resultado===1){
-          this.listCalendario = res.data; 
+          this.calendario = res.data; 
+          
         }
         else{
           console.log(res);
@@ -71,7 +75,7 @@ export class TurnosComponent implements OnInit{
         this.calendarioService.eliminarCalendario(calendario.id).subscribe({
           next:(res)=>{
             if(res.resultado===1){
-              this.mostrarCalendarios();
+              this.mostrarCalendario();
             }
             else{
               console.log(res);
@@ -88,9 +92,4 @@ export class TurnosComponent implements OnInit{
 
   }
 
-  irCalendario(idCalendario:number):void{
-    this.router.navigate(['pages/turnos/calendario'],{queryParams:{id:idCalendario}});
-  }
-
-  
 }
