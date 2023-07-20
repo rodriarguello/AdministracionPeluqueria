@@ -1,1 +1,49 @@
-<h1 class="text-center text-black">Componente Dashboard</h1>
+<h1 class="text-center text-black">Bienvenido/a {{(dataUsuario$| async)?.nombres}} </h1>
+<h2 class="text-center">Te mostramos el resumen de tu Peluqueria Canina: "{{(dataUsuario$|async)?.nombrePeluqueria}}"</h2>
+<div class="d-flex align-items-start justify-content-evenly">
+
+
+<mat-card class="d-flex flex-column align-items-center p-3" style="width: 300px;">
+        <mat-card-title>
+            Turnos de hoy
+        </mat-card-title>
+        
+            
+            <ul >
+                
+                <li *ngFor="let turno of listTurnosOcupados" class="turno fs-6 py-2 text-center" 
+                [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}"  >
+                    {{turno.horario.hora|slice:0:5}}
+                </li>
+            
+            </ul>
+        
+    </mat-card>
+
+    <mat-card class="d-flex flex-column align-items-center p-3" style="width: 300px;">
+        <mat-card-title>
+            Turnos Disponibles Hoy
+        </mat-card-title>
+        
+            
+            <ul >
+                
+                <li *ngFor="let turno of listTurnosDisponibles" class="turno fs-6 py-2 text-center" 
+                [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}"  >
+                    {{turno.horario.hora|slice:0:5}}
+                </li>
+            
+            </ul>
+        
+    </mat-card>
+
+    <mat-card class="p-3">
+        <mat-card-title>Resumen de Caja de Hoy</mat-card-title>
+        <mat-card-title>Cantidad de Turnos: {{dataIngresos.cantidadIngresos}}</mat-card-title>
+        <mat-card-title>Ingreso Total: ${{dataIngresos.total}}</mat-card-title>
+    </mat-card>
+
+    
+
+
+</div>
