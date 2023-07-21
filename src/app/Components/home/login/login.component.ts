@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   mostrarLoading:boolean= false;
 
   @Output() mostrarLogin = new EventEmitter<boolean>();
+  @Output() mostrarRegistro = new EventEmitter<boolean>();
   
   constructor(private router:Router, private fb:FormBuilder, private utilidadService:UtilidadService, private usuariosService:UsuariosService){
 
@@ -61,10 +62,14 @@ export class LoginComponent implements OnInit {
 
   }
 
-  mostrarRegistro():void{
+  mostrarIndex():void{
     this.mostrarLogin.emit(false);
   }
 
+  irRegistro():void{
+    this.mostrarLogin.emit(false);
+    this.mostrarRegistro.emit(true);
+  }
 
 
 
