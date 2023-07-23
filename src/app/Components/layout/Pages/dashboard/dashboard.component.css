@@ -1,57 +1,34 @@
-li{
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
 
-ul{
-    width: 200px;
-    margin: 0;
-    padding: 0;
-}
-
-.ul-horario{
-    width: 150px;
-}
-
-.headers{
-    background-color: rgb(103 58 183);
-    color: white;
-    text-align: center;
-    padding: .7rem 0;
-    
-}
-
-
-.horarios{
-    
-    background-color: rgb(103 58 183);
-    color:white;
-    text-align: center;
-}
 
 .turno{
     cursor: pointer;
 }
 
-
-.turno-ocupado{
+.turno:hover{
+    background-color: mediumpurple;
     color: white;
-    background-color: rgb(255, 34, 0);
 }
 
-.turno-ocupado:hover{
-    background-color: rgb(209, 0, 21);
-    color:white;
-    
-}
 
 .turno-disponible{
-    background-color: rgba(0, 255, 0, .7);
+    background-color: yellow;
     color: black;
+    cursor: pointer;
 }
 
 .turno-disponible:hover{
-    background-color: rgba(40, 167, 69, 1);
+    background-color: goldenrod;
     color: white;
+    cursor: pointer;
+}
+
+.card{
+    width: 300px;
+    min-height: 300px;
+    
+    
+}
+
+.asistio{
+    background-color: greenyellow;
 }

@@ -1,48 +1,82 @@
 <h1 class="text-center text-black">Bienvenido/a {{(dataUsuario$| async)?.nombres}} </h1>
 <h2 class="text-center">Te mostramos el resumen de tu Peluqueria Canina: "{{(dataUsuario$|async)?.nombrePeluqueria}}"</h2>
-<div class="d-flex align-items-start justify-content-evenly">
+<div class="d-flex align-items-start justify-content-evenly flex-wrap">
 
+<div class="mat-elevation-z15 mt-3 card">
 
-<mat-card class="d-flex flex-column align-items-center p-3" style="width: 300px;">
-        <mat-card-title>
+    <mat-card class="d-flex flex-column align-items-center p-3 card ">
+        <mat-card-title class="mb-3">
             Turnos de hoy
         </mat-card-title>
         
+        <div *ngFor="let turno of listTurnosOcupados" class="mat-elevation-z4 w-75 mb-3" [matMenuTriggerFor]="menu" (click)="turnoMenu=turno" >
             
-            <ul >
+            <mat-card class=" w-100 p-3 turno" [ngClass]="{'asistio':turno.asistio}">
                 
-                <li *ngFor="let turno of listTurnosOcupados" class="turno fs-6 py-2 text-center" 
-                [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}"  >
-                    {{turno.horario.hora|slice:0:5}}
-                </li>
-            
-            </ul>
+                <mat-card-title>{{turno.horario.hora|slice:0:5}} hs.</mat-card-title>
+                <mat-card-subtitle>Mascota: {{turno.mascota.nombre}}</mat-card-subtitle>
+                <mat-card-subtitle>Asistió:{{turno.asistio?' Si':' Todavía no'}}</mat-card-subtitle>
+                
+                
+            </mat-card >
+        </div>
+        
         
     </mat-card>
+    
+</div>
 
-    <mat-card class="d-flex flex-column align-items-center p-3" style="width: 300px;">
-        <mat-card-title>
+<div class="mat-elevation-z15 mt-3 card">
+
+    <mat-card class="d-flex flex-column align-items-center p-3 card " >
+        <mat-card-title class="mb-3">
             Turnos Disponibles Hoy
         </mat-card-title>
         
+        <div *ngFor="let turno of listTurnosDisponibles" class="mat-elevation-z4 w-75 mb-3" [matMenuTriggerFor]="menu" (click)="turnoMenu=turno" >
             
-            <ul >
+            <mat-card class=" w-100 p-3 turno-disponible">
                 
-                <li *ngFor="let turno of listTurnosDisponibles" class="turno fs-6 py-2 text-center" 
-                [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}"  >
-                    {{turno.horario.hora|slice:0:5}}
-                </li>
-            
-            </ul>
+                <mat-card-title>{{turno.horario.hora|slice:0:5}} hs.</mat-card-title>
+                
+                
+                
+            </mat-card >
+        </div>
+        
+        
         
     </mat-card>
+    
+</div>
+<div class="mat-elevation-z15 mt-3 card">
 
-    <mat-card class="p-3">
-        <mat-card-title>Resumen de Caja de Hoy</mat-card-title>
-        <mat-card-title>Cantidad de Turnos: {{dataIngresos.cantidadIngresos}}</mat-card-title>
-        <mat-card-title>Ingreso Total: ${{dataIngresos.total}}</mat-card-title>
+    <mat-card class="p-3 card ">
+        <mat-card-title class="text-center">Ingresos de hoy</mat-card-title>
+        <!-- <mat-card-title>Cantidad de Turnos: {{dataIngresos.cantidadIngresos}}</mat-card-title> -->
+        <mat-card-subtitle class="text-center">${{dataIngresos.total}}</mat-card-subtitle>
     </mat-card>
-
+    
+</div>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="reservarTurno(turnoMenu)" [disabled]="!turnoMenu.disponible" >
+            <mat-icon>dialpad</mat-icon>
+            <span>Reservar</span>
+        </button>
+        <button mat-menu-item (click)="verDetalles(turnoMenu)" [disabled]="turnoMenu.disponible">
+            <mat-icon>search</mat-icon>
+            <span>Detalles</span>
+        </button>
+        <button mat-menu-item [disabled]="turnoMenu.disponible" (click)="cancelarReserva(turnoMenu)">
+            <mat-icon>notifications_off</mat-icon>
+          <span>Cancelar Reserva</span>
+        </button>
+        <button mat-menu-item [disabled]="turnoMenu.disponible" >
+            <mat-icon>notifications_off</mat-icon>
+            <span>Asistió</span>
+            <input class="ms-2" type="checkbox" #inputAsistencia [checked]="turnoMenu.asistio" (click)="modificarAsistencia(turnoMenu, inputAsistencia.checked)">
+          </button>
+      </mat-menu>
     
 
 
