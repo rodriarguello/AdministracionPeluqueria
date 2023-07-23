@@ -1,6 +1,10 @@
-<h1 class="text-center text-black">Bienvenido/a {{(dataUsuario$| async)?.nombres}} </h1>
+<h1 class="text-center text-black mt-5 mb-2">Bienvenido/a {{(dataUsuario$| async)?.nombres}} </h1>
 <h2 class="text-center">Te mostramos el resumen de tu Peluqueria Canina: "{{(dataUsuario$|async)?.nombrePeluqueria}}"</h2>
-<div class="d-flex align-items-start justify-content-evenly flex-wrap">
+
+<div class="container d-flex justify-content-center">
+
+
+<div class="grid-container">
 
 <div class="mat-elevation-z15 mt-3 card">
 
@@ -32,17 +36,21 @@
         <mat-card-title class="mb-3">
             Turnos Disponibles Hoy
         </mat-card-title>
-        
-        <div *ngFor="let turno of listTurnosDisponibles" class="mat-elevation-z4 w-75 mb-3" [matMenuTriggerFor]="menu" (click)="turnoMenu=turno" >
+
+        <mat-card-content class="card-content">
             
-            <mat-card class=" w-100 p-3 turno-disponible">
+            <div *ngFor="let turno of listTurnosDisponibles" class="mat-elevation-z4 w-75 mb-3" [matMenuTriggerFor]="menu" (click)="turnoMenu=turno" >
                 
-                <mat-card-title>{{turno.horario.hora|slice:0:5}} hs.</mat-card-title>
-                
-                
-                
-            </mat-card >
-        </div>
+                <mat-card class=" w-100 p-3 turno-disponible">
+                    
+                    <mat-card-title>{{turno.horario.hora|slice:0:5}} hs.</mat-card-title>
+                    
+                    
+                    
+                </mat-card >
+            </div>
+        </mat-card-content>
+        
         
         
         
@@ -54,10 +62,40 @@
     <mat-card class="p-3 card ">
         <mat-card-title class="text-center">Ingresos de hoy</mat-card-title>
         <!-- <mat-card-title>Cantidad de Turnos: {{dataIngresos.cantidadIngresos}}</mat-card-title> -->
-        <mat-card-subtitle class="text-center">${{dataIngresos.total}}</mat-card-subtitle>
+        <mat-card-subtitle class="text-center">${{ingresoDiario.total}}</mat-card-subtitle>
     </mat-card>
     
 </div>
+
+<div class="mat-elevation-z15 mt-3 card">
+
+    <mat-card class="p-3 card ">
+        <mat-card-title class="text-center">Clientes registrados</mat-card-title>
+        <!-- <mat-card-title>Cantidad de Turnos: {{dataIngresos.cantidadIngresos}}</mat-card-title> -->
+        <mat-card-subtitle class="text-center">{{cantidadClientes}}</mat-card-subtitle>
+    </mat-card>
+    
+</div>
+
+<div class="mat-elevation-z15 mt-3 card">
+
+    <mat-card class="p-3 card ">
+        <mat-card-title class="text-center">Mascotas registrados</mat-card-title>
+        <!-- <mat-card-title>Cantidad de Turnos: {{dataIngresos.cantidadIngresos}}</mat-card-title> -->
+        <mat-card-subtitle class="text-center">{{cantidadMascotas}}</mat-card-subtitle>
+    </mat-card>
+    
+</div>
+<div class="mat-elevation-z15 mt-3 card">
+
+    <mat-card class="p-3 card ">
+        <mat-card-title class="text-center">Ingreso Mensual</mat-card-title>
+        <!-- <mat-card-title>Cantidad de Turnos: {{dataIngresos.cantidadIngresos}}</mat-card-title> -->
+        <mat-card-subtitle class="text-center">${{ingresoMensual.total}}</mat-card-subtitle>
+    </mat-card>
+    
+</div>
+
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="reservarTurno(turnoMenu)" [disabled]="!turnoMenu.disponible" >
             <mat-icon>dialpad</mat-icon>
@@ -79,5 +117,7 @@
       </mat-menu>
     
 
+
+</div>
 
 </div>

@@ -24,12 +24,19 @@ export class DashboardComponent implements OnInit {
     ,private dialog:MatDialog){
 
     this.dataUsuario$ = usuarioService.getDatosUsuario;
-    this.dataIngresos = {
+    this.ingresoDiario = {
+      cantidadIngresos:0,
+      total:0
+    }
+
+    this.ingresoMensual = {
       cantidadIngresos:0,
       total:0
     }
 
     this.turnoMenu = new Turno();
+    this.cantidadClientes = 0;
+    this.cantidadMascotas = 0;
     
   }
   ngOnInit(): void {
@@ -41,8 +48,11 @@ export class DashboardComponent implements OnInit {
  
   listTurnosOcupados:Turno[]=[];
   listTurnosDisponibles:Turno[]=[];
-  dataIngresos:RespuestaCaja;
+  ingresoDiario:RespuestaCaja;
+  ingresoMensual:RespuestaCaja;
   turnoMenu:Turno;
+  cantidadClientes:number;
+  cantidadMascotas:number;
 
   dataUsuario$:Observable<Usuario>;
 
@@ -58,7 +68,13 @@ export class DashboardComponent implements OnInit {
           this.listTurnosDisponibles = this.listTurnosDisponibles.filter(turno=>turno.disponible === true);
           this.listTurnosOcupados = this.listTurnosOcupados.filter(turno=>turno.disponible ===false);
 
-          this.dataIngresos = res.data.ingresos;
+          this.ingresoDiario = res.data.ingresoDiario;
+
+          this.ingresoMensual = res.data.ingresoMensual;
+
+          this.cantidadClientes = res.data.cantidadClientes;
+
+          this.cantidadMascotas = res.data.cantidadMascotas;
 
           
           
