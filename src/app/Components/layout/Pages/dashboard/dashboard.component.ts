@@ -36,14 +36,59 @@ export class DashboardComponent implements OnInit {
 
     this.turnoMenu = new Turno();
     this.cantidadClientes = 0;
+    this.cantidadClientesNuevos = 0;
     this.cantidadMascotas = 0;
+    this.cantidadMascotasNuevas = 0;
+    
     
   }
-  ngOnInit(): void {
+  ngOnInit() {
     
     this.mostrarResumenDiario();
+
+    
    
     
+  }
+
+  animarContador(valorNuevasMascotas:number,valorNuevosClientes:number) {
+    
+    let valorFinal = 0;
+
+
+    if(valorNuevasMascotas>valorNuevosClientes){
+      valorFinal = valorNuevasMascotas;
+    }
+    else{
+      valorFinal = valorNuevosClientes;
+    }
+
+   
+    const duration = 1000;
+    const steps = valorFinal;
+    const stepDuration = duration / steps;
+
+    let contador = 0;
+
+    const interval = setInterval(() => {
+      
+      if(this.cantidadMascotasNuevas < valorNuevasMascotas){
+        this.cantidadMascotasNuevas = contador;
+      }
+
+      if(this.cantidadClientesNuevos<valorNuevosClientes){
+
+        this.cantidadClientesNuevos = contador;
+      }  
+
+      
+      contador++;
+
+      if (contador > valorFinal) {
+        clearInterval(interval);
+      }
+      
+    }, stepDuration);
   }
  
   listTurnosOcupados:Turno[]=[];
@@ -52,7 +97,10 @@ export class DashboardComponent implements OnInit {
   ingresoMensual:RespuestaCaja;
   turnoMenu:Turno;
   cantidadClientes:number;
+  cantidadClientesNuevos:number;
+  
   cantidadMascotas:number;
+  cantidadMascotasNuevas:number;
 
   dataUsuario$:Observable<Usuario>;
 
@@ -68,13 +116,18 @@ export class DashboardComponent implements OnInit {
           this.listTurnosDisponibles = this.listTurnosDisponibles.filter(turno=>turno.disponible === true);
           this.listTurnosOcupados = this.listTurnosOcupados.filter(turno=>turno.disponible ===false);
 
-          this.ingresoDiario = res.data.ingresoDiario;
-
-          this.ingresoMensual = res.data.ingresoMensual;
+         
 
           this.cantidadClientes = res.data.cantidadClientes;
 
           this.cantidadMascotas = res.data.cantidadMascotas;
+          
+          this.ingresoDiario = res.data.ingresoDiario;
+
+          this.ingresoMensual = res.data.ingresoMensual;
+        
+          this.animarContador(res.data.nuevasMascotas,res.data.nuevosClientes);
+          
 
           
           
