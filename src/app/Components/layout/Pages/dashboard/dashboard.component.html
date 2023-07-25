@@ -18,8 +18,8 @@
             <mat-card class=" w-100 p-3 turno" [ngClass]="{'asistio':turno.asistio}">
                 
                 <mat-card-title>{{turno.horario.hora|slice:0:5}} hs.</mat-card-title>
-                <mat-card-subtitle>Mascota: {{turno.mascota.nombre}}</mat-card-subtitle>
-                <mat-card-subtitle>Asistió:{{turno.asistio?' Si':' Todavía no'}}</mat-card-subtitle>
+                <mat-card-subtitle >Mascota: {{turno.mascota.nombre}}</mat-card-subtitle>
+                <mat-card-subtitle >Asistió:{{turno.asistio?' Si':' Todavía no'}}</mat-card-subtitle>
                 
                 
             </mat-card >
@@ -60,9 +60,9 @@
 <div class="mat-elevation-z15 mt-3 card">
 
     <mat-card class="p-3 card ">
-        <mat-card-title class="text-center">Ingresos de hoy</mat-card-title>
-        <!-- <mat-card-title>Cantidad de Turnos: {{dataIngresos.cantidadIngresos}}</mat-card-title> -->
-        <mat-card-subtitle class="text-center">${{ingresoDiario.total}}</mat-card-subtitle>
+        <mat-card-title class="text-center mt-3">Ingresos de hoy</mat-card-title>
+       
+        <span class=" text-success fs-2 mt-5 text-center nuevos-registros">+ {{ingresoDiario.total| currency}}</span>
     </mat-card>
     
 </div>
@@ -70,28 +70,35 @@
 <div class="mat-elevation-z15 mt-3 card">
 
     <mat-card class="p-3 card ">
-        <mat-card-title class="text-center">Clientes registrados</mat-card-title>
+        <mat-card-title class="ms-4 mt-3">Clientes registrados</mat-card-title>
         <!-- <mat-card-title>Cantidad de Turnos: {{dataIngresos.cantidadIngresos}}</mat-card-title> -->
-        <mat-card-subtitle class="text-center">{{cantidadClientes}}</mat-card-subtitle>
+        
+        <mat-card-title  class="ms-4 fs-1 mt-4 text-color-primary">{{cantidadClientes}}</mat-card-title>
+        <span class=" text-success fs-4 mt-3 ms-4 nuevos-registros">+ {{cantidadClientesNuevos}}</span>
+        <span class=" text-success fs-6 mt-1 ms-4">Este mes</span>
+        
     </mat-card>
     
 </div>
 
 <div class="mat-elevation-z15 mt-3 card">
 
-    <mat-card class="p-3 card ">
-        <mat-card-title class="text-center">Mascotas registrados</mat-card-title>
+    <mat-card class="p-3 card">
+        <mat-card-title class="ms-4 mt-3">Mascotas registradas</mat-card-title>
         <!-- <mat-card-title>Cantidad de Turnos: {{dataIngresos.cantidadIngresos}}</mat-card-title> -->
-        <mat-card-subtitle class="text-center">{{cantidadMascotas}}</mat-card-subtitle>
+        <mat-card-title  class="ms-4 fs-1 mt-4 text-color-primary">{{cantidadMascotas}}</mat-card-title>
+        <span class=" text-success fs-4 mt-3 ms-4 nuevos-registros">+ {{cantidadMascotasNuevas}}</span>
+        <span class=" text-success fs-6 mt-1 ms-4">Este mes</span>
+        
     </mat-card>
     
 </div>
 <div class="mat-elevation-z15 mt-3 card">
 
-    <mat-card class="p-3 card ">
+    <mat-card class="p-3 card mt-3 ">
         <mat-card-title class="text-center">Ingreso Mensual</mat-card-title>
-        <!-- <mat-card-title>Cantidad de Turnos: {{dataIngresos.cantidadIngresos}}</mat-card-title> -->
-        <mat-card-subtitle class="text-center">${{ingresoMensual.total}}</mat-card-subtitle>
+        
+        <span class=" text-success fs-2 mt-5 text-center nuevos-registros">+ {{ingresoMensual.total| currency}}</span>
     </mat-card>
     
 </div>

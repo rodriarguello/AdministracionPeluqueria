@@ -51,46 +51,7 @@ export class DashboardComponent implements OnInit {
     
   }
 
-  animarContador(valorNuevasMascotas:number,valorNuevosClientes:number) {
-    
-    let valorFinal = 0;
-
-
-    if(valorNuevasMascotas>valorNuevosClientes){
-      valorFinal = valorNuevasMascotas;
-    }
-    else{
-      valorFinal = valorNuevosClientes;
-    }
-
-   
-    const duration = 1000;
-    const steps = valorFinal;
-    const stepDuration = duration / steps;
-
-    let contador = 0;
-
-    const interval = setInterval(() => {
-      
-      if(this.cantidadMascotasNuevas < valorNuevasMascotas){
-        this.cantidadMascotasNuevas = contador;
-      }
-
-      if(this.cantidadClientesNuevos<valorNuevosClientes){
-
-        this.cantidadClientesNuevos = contador;
-      }  
-
-      
-      contador++;
-
-      if (contador > valorFinal) {
-        clearInterval(interval);
-      }
-      
-    }, stepDuration);
-  }
- 
+  
   listTurnosOcupados:Turno[]=[];
   listTurnosDisponibles:Turno[]=[];
   ingresoDiario:RespuestaCaja;
@@ -101,34 +62,34 @@ export class DashboardComponent implements OnInit {
   
   cantidadMascotas:number;
   cantidadMascotasNuevas:number;
-
+  
   dataUsuario$:Observable<Usuario>;
-
+  
   mostrarResumenDiario():void{
-   
+    
     this.dashboardService.resumenDiario().subscribe({
       next:(res)=>{
         if(res.resultado===1){
-
+          
           this.listTurnosDisponibles =  res.data.turnos;
           this.listTurnosOcupados = res.data.turnos;
           
           this.listTurnosDisponibles = this.listTurnosDisponibles.filter(turno=>turno.disponible === true);
           this.listTurnosOcupados = this.listTurnosOcupados.filter(turno=>turno.disponible ===false);
-
-         
-
+          
+          
+          
           this.cantidadClientes = res.data.cantidadClientes;
-
+          
           this.cantidadMascotas = res.data.cantidadMascotas;
           
           this.ingresoDiario = res.data.ingresoDiario;
-
+          
           this.ingresoMensual = res.data.ingresoMensual;
         
           this.animarContador(res.data.nuevasMascotas,res.data.nuevosClientes);
           
-
+          
           
           
         }
@@ -136,20 +97,20 @@ export class DashboardComponent implements OnInit {
     });
 
   }
-
+  
   reservarTurno(turno:Turno):void{
     this.dialog.open(ModalReservarTurnoComponent,{disableClose:true,data:turno}).afterClosed().subscribe(
       (res)=>{
         if(res===true){
-
+          
           this.mostrarResumenDiario();
         }
       }
-    );
+      );
   }
-
+  
   cancelarReserva(turno:Turno):void{
-
+    
     swal.fire({
       title:"¿Desea Cancelar el Turno?",
       text: `Mascota: ${turno.mascota.nombre}\nDia: ${turno.fecha.dia}\nHora:${turno.horario.hora}`,
@@ -182,9 +143,9 @@ export class DashboardComponent implements OnInit {
         });
       }
     });
-
+    
   }
-
+  
   verDetalles(turno:Turno):void{
     
     this.dialog.open(ModalDetalleTurnoComponent,{disableClose:true,data:turno}).afterClosed().subscribe(
@@ -193,16 +154,16 @@ export class DashboardComponent implements OnInit {
           this.mostrarResumenDiario();
         }
       }
-    );
-  }
-
-  modificarAsistencia(turno:Turno,value:boolean){
-   
-    if(turno.asistio!=value){
-     
+      );
+    }
     
-      this.turnosService.modificarAsistencia(turno.id,value).subscribe({
-        next:(res)=>{
+    modificarAsistencia(turno:Turno,value:boolean){
+      
+      if(turno.asistio!=value){
+        
+        
+        this.turnosService.modificarAsistencia(turno.id,value).subscribe({
+          next:(res)=>{
           if(res.resultado===1){
             this.utilidadService.mostrarAlerta("Se modificó la asistencia","OK")
             this.mostrarResumenDiario();
@@ -216,13 +177,53 @@ export class DashboardComponent implements OnInit {
           console.log(err);
           this.utilidadService.mostrarAlerta("No se pudo modificar la asistencia","ERROR");
         }
-      
+        
       });
     }
     
     
-    }
-
+  }
   
-
+  
+  animarContador(valorNuevasMascotas:number,valorNuevosClientes:number) {
+    
+    let valorFinal = 0;
+  
+  
+    if(valorNuevasMascotas>valorNuevosClientes){
+      valorFinal = valorNuevasMascotas;
+    }
+    else{
+      valorFinal = valorNuevosClientes;
+    }
+  
+   
+    const duration = 1000;
+    const steps = valorFinal;
+    const stepDuration = duration / steps;
+  
+    let contador = 0;
+  
+    const interval = setInterval(() => {
+      
+      if(this.cantidadMascotasNuevas < valorNuevasMascotas){
+        this.cantidadMascotasNuevas = contador;
+      }
+  
+      if(this.cantidadClientesNuevos<valorNuevosClientes){
+  
+        this.cantidadClientesNuevos = contador;
+      }  
+  
+      
+      contador++;
+  
+      if (contador > valorFinal) {
+        clearInterval(interval);
+      }
+      
+    }, stepDuration);
+  }
+  
+  
 }
