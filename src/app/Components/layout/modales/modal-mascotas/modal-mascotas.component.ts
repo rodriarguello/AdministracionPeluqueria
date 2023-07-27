@@ -69,6 +69,23 @@ export class ModalMascotasComponent implements OnInit {
       this.tituloAccion = "Agregar Mascota";
       this.botonAccion = "Agregar";
 
+      if(this.dataMascota!=null && this.dataMascota.id != -1){
+       
+        
+        this.tituloAccion = "Actualizar Mascota";
+        this.botonAccion = "Actualizar";
+        this.formMascotas.patchValue({
+          nombre:this.dataMascota.nombre,
+          fechaNacimiento:this.dataMascota.fechaNacimiento,
+          cliente:this.dataMascota.cliente.id,
+          raza:this.dataMascota.raza.id,
+          enfermedades:this.dataMascota.enfermedades,
+          alergias:this.dataMascota.alergias
+        });
+  
+      }
+  
+      this.cargarSelect();
     }
     
     
@@ -76,23 +93,6 @@ export class ModalMascotasComponent implements OnInit {
 
   ngOnInit(): void {
     
-    if(this.dataMascota!=null && this.dataMascota.id != -1){
-     
-      
-      this.tituloAccion = "Actualizar Mascota";
-      this.botonAccion = "Actualizar";
-      this.formMascotas.patchValue({
-        nombre:this.dataMascota.nombre,
-        fechaNacimiento:this.dataMascota.fechaNacimiento,
-        cliente:this.dataMascota.cliente.id,
-        raza:this.dataMascota.raza.id,
-        enfermedades:this.dataMascota.enfermedades,
-        alergias:this.dataMascota.alergias
-      });
-
-    }
-
-    this.cargarSelect();
     
 
   }

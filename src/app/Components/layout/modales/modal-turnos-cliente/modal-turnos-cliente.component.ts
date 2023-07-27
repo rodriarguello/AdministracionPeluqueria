@@ -12,11 +12,11 @@ import { TurnosService } from 'src/app/services/turnos.service';
 export class ModalTurnosClienteComponent implements OnInit{
 
   constructor(@Inject(MAT_DIALOG_DATA) public dataCliente:Cliente, private turnoService:TurnosService){
-
+    this.mostrarTurnosCliente();
   }
   ngOnInit(): void {
     
-    this.mostrarTurnosCliente();
+    
   }
 
 
