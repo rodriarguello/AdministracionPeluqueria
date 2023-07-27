@@ -28,14 +28,14 @@
 
     <ul class="ul-horario">
         <li class="headers fs-5">Horario</li>
-        <li *ngFor="let horario of listHorarios" class="horarios fs-6 py-2"><span>{{horario.hora|slice:0:5}}</span></li>
+        <li *ngFor="let horario of listHorarios" class="horarios fs-6 py-2"><span>{{horario|slice:0:5}}</span></li>
     </ul>
     
     <ul *ngIf="listLunes.length!=0;else sinTurnoLunes">
         <li class="headers fs-5">Lun {{cabecerasFechas[0]}}</li>
         <li *ngFor="let turno of listLunes" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center" 
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}"  (click)="turnoMenu = turno">
-            {{turno.horario.hora|slice:0:5}}
+            {{turno.horario|slice:0:5}}
         </li>
 
     </ul>
@@ -52,7 +52,7 @@
         <li *ngFor="let turno of listMartes" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center" 
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}" (click)="turnoMenu = turno">
             
-        {{turno.horario.hora|slice:0:5}}</li>
+        {{turno.horario|slice:0:5}}</li>
 
     </ul>
 
@@ -67,7 +67,7 @@
         <li class="headers fs-5">Mie {{cabecerasFechas[2]}}</li>
         <li *ngFor="let turno of listMiercoles" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center" 
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}" (click)="turnoMenu = turno" >
-        {{turno.horario.hora|slice:0:5}}</li>
+        {{turno.horario|slice:0:5}}</li>
 
     </ul>
 
@@ -82,7 +82,7 @@
         <li class="headers fs-5">Jue {{cabecerasFechas[3]}}</li>
         <li *ngFor="let turno of listJueves" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center"
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}" (click)="turnoMenu = turno">
-            {{turno.horario.hora|slice:0:5}}</li>
+            {{turno.horario|slice:0:5}}</li>
 
     </ul>
 
@@ -97,7 +97,7 @@
         <li class="headers fs-5">Vie {{cabecerasFechas[4]}}</li>
         <li *ngFor="let turno of listViernes"[matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center"
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}" (click)="turnoMenu = turno">
-        {{turno.horario.hora|slice:0:5}}</li>
+        {{turno.horario|slice:0:5}}</li>
 
     </ul>
 
@@ -113,7 +113,7 @@
         <li class="headers fs-5">Sáb {{cabecerasFechas[5]}}</li>
         <li *ngFor="let turno of listSabado" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center"
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}" (click)="turnoMenu = turno">
-        {{turno.horario.hora|slice:0:5}}</li>
+        {{turno.horario|slice:0:5}}</li>
 
     </ul>
 
@@ -131,7 +131,7 @@
         <li class="headers fs-5">Dom {{cabecerasFechas[6]}}</li>
         <li *ngFor="let turno of listDomingo" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center"
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}" (click)="turnoMenu = turno">
-        {{turno.horario.hora|slice:0:5}}</li>
+        {{turno.horario|slice:0:5}}</li>
 
     </ul>
 

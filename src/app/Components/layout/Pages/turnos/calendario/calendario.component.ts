@@ -6,8 +6,6 @@ import { ModalReservarTurnoComponent } from '../modales-turnos/modal-reservar-tu
 import swal from 'sweetalert2';
 import { ModalDetalleTurnoComponent } from '../modales-turnos/modal-detalle-turno/modal-detalle-turno.component';
 import { UtilidadService } from 'src/app/services/utilidad.service';
-import { Horario } from 'src/app/models/horario';
-import { HorariosService } from 'src/app/services/horarios.service';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import * as moment from 'moment';
 
@@ -33,8 +31,7 @@ export const MY_DATA_FORMATS={
 
 export class CalendarioComponent implements OnInit{
   
-  constructor(private turnosService:TurnosService, private dialog:MatDialog, private utilidadService:UtilidadService,
-    private horarioService:HorariosService){
+  constructor(private turnosService:TurnosService, private dialog:MatDialog, private utilidadService:UtilidadService){
     
       this.turnoMenu = new Turno();
      
@@ -43,7 +40,7 @@ export class CalendarioComponent implements OnInit{
   @Input() idCalendario!:number;
   
   listTurnos:Turno[]=[];
-  listHorarios:Horario[] =[];
+  listHorarios:string[] =[];
   listLunes:Turno[]= [];
   listMartes:Turno[]=[];
   listMiercoles:Turno[]=[];
@@ -66,9 +63,10 @@ export class CalendarioComponent implements OnInit{
     
     this.fecha = new Date(Date.now());
     
-    this.mostrarHorarios();
+    
     
     this.mostrarTurnos();
+    
     
 
     
@@ -91,12 +89,16 @@ export class CalendarioComponent implements OnInit{
 
   semanaSiguiente():void{
     this.fecha = moment.utc(this.fecha).add(7,'days');
+    
     this.mostrarTurnos();
+
   }
 
   mostrarTurnos(){
    
     const fechaSeleccionada =  moment.utc(this.fecha);
+
+    
     
     if(fechaSeleccionada.isoWeekday() === 1){
       this.fechaInicio = fechaSeleccionada.clone();
@@ -163,10 +165,17 @@ export class CalendarioComponent implements OnInit{
 
           this.listTurnos = res.data;
           this.inicializacionListas();
+          this.listHorarios = [];
+          let contador = 0;
+          
+          while (this.listTurnos[0].fecha==this.listTurnos[contador].fecha) {
+            this.listHorarios.push(this.listTurnos[contador].horario);
+            contador++;
+          }
 
-          let cantidadHorarios = this.listHorarios.length; 
-        
-          let diaDeLaSemana = moment.utc(this.listTurnos[0].fecha.dia).isoWeekday();
+          let cantidadHorarios = contador; 
+
+          let diaDeLaSemana = moment.utc(this.listTurnos[0].fecha).isoWeekday();
 
           for(let i = 0; i< this.listTurnos.length; i++){
             
@@ -244,24 +253,7 @@ export class CalendarioComponent implements OnInit{
 
 
   }
-   mostrarHorarios ():void{
-    
-    this.horarioService.mostrarHorarios(this.idCalendario).subscribe({
-       next:(res)=>{
-        if(res.resultado === 1){
-          this.listHorarios = res.data;
-       
-          
-        }
-        else{
-          console.log(res.mensaje);
-        }
-      },
-      error:(err)=>{
-        console.log(err);
-      }
-    });
-  }
+   
 
 
 
@@ -280,7 +272,7 @@ export class CalendarioComponent implements OnInit{
 
     swal.fire({
       title:"¿Desea Cancelar el Turno?",
-      text: `Mascota: ${turno.mascota.nombre}\nDia: ${turno.fecha.dia}\nHora:${turno.horario.hora}`,
+      text: `Mascota: ${turno.mascota.nombre}\nDia: ${turno.fecha}\nHora:${turno.horario}`,
       icon:"warning",
       iconColor:'red',
       confirmButtonColor:"#3085d6",
