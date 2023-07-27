@@ -90,8 +90,11 @@ export class DashboardComponent implements OnInit {
           this.animarContador(res.data.nuevasMascotas,res.data.nuevosClientes);
           
           
+         
           
-          
+        }
+        else{
+
         }
       }
     });
@@ -113,7 +116,7 @@ export class DashboardComponent implements OnInit {
     
     swal.fire({
       title:"¿Desea Cancelar el Turno?",
-      text: `Mascota: ${turno.mascota.nombre}\nDia: ${turno.fecha.dia}\nHora:${turno.horario.hora}`,
+      text: `Mascota: ${turno.mascota.nombre}\nDia: ${turno.fecha}\nHora:${turno.horario}`,
       icon:"warning",
       iconColor:'red',
       confirmButtonColor:"#3085d6",
