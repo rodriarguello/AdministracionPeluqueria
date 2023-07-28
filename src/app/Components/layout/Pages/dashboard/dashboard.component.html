@@ -1,1 +1,151 @@
-<h1 class="text-center text-black">Componente Dashboard</h1>
+<h1 class="text-center text-black mt-5 mb-2">Bienvenido/a {{(dataUsuario$| async)?.nombres}} </h1>
+<h2 class="text-center">Te mostramos el resumen de tu Peluqueria Canina: "{{(dataUsuario$|async)?.nombrePeluqueria}}"</h2>
+
+<div class="container d-flex justify-content-center">
+
+
+<div class="grid-container">
+
+<div class="mat-elevation-z15 mt-3 card">
+
+    <mat-card class="d-flex flex-column align-items-center p-3 card ">
+        <mat-card-title class="mb-3">
+            Turnos de hoy
+        </mat-card-title>
+        <mat-card-content *ngIf="listTurnosOcupados.length>0;else sinTurnos" class="card-content">
+        <div *ngFor="let turno of listTurnosOcupados" class="mat-elevation-z4 w-75 mb-3" [matMenuTriggerFor]="menu" (click)="turnoMenu=turno" >
+            
+            <mat-card class=" w-100 p-3 turno" [ngClass]="{'asistio':turno.asistio}">
+                
+                <mat-card-title>{{turno.horario|slice:0:5}} hs.</mat-card-title>
+                <mat-card-subtitle >Mascota: {{turno.mascota.nombre}}</mat-card-subtitle>
+                <mat-card-subtitle >Asistió:{{turno.asistio?' Si':' Todavía no'}}</mat-card-subtitle>
+                
+                
+            </mat-card >
+        </div>
+
+    </mat-card-content>
+        
+    </mat-card>
+    
+</div>
+
+<div class="mat-elevation-z15 mt-3 card">
+
+    <mat-card class="d-flex flex-column align-items-center p-3 card " >
+        <mat-card-title class="mb-3">
+            Turnos Disponibles Hoy
+        </mat-card-title>
+
+        <mat-card-content *ngIf="listTurnosDisponibles.length>0;else sinTurnos" class="card-content">
+            
+            <div *ngFor="let turno of listTurnosDisponibles" class="mat-elevation-z4 w-75 mb-3" [matMenuTriggerFor]="menu" (click)="turnoMenu=turno" >
+                
+                <mat-card class=" w-100 p-3 turno-disponible">
+                    
+                    <mat-card-title>{{turno.horario|slice:0:5}} hs.</mat-card-title>
+                    
+                    
+                    
+                </mat-card >
+            </div>
+        </mat-card-content>
+        
+        
+        
+        
+    </mat-card>
+    
+</div>
+
+
+
+
+<div class="mat-elevation-z15 mt-3 card">
+
+    <mat-card class="p-3 card ">
+        <mat-card-title class="text-center mt-3">Ingresos de hoy</mat-card-title>
+       
+        <span class=" text-success fs-2 mt-5 text-center nuevos-registros">+ {{ingresoDiario.total| currency}}</span>
+    </mat-card>
+    
+</div>
+
+<div class="mat-elevation-z15 mt-3 card">
+
+    <mat-card class="p-3 card ">
+        <mat-card-title class="ms-4 mt-3">Clientes registrados</mat-card-title>
+        <!-- <mat-card-title>Cantidad de Turnos: {{dataIngresos.cantidadIngresos}}</mat-card-title> -->
+        
+        <mat-card-title  class="ms-4 fs-1 mt-4 text-color-primary">{{cantidadClientes}}</mat-card-title>
+        <span class=" text-success fs-4 mt-3 ms-4 nuevos-registros">+ {{cantidadClientesNuevos}}</span>
+        <span class=" text-success fs-6 mt-1 ms-4">Este mes</span>
+        
+    </mat-card>
+    
+</div>
+
+<div class="mat-elevation-z15 mt-3 card">
+
+    <mat-card class="p-3 card">
+        <mat-card-title class="ms-4 mt-3">Mascotas registradas</mat-card-title>
+        <!-- <mat-card-title>Cantidad de Turnos: {{dataIngresos.cantidadIngresos}}</mat-card-title> -->
+        <mat-card-title  class="ms-4 fs-1 mt-4 text-color-primary">{{cantidadMascotas}}</mat-card-title>
+        <span class=" text-success fs-4 mt-3 ms-4 nuevos-registros">+ {{cantidadMascotasNuevas}}</span>
+        <span class=" text-success fs-6 mt-1 ms-4">Este mes</span>
+        
+    </mat-card>
+    
+</div>
+<div class="mat-elevation-z15 mt-3 card">
+
+    <mat-card class="p-3 card mt-3 ">
+        <mat-card-title class="text-center">Ingreso Mensual</mat-card-title>
+        
+        <span class=" text-success fs-2 mt-5 text-center nuevos-registros">+ {{ingresoMensual.total| currency}}</span>
+    </mat-card>
+    
+</div>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="reservarTurno(turnoMenu)" [disabled]="!turnoMenu.disponible" >
+            <mat-icon>dialpad</mat-icon>
+            <span>Reservar</span>
+        </button>
+        <button mat-menu-item (click)="verDetalles(turnoMenu)" [disabled]="turnoMenu.disponible">
+            <mat-icon>search</mat-icon>
+            <span>Detalles</span>
+        </button>
+        <button mat-menu-item [disabled]="turnoMenu.disponible" (click)="cancelarReserva(turnoMenu)">
+            <mat-icon>notifications_off</mat-icon>
+          <span>Cancelar Reserva</span>
+        </button>
+        <button mat-menu-item [disabled]="turnoMenu.disponible" >
+            <mat-icon>notifications_off</mat-icon>
+            <span>Asistió</span>
+            <input class="ms-2" type="checkbox" #inputAsistencia [checked]="turnoMenu.asistio" (click)="modificarAsistencia(turnoMenu, inputAsistencia.checked)">
+          </button>
+      </mat-menu>
+    
+
+
+</div>
+
+</div>
+
+<ng-template #sinTurnos>
+    <mat-card-content  class="card-content">
+            
+        <div class="mat-elevation-z4 w-75 mb-3"  >
+            
+            <mat-card class=" w-100 p-3 turno-disponible">
+                
+                <mat-card-title>No hay turnos</mat-card-title>
+                
+                
+                
+            </mat-card >
+        </div>
+    </mat-card-content>
+</ng-template>

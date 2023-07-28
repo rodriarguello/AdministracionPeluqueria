@@ -1,10 +1,45 @@
 
-<div class="container d-flex flex-column align-items-center justify-content-center vh-100">
-    <h1 style="margin-bottom: 10vh;text-align: center;">ADMINISTRACION DE PELUQUERIAS CANINAS</h1>
-        
-    <app-login *ngIf="mostrarLogin" (mostrarLogin)="mostrarLogin=$event"></app-login>
+<div *ngIf="!mostrarLogin && !mostrarRegistro ">
 
-    <app-registro *ngIf="!mostrarLogin" (mostrarLogin)="mostrarLogin=$event"></app-registro>
-        
+
+<header>
+
+    <nav class="d-flex justify-content-between" >
+        <div class="logo">
+            <img src="../../../../assets/logo_myvet.png" >
+        </div>
+        <div>
+            <button class="me-4 fs-6 px-4 py-4" mat-stroked-button color="primary" (click)="mostrarLogin = !mostrarLogin">
+                Ingresar  
+                
+                <mat-icon>login</mat-icon>
+            </button>
+            <button class="ms-4 fs-6 py-4" mat-raised-button color="primary" (click)="mostrarRegistro = !mostrarRegistro">
+                Registrarme
+            </button>
+        </div>
+    </nav>
+
+</header>
+
+<div class="container d-flex  justify-content-center">
     
+    <div class="container-texto-titulo">
+        <h2 class="titulo">My Pelu, el manejo de tú Peluquería Canina en un solo lugar.</h2>
+        <h3 class="subtitulo">Software de gestión integral para peluquerías caninas.</h3>
+        <button class=" fs-6 py-4" mat-raised-button color="primary" (click)="mostrarRegistro=!mostrarRegistro" >
+            Probar Ahora
+        </button>
+        
+    </div>
+    <div class="imagen">
+        <img src="../../../../assets/pomerania.png">
+    </div>
 </div>
+</div>
+    
+<app-login *ngIf="mostrarLogin" (mostrarLogin)="mostrarLogin=$event" (mostrarRegistro)="mostrarRegistro=$event"></app-login>
+
+
+<app-registro *ngIf="mostrarRegistro" (mostrarRegistro)="mostrarRegistro=$event"(mostrarLogin)="mostrarLogin = $event" ></app-registro>
+    

@@ -1,0 +1,44 @@
+
+nav{
+    margin: 50px 200px 50px;
+}
+.imagen{
+   
+    width: 400px;
+    height: 600px;
+
+}
+
+.imagen img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.logo{
+    margin-left: 50px;
+}
+
+.container-texto-titulo{
+    width: 400px;
+    margin-right: 50px;
+    margin-top: 80px;
+}
+
+.titulo{
+    font-size: 50px;
+    line-height: 68px;
+    font-weight: 700;
+    letter-spacing: -1.9px !important;
+}
+
+.subtitulo{
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: -0.66px;
+
+}
+
+button{
+    border-radius: 25px;
+}

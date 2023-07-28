@@ -1,27 +1,20 @@
-import { Component,  OnInit } from '@angular/core';
+import { Component,  Input, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Turno } from 'src/app/models/turno/turno';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { ModalReservarTurnoComponent } from '../modales-turnos/modal-reservar-turno/modal-reservar-turno.component';
-import { ActivatedRoute, Params } from '@angular/router';
 import swal from 'sweetalert2';
 import { ModalDetalleTurnoComponent } from '../modales-turnos/modal-detalle-turno/modal-detalle-turno.component';
 import { UtilidadService } from 'src/app/services/utilidad.service';
-import { Horario } from 'src/app/models/horario';
-import { HorariosService } from 'src/app/services/horarios.service';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import * as moment from 'moment';
+import { ModalDetalleCalendarioComponent } from '../modales-turnos/modal-detalle-calendario/modal-detalle-calendario.component';
+import { Calendario } from 'src/app/models/calendario';
+import { CalendarioService } from 'src/app/services/calendario.service';
+import { MY_DATA_FORMATS } from 'src/app/Reutilizable/shared/spinner/spinner.component';
 
 
-export const MY_DATA_FORMATS={
-  parse:{
-    dateInput:'DD/MM/YYYY'
-  },
-  display:{
-    dateInput:'DD/MM/YYYY',
-    monthYearLabel:'MMMM YYYY'
-  }
-};
+
 
 @Component({
   selector: 'app-calendario',
@@ -32,20 +25,20 @@ export const MY_DATA_FORMATS={
   ]
 })
 
+
 export class CalendarioComponent implements OnInit{
   
-  constructor(private turnosService:TurnosService, private dialog:MatDialog, private activatedRoute:ActivatedRoute, private utilidadService:UtilidadService,
-    private horarioService:HorariosService){
+  constructor(private turnosService:TurnosService, private dialog:MatDialog, private utilidadService:UtilidadService,private calendarioService:CalendarioService){
     
       this.turnoMenu = new Turno();
      
   }
-  
-  
-  
+
+  @Output() calendarioEliminado = new EventEmitter<boolean>();
+  @Input() calendario!:Calendario;
+
   listTurnos:Turno[]=[];
-  idCalendario!:number;
-  listHorarios:Horario[] =[];
+  listHorarios:string[] =[];
   listLunes:Turno[]= [];
   listMartes:Turno[]=[];
   listMiercoles:Turno[]=[];
@@ -65,16 +58,13 @@ export class CalendarioComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.activatedRoute.queryParams.subscribe((params:Params)=>{
-      this.idCalendario = params['id'];
-      
-      
-    });
+    
     this.fecha = new Date(Date.now());
     
-    this.mostrarHorarios();
+    
     
     this.mostrarTurnos();
+    
     
 
     
@@ -97,12 +87,16 @@ export class CalendarioComponent implements OnInit{
 
   semanaSiguiente():void{
     this.fecha = moment.utc(this.fecha).add(7,'days');
+    
     this.mostrarTurnos();
+
   }
 
   mostrarTurnos(){
    
     const fechaSeleccionada =  moment.utc(this.fecha);
+
+    
     
     if(fechaSeleccionada.isoWeekday() === 1){
       this.fechaInicio = fechaSeleccionada.clone();
@@ -154,9 +148,11 @@ export class CalendarioComponent implements OnInit{
     
 
 
-    this.turnosService.filtrarTurnos(this.idCalendario,this.fechaInicio.format(),this.fechaFin.format()).subscribe({
+    this.turnosService.filtrarTurnos(this.calendario.id,this.fechaInicio.format(),this.fechaFin.format()).subscribe({
       next:(res)=>{
         if(res.resultado===1){
+
+         
           this.cabecerasFechas = [];
           this.cabecerasFechas.push(this.fechaInicio.format('DD-MMMM'));
           this.cabecerasFechas.push(this.fechaInicio.clone().add(1,'days').format('DD-MMMM'));
@@ -169,10 +165,19 @@ export class CalendarioComponent implements OnInit{
 
           this.listTurnos = res.data;
           this.inicializacionListas();
+          this.listHorarios = [];
+          let contador = 0;
+          
+          while (this.listTurnos[contador] != null && this.listTurnos[0].fecha == this.listTurnos[contador].fecha) {
+            this.listHorarios.push(this.listTurnos[contador].horario);
 
-          let cantidadHorarios = this.listHorarios.length; 
-        
-          let diaDeLaSemana = moment.utc(this.listTurnos[0].fecha.dia).isoWeekday();
+            contador++;
+          }
+
+         
+          let cantidadHorarios = contador; 
+
+          let diaDeLaSemana = moment.utc(this.listTurnos[0].fecha).isoWeekday();
 
           for(let i = 0; i< this.listTurnos.length; i++){
             
@@ -250,24 +255,7 @@ export class CalendarioComponent implements OnInit{
 
 
   }
-   mostrarHorarios ():void{
-    
-    this.horarioService.mostrarHorarios(this.idCalendario).subscribe({
-       next:(res)=>{
-        if(res.resultado === 1){
-          this.listHorarios = res.data;
-       
-          
-        }
-        else{
-          console.log(res.mensaje);
-        }
-      },
-      error:(err)=>{
-        console.log(err);
-      }
-    });
-  }
+   
 
 
 
@@ -286,7 +274,7 @@ export class CalendarioComponent implements OnInit{
 
     swal.fire({
       title:"¿Desea Cancelar el Turno?",
-      text: `Mascota: ${turno.mascota.nombre}\nDia: ${turno.fecha.dia}\nHora:${turno.horario.hora}`,
+      text: `Mascota: ${turno.mascota.nombre}\nDia: ${turno.fecha}\nHora:${turno.horario}`,
       icon:"warning",
       iconColor:'red',
       confirmButtonColor:"#3085d6",
@@ -357,4 +345,39 @@ export class CalendarioComponent implements OnInit{
     
     }
 
+    mostrarDetallesCalendario(){
+      this.dialog.open(ModalDetalleCalendarioComponent, {data:this.calendario}).afterClosed().subscribe((res)=>{
+  
+        if(res.eliminado){
+          this.calendario = null!;
+          this.calendarioEliminado.next(true);
+        }
+  
+        if(res.modificado){
+          this.mostrarCalendario();
+          this.mostrarTurnos();
+        }
+      });
+    }
+
+    mostrarCalendario():void{
+      this.calendarioService.mostrarCalendario().subscribe({
+        next:(res)=>{
+          if(res.resultado===1){
+            this.calendario = res.data; 
+           
+            
+          }
+          else{
+            console.log(res);
+          }
+        },
+        error:(error)=>{
+          console.log(error);
+        }
+      });
+    }
+
+
+    
 }

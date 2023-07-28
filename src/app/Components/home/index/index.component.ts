@@ -11,7 +11,8 @@ export class IndexComponent implements OnInit{
 
   constructor(private router:Router, private usuarioService:UsuariosService){
 
-    this.mostrarLogin = true;
+    this.mostrarLogin = false;
+    this.mostrarRegistro = false;
   }
   ngOnInit(): void {
 
@@ -19,7 +20,8 @@ export class IndexComponent implements OnInit{
     
   }
 
-  mostrarLogin!:boolean;
+  mostrarLogin:boolean;
+  mostrarRegistro:boolean;
 
 
   obtenerDatosUsuario(){

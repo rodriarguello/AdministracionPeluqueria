@@ -18,16 +18,8 @@ import { ModalAlergiasComponent } from '../modal-alergias/modal-alergias.compone
 import { ModalClientesComponent } from '../modal-clientes/modal-clientes.component';
 import { ModalEnfermedadesComponent } from '../modal-enfermedades/modal-enfermedades.component';
 import { ModalRazasComponent } from '../modal-razas/modal-razas.component';
+import { MY_DATA_FORMATS } from 'src/app/Reutilizable/shared/spinner/spinner.component';
 
-export const MY_DATA_FORMATS={
-  parse:{
-    dateInput:'DD/MM/YYYY'
-  },
-  display:{
-    dateInput:'DD/MM/YYYY',
-    monthYearLabel:'MMMM YYYY'
-  }
-};
 
 
 @Component({
@@ -69,6 +61,23 @@ export class ModalMascotasComponent implements OnInit {
       this.tituloAccion = "Agregar Mascota";
       this.botonAccion = "Agregar";
 
+      if(this.dataMascota!=null && this.dataMascota.id != -1){
+       
+        
+        this.tituloAccion = "Actualizar Mascota";
+        this.botonAccion = "Actualizar";
+        this.formMascotas.patchValue({
+          nombre:this.dataMascota.nombre,
+          fechaNacimiento:this.dataMascota.fechaNacimiento,
+          cliente:this.dataMascota.cliente.id,
+          raza:this.dataMascota.raza.id,
+          enfermedades:this.dataMascota.enfermedades,
+          alergias:this.dataMascota.alergias
+        });
+  
+      }
+  
+      this.cargarSelect();
     }
     
     
@@ -76,23 +85,6 @@ export class ModalMascotasComponent implements OnInit {
 
   ngOnInit(): void {
     
-    if(this.dataMascota!=null && this.dataMascota.id != -1){
-     
-      
-      this.tituloAccion = "Actualizar Mascota";
-      this.botonAccion = "Actualizar";
-      this.formMascotas.patchValue({
-        nombre:this.dataMascota.nombre,
-        fechaNacimiento:this.dataMascota.fechaNacimiento,
-        cliente:this.dataMascota.cliente.id,
-        raza:this.dataMascota.raza.id,
-        enfermedades:this.dataMascota.enfermedades,
-        alergias:this.dataMascota.alergias
-      });
-
-    }
-
-    this.cargarSelect();
     
 
   }

@@ -1,0 +1,16 @@
+
+    <mat-dialog-content>
+        <h3>Nueva fecha de Finalización</h3>
+        <mat-form-field >
+            <mat-label>Ingrese nueva fecha de finalización</mat-label>
+            <input matInput [min]="minDate" [max]="maxDate"  [matDatepicker]="picker" [(ngModel)]="nuevaFechaFin">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-raised-button color="primary" (click)="modificarTurnos()">{{tituloAccion}}</button>
+        <button mat-raised-button color="warn" mat-dialog-close>Cerrar</button>
+    </mat-dialog-actions>

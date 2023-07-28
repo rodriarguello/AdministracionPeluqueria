@@ -108,7 +108,7 @@
                         La mascota no posee Turnos.
                     </mat-card-subtitle>
                      <ng-template #turnos>
-                         <mat-card-subtitle *ngFor="let turno of mascota.turnos">Fecha:{{turno.fecha.dia| date:'dd/MM/yyyy'}} - Asistió: {{turno.asistio?'Si':'No'}}
+                         <mat-card-subtitle *ngFor="let turno of mascota.turnos">Fecha:{{turno.fecha| date:'dd/MM/yyyy'}} - Asistió: {{turno.asistio?'Si':'No'}}
                             <button mat-icon-button  color="primary" (click)="verDetalleTurno(turno)">
                                 <mat-icon >search</mat-icon>
     

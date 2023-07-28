@@ -26,10 +26,12 @@ export class ModalReservarTurnoComponent implements OnInit {
       precio:['', Validators.required]
 
     });
+
+    this.mostrarMascotas();
+    
   }
   ngOnInit(): void {
 
-    this.mostrarMascotas();
 
   }
 

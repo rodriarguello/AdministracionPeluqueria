@@ -31,6 +31,7 @@ constructor(fb:FormBuilder, private usuarioService:UsuariosService, private util
 
   }
 
+  @Output() mostrarRegistro = new EventEmitter<boolean>();
   @Output() mostrarLogin = new EventEmitter<boolean>();
 
 registrarUsuario():void{
@@ -58,8 +59,11 @@ this.usuarioService.crearUsuario(usuario).subscribe({
 
     this.formularioRegistro.reset();
 
+    this.mostrarRegistro.emit(false);
     this.mostrarLogin.emit(true);
-    
+    setTimeout(() => {
+      this.utilidadService.mostrarAlerta("Ahora tenés que iniciar sesión", "REGISTRO");
+    }, 3000);
   },
   error:()=>{
    this.utilidadService.mostrarAlerta("Error al registrarse","REGISTRO");
@@ -71,7 +75,12 @@ this.usuarioService.crearUsuario(usuario).subscribe({
 
   
 
-  volverLogin():void{
+  volverIndex():void{
+    this.mostrarRegistro.emit(false);
+  }
+
+  irLogin():void{
+    this.mostrarRegistro.emit(false);
     this.mostrarLogin.emit(true);
   }
 
