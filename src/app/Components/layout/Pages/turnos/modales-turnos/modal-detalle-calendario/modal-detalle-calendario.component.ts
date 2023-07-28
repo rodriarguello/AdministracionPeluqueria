@@ -1,9 +1,11 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Calendario } from 'src/app/models/calendario';
 import { CalendarioService } from 'src/app/services/calendario.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
 import swal from 'sweetalert2';
+import { ModalModificarTurnosComponent } from '../modal-modificar-turnos/modal-modificar-turnos.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-modal-detalle-calendario',
@@ -13,11 +15,13 @@ import swal from 'sweetalert2';
 export class ModalDetalleCalendarioComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA)dataCalendario:Calendario, private calendarioService:CalendarioService,private utilidadService:UtilidadService,
-  private dialogoActual:MatDialogRef<ModalDetalleCalendarioComponent>){
+  private dialogoActual:MatDialogRef<ModalDetalleCalendarioComponent>,private dialog:MatDialog){
     this.calendario = dataCalendario;
+    this.calendarioModificado = false;
   }
 
   calendario:Calendario;
+  calendarioModificado:boolean;
 
   eliminarCalendario(calendario:Calendario){
 
@@ -66,6 +70,29 @@ export class ModalDetalleCalendarioComponent {
         }
       }
     });
+  }
+
+  agregarTurnos(){
+    this.dialog.open(ModalModificarTurnosComponent,{data:{minDate:moment(this.calendario.fechaFin).add('1','days'),maxDate:moment("2030-12-31"),accion:"agregar"}}).afterClosed().subscribe(
+      {next:(res)=>{
+          if(res === true){
+            this.calendarioModificado = true;
+            this.mostrarCalendario();
+          }
+    }});
+  }
+
+  eliminarTurnos(){
+    this.dialog.open(ModalModificarTurnosComponent,{data:{minDate:moment(this.calendario.fechaInicio).add('1',"days"),maxDate:moment(this.calendario.fechaFin).subtract('1','days'),accion:"eliminar"}}).afterClosed().subscribe(
+      {next:(res)=>{
+          if(res === true){
+            this.calendarioModificado = true;
+            this.mostrarCalendario();
+          }
+    }});
+  }
+  cerrarModal(){
+    this.dialogoActual.close({modificado:this.calendarioModificado});
   }
 
 }

@@ -34,8 +34,15 @@
                     
                 </ng-template>
             </mat-card-content>
-            
-            <button  mat-raised-button color="warn" (click)="eliminarCalendario(calendario)" class="m-3 w-75">
+            <button  mat-raised-button color="accent" (click)="eliminarTurnos()" class="mt-3 w-75">
+                Eliminar Turnos
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button  mat-raised-button color="primary" (click)="agregarTurnos()" class="mt-2 w-75">
+                Agregar Turnos
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button  mat-raised-button color="warn" (click)="eliminarCalendario(calendario)" class="mb-3 mt-2 w-75">
                 Eliminar Calendario
                 <mat-icon>delete</mat-icon>
             </button>
@@ -45,7 +52,7 @@
             
 </mat-dialog-content>     
 <mat-dialog-actions align="center">
-    <button mat-raised-button color="warn"  matDialogClose >Cerrar</button>
+    <button mat-raised-button color="primary"  (click)="cerrarModal()" >Aceptar</button>
 </mat-dialog-actions>            
             
             
