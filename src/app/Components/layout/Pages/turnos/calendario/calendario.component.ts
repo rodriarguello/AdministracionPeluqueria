@@ -153,6 +153,8 @@ export class CalendarioComponent implements OnInit{
     this.turnosService.filtrarTurnos(this.idCalendario,this.fechaInicio.format(),this.fechaFin.format()).subscribe({
       next:(res)=>{
         if(res.resultado===1){
+
+         
           this.cabecerasFechas = [];
           this.cabecerasFechas.push(this.fechaInicio.format('DD-MMMM'));
           this.cabecerasFechas.push(this.fechaInicio.clone().add(1,'days').format('DD-MMMM'));
@@ -168,11 +170,13 @@ export class CalendarioComponent implements OnInit{
           this.listHorarios = [];
           let contador = 0;
           
-          while (this.listTurnos[0].fecha==this.listTurnos[contador].fecha) {
+          while (this.listTurnos[contador] != null && this.listTurnos[0].fecha == this.listTurnos[contador].fecha) {
             this.listHorarios.push(this.listTurnos[contador].horario);
+
             contador++;
           }
 
+         
           let cantidadHorarios = contador; 
 
           let diaDeLaSemana = moment.utc(this.listTurnos[0].fecha).isoWeekday();
