@@ -1,4 +1,4 @@
-import { Component,  Input,  OnInit } from '@angular/core';
+import { Component,  Input, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Turno } from 'src/app/models/turno/turno';
 import { TurnosService } from 'src/app/services/turnos.service';
@@ -8,17 +8,13 @@ import { ModalDetalleTurnoComponent } from '../modales-turnos/modal-detalle-turn
 import { UtilidadService } from 'src/app/services/utilidad.service';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import * as moment from 'moment';
+import { ModalDetalleCalendarioComponent } from '../modales-turnos/modal-detalle-calendario/modal-detalle-calendario.component';
+import { Calendario } from 'src/app/models/calendario';
+import { CalendarioService } from 'src/app/services/calendario.service';
+import { MY_DATA_FORMATS } from 'src/app/Reutilizable/shared/spinner/spinner.component';
 
 
-export const MY_DATA_FORMATS={
-  parse:{
-    dateInput:'DD/MM/YYYY'
-  },
-  display:{
-    dateInput:'DD/MM/YYYY',
-    monthYearLabel:'MMMM YYYY'
-  }
-};
+
 
 @Component({
   selector: 'app-calendario',
@@ -29,16 +25,18 @@ export const MY_DATA_FORMATS={
   ]
 })
 
+
 export class CalendarioComponent implements OnInit{
   
-  constructor(private turnosService:TurnosService, private dialog:MatDialog, private utilidadService:UtilidadService){
+  constructor(private turnosService:TurnosService, private dialog:MatDialog, private utilidadService:UtilidadService,private calendarioService:CalendarioService){
     
       this.turnoMenu = new Turno();
      
   }
-  
-  @Input() idCalendario!:number;
-  
+
+  @Output() calendarioEliminado = new EventEmitter<boolean>();
+  @Input() calendario!:Calendario;
+
   listTurnos:Turno[]=[];
   listHorarios:string[] =[];
   listLunes:Turno[]= [];
@@ -150,7 +148,7 @@ export class CalendarioComponent implements OnInit{
     
 
 
-    this.turnosService.filtrarTurnos(this.idCalendario,this.fechaInicio.format(),this.fechaFin.format()).subscribe({
+    this.turnosService.filtrarTurnos(this.calendario.id,this.fechaInicio.format(),this.fechaFin.format()).subscribe({
       next:(res)=>{
         if(res.resultado===1){
 
@@ -347,4 +345,39 @@ export class CalendarioComponent implements OnInit{
     
     }
 
+    mostrarDetallesCalendario(){
+      this.dialog.open(ModalDetalleCalendarioComponent, {data:this.calendario}).afterClosed().subscribe((res)=>{
+  
+        if(res.eliminado){
+          this.calendario = null!;
+          this.calendarioEliminado.next(true);
+        }
+  
+        if(res.modificado){
+          this.mostrarCalendario();
+          this.mostrarTurnos();
+        }
+      });
+    }
+
+    mostrarCalendario():void{
+      this.calendarioService.mostrarCalendario().subscribe({
+        next:(res)=>{
+          if(res.resultado===1){
+            this.calendario = res.data; 
+           
+            
+          }
+          else{
+            console.log(res);
+          }
+        },
+        error:(error)=>{
+          console.log(error);
+        }
+      });
+    }
+
+
+    
 }
