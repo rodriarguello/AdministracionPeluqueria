@@ -38,5 +38,10 @@ export class CalendarioService {
     return this.http.post<ResponseApi>(`${this.urlApi}/agregarturnos/${fechaFin}`,this.httpOptions);
   }
 
+  eliminarTurnos(fechaFin:string):Observable<ResponseApi>{
+
+    return this.http.put<ResponseApi>(`${this.urlApi}/eliminarturnos/${fechaFin}`,this.httpOptions);
+  }
+
 
 }
