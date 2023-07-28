@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MY_DATA_FORMATS } from 'src/app/Components/layout/modales/modal-mascotas/modal-mascotas.component';
+import { MY_DATA_FORMATS } from 'src/app/Reutilizable/shared/spinner/spinner.component';
 import { Calendario } from 'src/app/models/calendario';
 import { CalendarioService } from 'src/app/services/calendario.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
