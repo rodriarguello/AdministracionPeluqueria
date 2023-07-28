@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalCalendarioComponent } from './modales-turnos/modal-crear-calendario/modal-crear-calendario.component';
 import { Calendario } from 'src/app/models/calendario';
 import { CalendarioService } from 'src/app/services/calendario.service';
-import { ModalDetalleCalendarioComponent } from './modales-turnos/modal-detalle-calendario/modal-detalle-calendario.component';
+
 
 
 
@@ -16,7 +16,7 @@ export class TurnosComponent implements OnInit{
 
   constructor(private dialog:MatDialog, private calendarioService:CalendarioService){
 
-    //this.calendario = new Calendario();
+    
     this.mostrarCalendario();
     this.calendarioEliminado = false;
     
@@ -61,14 +61,5 @@ export class TurnosComponent implements OnInit{
   }
 
  
-
-  // mostrarDetallesCalendario(){
-  //   this.dialog.open(ModalDetalleCalendarioComponent, {data:this.calendario}).afterClosed().subscribe((res)=>{
-
-  //     if(res.eliminado){
-  //       this.calendario = null!;
-  //     }
-  //   });
-  // }
 
 }
