@@ -13,6 +13,7 @@ import { TurnosService } from 'src/app/services/turnos.service';
 import { ModalReservarTurnoComponent } from './modales-turnos/modal-reservar-turno/modal-reservar-turno.component';
 import { ModalDetalleTurnoComponent } from './modales-turnos/modal-detalle-turno/modal-detalle-turno.component';
 import { ModalDetalleCalendarioComponent } from './modales-turnos/modal-detalle-calendario/modal-detalle-calendario.component';
+import { ModalModificarTurnosComponent } from './modales-turnos/modal-modificar-turnos/modal-modificar-turnos.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ModalDetalleCalendarioComponent } from './modales-turnos/modal-detalle-
     CalendarioComponent,
     ModalReservarTurnoComponent,
     ModalDetalleTurnoComponent,
-    ModalDetalleCalendarioComponent
+    ModalDetalleCalendarioComponent,
+    ModalModificarTurnosComponent
   ],
   imports: [
     CommonModule,
