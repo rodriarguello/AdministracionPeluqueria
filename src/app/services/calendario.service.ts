@@ -33,5 +33,10 @@ export class CalendarioService {
     return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`,this.httpOptions);
   }
 
+  agregarTurnos(fechaFin:string):Observable<ResponseApi>{
+
+    return this.http.post<ResponseApi>(`${this.urlApi}/agregarturnos/${fechaFin}`,this.httpOptions);
+  }
+
 
 }
