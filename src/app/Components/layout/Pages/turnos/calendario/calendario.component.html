@@ -35,7 +35,7 @@
     
     
     <ul *ngIf="listLunes.length!=0;else sinTurnoLunes">
-        <li class="headers fs-5">Lun {{cabecerasFechas[0]}}</li>
+        <li class="headers fs-5">{{cabecerasFechas[0]| formatearTituloFechas}}</li>
         <li *ngFor="let turno of listLunes" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center" 
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}"  (click)="turnoMenu = turno">
             {{turno.horario|slice:0:5}}
@@ -45,13 +45,13 @@
 
     <ng-template #sinTurnoLunes>
         <ul>
-            <li class="headers fs-5">{{cabecerasFechas[0]}}</li>
+            <li class="headers fs-5">{{cabecerasFechas[0]| formatearTituloFechas}}</li>
             <li *ngFor="let horario of listHorarios" class="fs-6 py-2 text-center"><span >---</span></li>
         </ul>
     </ng-template>
 
     <ul *ngIf="listMartes.length!=0;else sinTurnoMartes">
-        <li class="headers fs-5">Mar {{cabecerasFechas[1]}}</li>
+        <li class="headers fs-5">{{cabecerasFechas[1]| formatearTituloFechas}}</li>
         <li *ngFor="let turno of listMartes" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center" 
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}" (click)="turnoMenu = turno">
             
@@ -61,13 +61,13 @@
 
     <ng-template #sinTurnoMartes>
         <ul>
-            <li class="headers fs-5">Mar {{cabecerasFechas[1]}}</li>
+            <li class="headers fs-5">{{cabecerasFechas[1]| formatearTituloFechas}}</li>
             <li *ngFor="let horario of listHorarios" class="fs-6 py-2 text-center"><span>---</span></li>
         </ul>
     </ng-template>
 
     <ul *ngIf="listMiercoles.length!=0;else sinTurnoMiercoles">
-        <li class="headers fs-5">Mie {{cabecerasFechas[2]}}</li>
+        <li class="headers fs-5">{{cabecerasFechas[2]| formatearTituloFechas}}</li>
         <li *ngFor="let turno of listMiercoles" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center" 
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}" (click)="turnoMenu = turno" >
         {{turno.horario|slice:0:5}}</li>
@@ -76,13 +76,13 @@
 
     <ng-template #sinTurnoMiercoles>
         <ul>
-            <li class="headers fs-5">Mié {{cabecerasFechas[2]}}</li>
+            <li class="headers fs-5">{{cabecerasFechas[2]| formatearTituloFechas}}</li>
             <li *ngFor="let horario of listHorarios" class="fs-6 py-2 text-center"><span >---</span></li>
         </ul>
     </ng-template>
 
     <ul *ngIf="listJueves.length!=0;else sinTurnoJueves">
-        <li class="headers fs-5">Jue {{cabecerasFechas[3]}}</li>
+        <li class="headers fs-5">{{cabecerasFechas[3]| formatearTituloFechas}}</li>
         <li *ngFor="let turno of listJueves" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center"
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}" (click)="turnoMenu = turno">
             {{turno.horario|slice:0:5}}</li>
@@ -91,13 +91,13 @@
 
     <ng-template #sinTurnoJueves>
         <ul>
-            <li class="headers fs-5">Jue {{cabecerasFechas[3]}}</li>
+            <li class="headers fs-5">{{cabecerasFechas[3]| formatearTituloFechas}}</li>
             <li *ngFor="let horario of listHorarios" class="fs-6 py-2 text-center"><span >---</span></li>
         </ul>
     </ng-template>
 
     <ul *ngIf="listViernes.length!=0;else sinTurnoViernes">
-        <li class="headers fs-5">Vie {{cabecerasFechas[4]}}</li>
+        <li class="headers fs-5">{{cabecerasFechas[4]| formatearTituloFechas}}</li>
         <li *ngFor="let turno of listViernes"[matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center"
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}" (click)="turnoMenu = turno">
         {{turno.horario|slice:0:5}}</li>
@@ -106,14 +106,14 @@
 
     <ng-template #sinTurnoViernes>
         <ul>
-            <li class="headers fs-5">Vie {{cabecerasFechas[4]}}</li>
+            <li class="headers fs-5">{{cabecerasFechas[4]| formatearTituloFechas}}</li>
             <li *ngFor="let horario of listHorarios" class="fs-6 py-2 text-center" ><span >---</span></li>
         </ul>
     </ng-template>
     
     
     <ul *ngIf="listSabado.length!=0;else sinTurnoSabado">
-        <li class="headers fs-5">Sáb {{cabecerasFechas[5]}}</li>
+        <li class="headers fs-5">{{cabecerasFechas[5]| formatearTituloFechas}}</li>
         <li *ngFor="let turno of listSabado" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center"
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}" (click)="turnoMenu = turno">
         {{turno.horario|slice:0:5}}</li>
@@ -122,7 +122,7 @@
 
     <ng-template #sinTurnoSabado>
         <ul>
-            <li class="headers fs-5">Sáb {{cabecerasFechas[5]}}</li>
+            <li class="headers fs-5">{{cabecerasFechas[5]| formatearTituloFechas}}</li>
             <li *ngFor="let horario of listHorarios" class="fs-6 py-2 text-center"><span >---</span></li>
         </ul>
     </ng-template>
@@ -131,7 +131,7 @@
 
 
     <ul *ngIf="listDomingo.length!=0;else sinTurnoDomingo">
-        <li class="headers fs-5">Dom {{cabecerasFechas[6]}}</li>
+        <li class="headers fs-5">{{cabecerasFechas[6]| formatearTituloFechas}}</li>
         <li *ngFor="let turno of listDomingo" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center"
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}" (click)="turnoMenu = turno">
         {{turno.horario|slice:0:5}}</li>
@@ -140,7 +140,7 @@
 
     <ng-template #sinTurnoDomingo>
         <ul>
-            <li class="headers fs-5">Dom {{cabecerasFechas[6]}}</li>
+            <li class="headers fs-5">{{cabecerasFechas[6]| formatearTituloFechas}}</li>
             <li *ngFor="let horario of listHorarios" class="fs-6 py-2 text-center"><span >---</span></li>
         </ul>
     </ng-template>
