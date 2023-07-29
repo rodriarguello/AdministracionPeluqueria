@@ -32,10 +32,7 @@
 
 
 
-    <ul class="ul-horario">
-        <li class="headers fs-5">Horario</li>
-        <li *ngFor="let horario of listHorarios" class="horarios fs-6 py-2"><span>{{horario|slice:0:5}}</span></li>
-    </ul>
+    
     
     <ul *ngIf="listLunes.length!=0;else sinTurnoLunes">
         <li class="headers fs-5">Lun {{cabecerasFechas[0]}}</li>
@@ -48,7 +45,7 @@
 
     <ng-template #sinTurnoLunes>
         <ul>
-            <li class="headers fs-5">Lun {{cabecerasFechas[0]}}</li>
+            <li class="headers fs-5">{{cabecerasFechas[0]}}</li>
             <li *ngFor="let horario of listHorarios" class="fs-6 py-2 text-center"><span >---</span></li>
         </ul>
     </ng-template>

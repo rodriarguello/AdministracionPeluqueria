@@ -1,4 +1,4 @@
-import { Component,  Input, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component,  Input, EventEmitter, OnInit, Output, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Turno } from 'src/app/models/turno/turno';
 import { TurnosService } from 'src/app/services/turnos.service';
@@ -26,18 +26,30 @@ import { MY_DATA_FORMATS } from 'src/app/Reutilizable/shared/spinner/spinner.com
 })
 
 
-export class CalendarioComponent implements OnInit{
+export class CalendarioComponent implements OnInit, OnChanges{
   
   constructor(private turnosService:TurnosService, private dialog:MatDialog, private utilidadService:UtilidadService,private calendarioService:CalendarioService){
     
       this.turnoMenu = new Turno();
+      moment.locale("es");
      
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    
+    if(changes['calendario']){
+      this.fecha = new Date(Date.now());
+    
+    
+    
+    this.mostrarTurnos();
 
+    }
+  }
+  
   @Output() calendarioEliminado = new EventEmitter<boolean>();
   @Input() calendario!:Calendario;
 
-  listTurnos:Turno[]=[];
+  
   listHorarios:string[] =[];
   listLunes:Turno[]= [];
   listMartes:Turno[]=[];
@@ -46,7 +58,7 @@ export class CalendarioComponent implements OnInit{
   listViernes:Turno[]=[];
   listSabado:Turno[]=[];
   listDomingo:Turno[]=[];
-  cabecerasFechas:Date[] = [];
+  cabecerasFechas:string[] = [];
   
 
 
@@ -58,16 +70,6 @@ export class CalendarioComponent implements OnInit{
 
   ngOnInit(): void {
 
-    
-    this.fecha = new Date(Date.now());
-    
-    
-    
-    this.mostrarTurnos();
-    
-    
-
-    
   }
 
   inicializacionListas(){
@@ -152,83 +154,47 @@ export class CalendarioComponent implements OnInit{
       next:(res)=>{
         if(res.resultado===1){
 
-         
           this.cabecerasFechas = [];
-          this.cabecerasFechas.push(this.fechaInicio.format('DD-MMMM'));
-          this.cabecerasFechas.push(this.fechaInicio.clone().add(1,'days').format('DD-MMMM'));
-          this.cabecerasFechas.push(this.fechaInicio.clone().add(2,'days').format('DD-MMMM'));
-          this.cabecerasFechas.push(this.fechaInicio.clone().add(3,'days').format('DD-MMMM'));
-          this.cabecerasFechas.push(this.fechaInicio.clone().add(4,'days').format('DD-MMMM'));
-          this.cabecerasFechas.push(this.fechaInicio.clone().add(5,'days').format('DD-MMMM'));
-          this.cabecerasFechas.push(this.fechaFin.format('DD-MMMM'));
+          const fechaLun = this.fechaInicio;
+          this.cabecerasFechas.push(fechaLun.format('ddd DD [de] MMMM'));
+
+
+          const fechaMar= this.fechaInicio.clone().add(1,'days');
+          this.cabecerasFechas.push(fechaMar.format('ddd DD [de] MMMM'));
+
+          const fechaMie = fechaMar.clone().add(1,'days');
+          this.cabecerasFechas.push(fechaMie.format('ddd DD [de] MMMM'));
+
+          const fechaJue = fechaMie.clone().add(1,'days');
+          this.cabecerasFechas.push(fechaJue.format('ddd DD [de] MMMM'));
+
+          const fechaVie = fechaJue.clone().add(1,'days');
+          this.cabecerasFechas.push(fechaVie.format('ddd DD [de] MMMM'));
+
+          const fechaSab = fechaVie.clone().add(1,'days');
+          this.cabecerasFechas.push(fechaSab.format('ddd DD [de] MMMM'));
+
+          const fechaDom = fechaSab.clone().add(1,'days');
+          this.cabecerasFechas.push(fechaDom.format('ddd DD [de] MMMM'));
           
 
-          this.listTurnos = res.data;
+          
           this.inicializacionListas();
           this.listHorarios = [];
-          let contador = 0;
           
-          while (this.listTurnos[contador] != null && this.listTurnos[0].fecha == this.listTurnos[contador].fecha) {
-            this.listHorarios.push(this.listTurnos[contador].horario);
-
-            contador++;
-          }
-
-         
-          let cantidadHorarios = contador; 
-
-          let diaDeLaSemana = moment.utc(this.listTurnos[0].fecha).isoWeekday();
-
-          for(let i = 0; i< this.listTurnos.length; i++){
-            
-            
-
-            if((diaDeLaSemana===1 || this.listTurnos.length>cantidadHorarios*6) && this.listLunes.length<cantidadHorarios){
-                this.listLunes.push(this.listTurnos[i]);
-                if(this.listLunes.length === cantidadHorarios) diaDeLaSemana++;
-                continue;
-            }
-
-
-            if((diaDeLaSemana===2 || this.listTurnos.length>cantidadHorarios*5 ) && this.listMartes.length<cantidadHorarios){
-              this.listMartes.push(this.listTurnos[i]);
-              if(this.listMartes.length === cantidadHorarios) diaDeLaSemana++;
-              continue;
-            }
-
-
-            if((diaDeLaSemana===3 || this.listTurnos.length>cantidadHorarios*4) && this.listMiercoles.length<cantidadHorarios){
-              this.listMiercoles.push(this.listTurnos[i]);
-              if(this.listMiercoles.length === cantidadHorarios) diaDeLaSemana++;
-              continue;
-            }
-
-
-
-            if((diaDeLaSemana===4 || this.listTurnos.length>this.listHorarios.length*3) && this.listJueves.length<cantidadHorarios){
-              this.listJueves.push(this.listTurnos[i]);
-              if(this.listJueves.length === cantidadHorarios) diaDeLaSemana++;
-              continue;
-            }
-
-
-            if((diaDeLaSemana===5 || this.listTurnos.length>this.listHorarios.length*2) && this.listViernes.length<cantidadHorarios){
-              this.listViernes.push(this.listTurnos[i]);
-              if(this.listViernes.length === cantidadHorarios) diaDeLaSemana++;
-              continue;
-            }
-
-            if((diaDeLaSemana===6 || this.listTurnos.length>this.listHorarios.length) &&this.listSabado.length<cantidadHorarios){
-              this.listSabado.push(this.listTurnos[i]);
-              if(this.listSabado.length === cantidadHorarios) diaDeLaSemana++;
-              continue;
-            }
-
-            
-              this.listDomingo.push(this.listTurnos[i]);
+          for (let index = 0; index < res.data.cantidadHorarios; index++) {
+            this.listHorarios.push(index.toString()); 
             
           }
           
+          this.listLunes = res.data.lunes;
+          this.listMartes = res.data.martes;
+          this.listMiercoles = res.data.miercoles;
+          this.listJueves = res.data.jueves;
+          this.listViernes = res.data.viernes;
+          this.listSabado = res.data.sabado;
+          this.listDomingo = res.data.domingo;
+
           
 
         }
