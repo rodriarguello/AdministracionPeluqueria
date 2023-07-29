@@ -14,6 +14,8 @@ import { ModalReservarTurnoComponent } from './modales-turnos/modal-reservar-tur
 import { ModalDetalleTurnoComponent } from './modales-turnos/modal-detalle-turno/modal-detalle-turno.component';
 import { ModalDetalleCalendarioComponent } from './modales-turnos/modal-detalle-calendario/modal-detalle-calendario.component';
 import { ModalModificarTurnosComponent } from './modales-turnos/modal-modificar-turnos/modal-modificar-turnos.component';
+import { FormatearTituloFechasPipe } from 'src/app/Reutilizable/formatear-titulo-fechas.pipe';
+
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { ModalModificarTurnosComponent } from './modales-turnos/modal-modificar-
     ModalReservarTurnoComponent,
     ModalDetalleTurnoComponent,
     ModalDetalleCalendarioComponent,
-    ModalModificarTurnosComponent
+    ModalModificarTurnosComponent,
+    FormatearTituloFechasPipe
   ],
   imports: [
     CommonModule,
