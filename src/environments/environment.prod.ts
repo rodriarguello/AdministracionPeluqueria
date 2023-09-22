@@ -1,5 +1,5 @@
 export const environment ={
     production:true,
-    API_URL: 'https://localhost:7026/api'
+    API_URL: 'http://rodriarguello96-001-site1.htempurl.com/'
     
 }
