@@ -56,7 +56,7 @@ export class UsuariosService {
 
   crearUsuario(credenciales:Usuario):Observable<Credencial>{
 
-    return this.http.post<Credencial>(`${this.urlApi}/registrar`, credenciales,this.httpOptions);
+    return this.http.post<Credencial>(`${this.urlApi}/registrar`, credenciales);
 
   }
 
