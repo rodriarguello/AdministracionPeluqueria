@@ -2,16 +2,16 @@ import { Component,  Input, EventEmitter, OnInit, Output, AfterViewInit, OnChang
 import { MatDialog } from '@angular/material/dialog';
 import { Turno } from 'src/app/models/turno/turno';
 import { TurnosService } from 'src/app/services/turnos.service';
-import { ModalReservarTurnoComponent } from '../modales-turnos/modal-reservar-turno/modal-reservar-turno.component';
 import swal from 'sweetalert2';
-import { ModalDetalleTurnoComponent } from '../modales-turnos/modal-detalle-turno/modal-detalle-turno.component';
 import { UtilidadService } from 'src/app/services/utilidad.service';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import * as moment from 'moment';
-import { ModalDetalleCalendarioComponent } from '../modales-turnos/modal-detalle-calendario/modal-detalle-calendario.component';
 import { Calendario } from 'src/app/models/calendario';
 import { CalendarioService } from 'src/app/services/calendario.service';
-import { MY_DATA_FORMATS } from 'src/app/Reutilizable/shared/spinner/spinner.component';
+import { MY_DATA_FORMATS } from 'src/app/spinner/spinner.component';
+import { ModalDetalleCalendarioComponent } from '../modales-turnos/modal-detalle-calendario/modal-detalle-calendario.component';
+import { ModalDetalleTurnoComponent } from '../modales-turnos/modal-detalle-turno/modal-detalle-turno.component';
+import { ModalReservarTurnoComponent } from '../modales-turnos/modal-reservar-turno/modal-reservar-turno.component';
 
 
 

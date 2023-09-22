@@ -4,7 +4,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { CalendarioService } from 'src/app/services/calendario.service';
 import * as moment from 'moment';
 import { UtilidadService } from 'src/app/services/utilidad.service';
-import { MY_DATA_FORMATS } from 'src/app/Reutilizable/shared/spinner/spinner.component';
+import { MY_DATA_FORMATS } from 'src/app/spinner/spinner.component';
 import swal from 'sweetalert2';
 
 @Component({
