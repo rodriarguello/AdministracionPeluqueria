@@ -4,29 +4,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from './Reutilizable/shared/shared.module';
-import { IndexComponent } from './Components/home/index/index.component';
-import { LoginComponent } from './Components/home/login/login.component';
 import { UsuariosService } from './services/usuarios.service';
 import { UtilidadService } from './services/utilidad.service';
-import { RegistroComponent } from './Components/home/registro/registro.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './Interceptors/jwt.interceptor';
 import { SpinnerInterceptor } from './Interceptors/spinner.interceptor';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent,
-    LoginComponent,
-    RegistroComponent
+    SpinnerComponent
    
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [
     UsuariosService,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import * as moment from 'moment';
-import { MY_DATA_FORMATS } from 'src/app/Reutilizable/shared/spinner/spinner.component';
+import { MY_DATA_FORMATS } from 'src/app/spinner/spinner.component';
 import { RespuestaCaja } from 'src/app/models/respuesta-caja';
 import { CajaService } from 'src/app/services/caja.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';

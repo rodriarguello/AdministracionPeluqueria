@@ -7,9 +7,9 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
-import { ModalReservarTurnoComponent } from '../turnos/modales-turnos/modal-reservar-turno/modal-reservar-turno.component';
 import { MatDialog } from '@angular/material/dialog';
 import swal from 'sweetalert2';
+import { ModalReservarTurnoComponent } from '../turnos/modales-turnos/modal-reservar-turno/modal-reservar-turno.component';
 import { ModalDetalleTurnoComponent } from '../turnos/modales-turnos/modal-detalle-turno/modal-detalle-turno.component';
 
 

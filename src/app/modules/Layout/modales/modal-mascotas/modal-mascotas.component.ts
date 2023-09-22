@@ -18,7 +18,7 @@ import { ModalAlergiasComponent } from '../modal-alergias/modal-alergias.compone
 import { ModalClientesComponent } from '../modal-clientes/modal-clientes.component';
 import { ModalEnfermedadesComponent } from '../modal-enfermedades/modal-enfermedades.component';
 import { ModalRazasComponent } from '../modal-razas/modal-razas.component';
-import { MY_DATA_FORMATS } from 'src/app/Reutilizable/shared/spinner/spinner.component';
+import { MY_DATA_FORMATS } from 'src/app/spinner/spinner.component';
 
 
 

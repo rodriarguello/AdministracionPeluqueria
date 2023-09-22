@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ModalMascotasComponent } from 'src/app/Components/layout/modales/modal-mascotas/modal-mascotas.component';
+import { ModalMascotasComponent } from 'src/app/modules/Layout/modales/modal-mascotas/modal-mascotas.component';
 import { Mascota } from 'src/app/models/mascota/mascota';
 import { Turno } from 'src/app/models/turno/turno';
 import { TurnoModificar } from 'src/app/models/turno/turnoModificar';
