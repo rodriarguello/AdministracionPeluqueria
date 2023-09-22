@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ResponseApi } from '../models/response-api';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class CajaService {
 
    }
 
-   urlApi:string = 'https://localhost:7026/api/caja';
+   urlApi:string =  environment.API_URL+'/caja';
 
   httpOptions={ headers:new HttpHeaders({
     'Content-Type':'application/json'

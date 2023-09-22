@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente } from '../models/cliente';
 import { ResponseApi } from '../models/response-api';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ClientesService {
   constructor(private http:HttpClient) { }
 
 
-  urlApi:string = "https://localhost:7026/api/clientes";
+  urlApi:string = environment.API_URL+'/clientes';
 
   httpOptions = {headers: new HttpHeaders({
     'Content-Type':'application/json'

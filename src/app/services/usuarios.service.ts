@@ -6,6 +6,7 @@ import { Usuario } from '../models/usuario';
 import {map} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ResponseApi } from '../models/response-api';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -25,7 +26,7 @@ export class UsuariosService {
 
   }
 
-  urlApi:string = 'https://localhost:7026/api/cuentas';
+  urlApi:string = environment.API_URL+'/cuentas';
 
   httpOptions={ headers:new HttpHeaders({
     'Content-Type':'application/json'

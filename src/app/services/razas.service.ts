@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Raza } from '../models/raza';
 import { ResponseApi } from '../models/response-api';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class RazasService {
   constructor(private http:HttpClient) { }
 
 
-  urlApi:string = 'https://localhost:7026/api/razas';
+  urlApi:string = environment.API_URL+'/razas';
 
   httpOptions={headers: new HttpHeaders({
     'Content-Type':'application/json'})

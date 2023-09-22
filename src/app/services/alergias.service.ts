@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Alergia } from '../models/alergia';
 import { ResponseApi } from '../models/response-api';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -11,15 +12,13 @@ import { ResponseApi } from '../models/response-api';
 export class AlergiasService {
 
 
-  //#region Constructor
   constructor(private http:HttpClient) { }
 
-//#endregion
  
 
 
 
-urlApi:string = 'https://localhost:7026/api/alergias';
+urlApi:string = environment.API_URL+'/alergias';
 
 httpOptions={ headers:new HttpHeaders({
     'Content-Type':'application/json'

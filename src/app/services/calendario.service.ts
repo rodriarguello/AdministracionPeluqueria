@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { ResponseApi } from '../models/response-api';
 import { Calendario } from '../models/calendario';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +12,7 @@ export class CalendarioService {
   constructor(private http:HttpClient) { }
 
 
-  urlApi:string = 'https://localhost:7026/api/calendario';
+  urlApi:string = environment.API_URL+'/calendario';
 
   httpOptions = {headers: new HttpHeaders({
     "Content-Type":"application/json"

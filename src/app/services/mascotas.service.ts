@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AgregarMascota } from '../models/mascota/agregarMascota';
 import { Mascota } from '../models/mascota/mascota';
 import { ResponseApi } from '../models/response-api';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class MascotasService {
   constructor(private http:HttpClient) { }
 
 
-  urlApi:string='https://localhost:7026/api/mascotas';
+  urlApi:string = environment.API_URL+'/mascotas';
 
   htttpOptions = {headers: new HttpHeaders({
     'Content-Type':'application/json'

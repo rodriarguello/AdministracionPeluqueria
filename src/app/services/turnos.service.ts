@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ResponseApi } from '../models/response-api';
 import { TurnoModificar } from '../models/turno/turnoModificar';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class TurnosService {
 
   constructor(private http:HttpClient) { }
 
-  urlApi:string = 'https://localhost:7026/api/turnos';
+  urlApi:string = environment.API_URL+'/turnos';
 
   httpOptions={headers:new HttpHeaders({
     "Content-Type":"application/json"
