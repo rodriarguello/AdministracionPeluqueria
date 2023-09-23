@@ -1,4 +1,4 @@
 export const environment={
     production:false,
-    API_URL: 'https://rodriarguello96-001-site1.htempurl.com/api'
+    API_URL: 'https://www.mypelu.somee.com/api'
 }
