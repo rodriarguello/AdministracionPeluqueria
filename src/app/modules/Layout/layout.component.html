@@ -20,11 +20,6 @@
                 <mat-icon  >menu</mat-icon>
             </button>
         </div>
-        <div>
-            <button (click)="cerrarSesion()" class="btn btn-danger text-white me-5">
-                Cerrar Sesión
-            </button>
-        </div>
     </mat-toolbar-row>
 </mat-toolbar>
 
@@ -33,13 +28,13 @@
 <mat-sidenav-container>
     
         <!-- SIDENAV PRINCIPAL -->
-    <mat-sidenav #sideNav opened="true" mode="side" style="width: 300px;">
+    <mat-sidenav #sideNav mode="over" style="width: 300px;">
         <mat-nav-list >
                 
 
             <!-- LIST ITEM DASHBOARD -->
             
-            <mat-list-item routerLink="/pages/dashboard" class="ps-4 py-5">
+            <mat-list-item  (click)="redireccionarA('/pages/dashboard')" class="ps-4 py-5">
 
                 <div class="d-flex justify-content-start fs-4">
 
@@ -52,7 +47,7 @@
             
             <!-- LIST ITEM CLIENTES -->
             
-            <mat-list-item routerLink="/pages/clientes"  class="ps-4 py-5">
+            <mat-list-item (click)="redireccionarA('/pages/clientes')" class="ps-4 py-5">
             
              
                     <div class="d-flex justify-content-start fs-4">
@@ -71,7 +66,7 @@
 
             <!-- LIST ITEM TURNOS -->
             
-            <mat-list-item  routerLink="/pages/turnos"class="ps-4 py-5" >
+            <mat-list-item (click)="redireccionarA('/pages/turnos')"  class="ps-4 py-5" >
                 
                 <div class="d-flex justify-content-start fs-4">
 
@@ -89,7 +84,7 @@
 
             <!-- LIST ITEM MASCOTAS -->
             
-            <mat-list-item routerLink="/pages/mascotas"  class="ps-4 py-5" >
+            <mat-list-item  (click)="redireccionarA('/pages/mascotas')"   class="ps-4 py-5" >
                 
                 
                 <div class="d-flex justify-content-start fs-4">
@@ -107,7 +102,7 @@
            
             <!-- LIST ITEM CAJA -->
             
-            <mat-list-item routerLink="/pages/caja" class="ps-4 py-5" >
+            <mat-list-item (click)="redireccionarA('/pages/caja')"  class="ps-4 py-5" >
                 <div class="d-flex justify-content-start fs-4">
 
                     <mat-icon mat-list-icon color="primary" >monetization_on</mat-icon>
@@ -121,7 +116,7 @@
 
             <!-- LIST ITEM RAZAS -->
 
-            <mat-list-item  class="ps-4 py-5" routerLink="/pages/razas">
+            <mat-list-item  class="ps-4 py-5" (click)="redireccionarA('/pages/razas')"  >
 
                 <div class="d-flex justify-content-start fs-4">
     
@@ -135,7 +130,7 @@
             
             
              <!-- LIST ITEM ALERGIAS-->
-        <mat-list-item  class="ps-4 py-5" routerLink="/pages/alergias">
+        <mat-list-item  class="ps-4 py-5" (click)="redireccionarA('/pages/alergias')"  >
 
             <div class="d-flex justify-content-start fs-4 py-3">
 
@@ -147,13 +142,25 @@
         </mat-list-item>
 
         <!-- LIST ITEM ENFERMEDADES-->
-        <mat-list-item  class="ps-4 py-5" routerLink="/pages/enfermedades"  >
+        <mat-list-item  class="ps-4 py-5" (click)="redireccionarA('/pages/enfermedades')"   >
 
             <div class="d-flex justify-content-start fs-4">
 
                 <mat-icon mat-list-icon color="primary">local_hospital</mat-icon>
                     
                 <div class="ps-3">Enfermedades</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <mat-list-item  class="ps-4 py-5" (click)="cerrarSesion()"  >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="primary">logout</mat-icon>
+                    
+                <div class="ps-3">Cerrar Sesión</div>
                     
             </div>
 
@@ -168,7 +175,7 @@
 
  
             
-    <mat-sidenav-content style="height: 90vh;">
+    <mat-sidenav-content >
         
         <router-outlet></router-outlet>
 

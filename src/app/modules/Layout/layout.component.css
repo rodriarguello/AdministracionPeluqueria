@@ -8,5 +8,9 @@ a{
     text-decoration: none;
 }
 
+mat-sidenav-content{
+    height: calc(100vh - 96px);
+}
+
 
 

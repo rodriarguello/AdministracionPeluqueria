@@ -24,7 +24,6 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule} from '@angular/material/dialog';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -32,8 +31,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import {MatNativeDateModule} from '@angular/material/core';
 import {MomentDateModule} from '@angular/material-moment-adapter';
-import { SpinnerComponent } from '../../spinner/spinner.component';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -68,6 +66,7 @@ import { SpinnerComponent } from '../../spinner/spinner.component';
     MatNativeDateModule,
     MomentDateModule,
     MatMenuModule,
+    MatCheckboxModule
   ],
   providers:[
       MatDatepickerModule,

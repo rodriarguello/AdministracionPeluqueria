@@ -2,11 +2,18 @@
 
 .turno{
     cursor: pointer;
+    width: 100% !important;
+    border-left: solid 8px rgb(103, 58, 183);
 }
 
 .turno:hover{
-    background-color: rgb(103, 58, 183);
-    color: white;
+    background-color: #e6e6e6;
+    
+}
+
+
+.subtitulo-turno{
+    color: inherit;
 }
 
 
@@ -14,14 +21,13 @@
 
 
 .turno-disponible{
-    background-color: yellow;
+    border-left: solid 8px yellow;
     color: black;
     cursor: pointer;
 }
 
 .turno-disponible:hover{
-    background-color: goldenrod;
-    color: white;
+    background-color: #e6e6e6;
     cursor: pointer;
 }
 
@@ -34,14 +40,18 @@
 }
 
 .card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     overflow-y: auto;
     overflow-x: hidden;
     width: 100%;
 }
 
 .asistio{
-    background-color: greenyellow;
+    border-left: solid 8px #2fc41b ;
 }
+
 
 .grid-container {
     display: grid;
