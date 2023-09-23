@@ -20,11 +20,6 @@
                 <mat-icon  >menu</mat-icon>
             </button>
         </div>
-        <div>
-            <button (click)="cerrarSesion()" class="btn btn-danger text-white me-5">
-                Cerrar Sesión
-            </button>
-        </div>
     </mat-toolbar-row>
 </mat-toolbar>
 
@@ -154,6 +149,18 @@
                 <mat-icon mat-list-icon color="primary">local_hospital</mat-icon>
                     
                 <div class="ps-3">Enfermedades</div>
+                    
+            </div>
+
+        </mat-list-item>
+
+        <mat-list-item  class="ps-4 py-5" (click)="cerrarSesion()"  >
+
+            <div class="d-flex justify-content-start fs-4">
+
+                <mat-icon mat-list-icon color="primary">logout</mat-icon>
+                    
+                <div class="ps-3">Cerrar Sesión</div>
                     
             </div>
 
