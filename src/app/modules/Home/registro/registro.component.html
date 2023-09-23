@@ -1,65 +1,70 @@
 
-<div class="d-flex justify-content-center mt-5">
+<div class="d-flex justify-content-center">
 
-
-    <div class="mat-elevation-z15 loginCard">
-    <mat-card class="loginCard">
-            
-        <h2 class="pt-5">Registro</h2>
-        
-            <form [formGroup]="formularioRegistro">
-                <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Nombres</mat-label>
-                    <input formControlName="nombres" autocomplete="off" type="text" matInput placeholder="Ingresa tu nombre">
-                    <mat-icon matSuffix>user</mat-icon>
-                  </mat-form-field>
-
-                  <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Apellido</mat-label>
-                    <input formControlName="apellido" autocomplete="off" type="text" matInput placeholder="Ingresa tu apellido">
-                    <mat-icon matSuffix>user</mat-icon>
-                  </mat-form-field>
-
-                  <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Nombre de la Peluqueria</mat-label>
-                    <input formControlName="nombrePeluqueria" autocomplete="off" type="text" matInput placeholder="Ingresa el nombre de tu Peluqueria">
-                    <mat-icon matSuffix>pets</mat-icon>
-                  </mat-form-field>
-            
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Email</mat-label>
-                  <input formControlName="email" autocomplete="off" type="email" matInput placeholder="nombre@ejemplo.com">
-                  <mat-icon matSuffix>mail</mat-icon>
-                </mat-form-field>
-             
-                
-                <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Contraseña</mat-label>
-                    <input formControlName="password" autocomplete="off" [type]="ocultarPassword? 'password':'text'" matInput >
-                    <mat-icon (click)="ocultarPassword=!ocultarPassword" matSuffix style="cursor: pointer;">
-                        {{ocultarPassword?'visibility_off':'visibility'}}</mat-icon>
-                  </mat-form-field>
-
-               
-                
-
-                <div class="mt-3">
-                    <button class="me-4 fs-5 px-4 py-4" mat-raised-button color="primary" [disabled]="formularioRegistro.invalid" (click)="registrarUsuario()">
-                        Registrar 
-                        
-                        <mat-icon>login</mat-icon>
-                    </button>
-                    <button class="me-4 fs-6 py-4" mat-raised-button color="primary" (click)="volverIndex()">
-                        Volver
-                    </button>
-                </div>
-
-                
-                
-              </form>
-              <p class="mt-3 mb-5">¿Tenés un usuario? <span style="color:mediumpurple; cursor: pointer;" (click)="irLogin()">Ingresá</span></p>
-              
-    </mat-card>
-    </div>
+  <div class="imagen">
+    <img src="../../../../assets/lavar-perro-mascota-casa-optimizada.jpg">
   </div>
 
+  <div class=" contenedor d-flex flex-column justify-content-center align-items-center">
+    <div>
+      <h2 class>Registro</h2>
+
+    </div>
+
+    <form [formGroup]="formularioRegistro" class="d-flex flex-column justify-content-center align-items-center w-100">
+      <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Nombres</mat-label>
+          <input formControlName="nombres" autocomplete="off" type="text" matInput placeholder="Ingresa tu nombre">
+          <mat-icon matSuffix>user</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Apellido</mat-label>
+          <input formControlName="apellido" autocomplete="off" type="text" matInput placeholder="Ingresa tu apellido">
+          <mat-icon matSuffix>user</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Nombre de la Peluqueria</mat-label>
+          <input formControlName="nombrePeluqueria" autocomplete="off" type="text" matInput placeholder="Ingresa el nombre de tu Peluqueria">
+          <mat-icon matSuffix>pets</mat-icon>
+        </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input formControlName="email" autocomplete="off" type="email" matInput placeholder="nombre@ejemplo.com">
+        <mat-icon matSuffix>mail</mat-icon>
+      </mat-form-field>
+   
+      
+      <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input formControlName="password" autocomplete="off" [type]="ocultarPassword? 'password':'text'" matInput >
+          <mat-icon (click)="ocultarPassword=!ocultarPassword" matSuffix style="cursor: pointer;">
+              {{ocultarPassword?'visibility_off':'visibility'}}</mat-icon>
+        </mat-form-field>
+
+     
+      
+
+      <div class="mt-3">
+          <button class="me-4 fs-5 px-4 py-4" mat-raised-button color="primary" [disabled]="formularioRegistro.invalid" (click)="registrarUsuario()">
+              Registrar 
+              
+              <mat-icon>login</mat-icon>
+          </button>
+          <button class="me-4 fs-6 py-4" mat-raised-button color="primary" (click)="volverIndex()">
+              Volver
+          </button>
+      </div>
+
+      
+      
+    </form>
+    <p class="mt-3 mb-5">¿Tenés un usuario? <span style="color:mediumpurple; cursor: pointer;" (click)="irLogin()">Ingresá</span></p>
+    
+  </div>
+
+</div>
+
+  
