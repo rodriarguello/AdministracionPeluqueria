@@ -13,13 +13,14 @@ export class IndexComponent implements OnInit{
 
     this.mostrarLogin = false;
     this.mostrarRegistro = false;
+    this.abrirMenu = false;
   }
   ngOnInit(): void {
 
     this.obtenerDatosUsuario();
     
   }
-
+  abrirMenu:boolean;
   mostrarLogin:boolean;
   mostrarRegistro:boolean;
 
@@ -42,6 +43,16 @@ export class IndexComponent implements OnInit{
       }
       );
     }
+  }
+
+  irLogin():void{
+    this.mostrarLogin = true;
+    this.abrirMenu = false;
+  }
+
+  irRegistro():void{
+    this.mostrarRegistro = true;
+    this.abrirMenu = false;
   }
 
 }

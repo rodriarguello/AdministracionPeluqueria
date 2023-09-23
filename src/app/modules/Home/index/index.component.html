@@ -1,14 +1,14 @@
 
-<div *ngIf="!mostrarLogin && !mostrarRegistro ">
+<div *ngIf="!mostrarLogin && !mostrarRegistro "  >
 
 
 <header>
 
     <nav class="d-flex justify-content-between" >
-        <div class="logo">
-            <img src="../../../../assets/logo_myvet.png" >
+        <div class="logo" >
+            <img src="../../../../assets/Logo_My_Pelu.png" >
         </div>
-        <div>
+        <div class="d-flex botones">
             <button class="me-4 fs-6 px-4 py-4" mat-stroked-button color="primary" (click)="mostrarLogin = !mostrarLogin">
                 Ingresar  
                 
@@ -18,15 +18,18 @@
                 Registrarme
             </button>
         </div>
+        <div class="boton-menu">
+            <button  mat-icon-button color="primary" (click)="abrirMenu = !abrirMenu" ><mat-icon>menu</mat-icon></button>
+        </div>
     </nav>
 
 </header>
 
-<div class="container d-flex  justify-content-center">
+<div class=" d-flex  justify-content-center desktop">
     
     <div class="container-texto-titulo">
         <h2 class="titulo">My Pelu, el manejo de tú Peluquería Canina en un solo lugar.</h2>
-        <h3 class="subtitulo">Software de gestión integral para peluquerías caninas.</h3>
+        <h3 class="subtitulo ">Software de gestión integral para peluquerías caninas.</h3>
         <button class=" fs-6 py-4" mat-raised-button color="primary" (click)="mostrarRegistro=!mostrarRegistro" >
             Probar Ahora
         </button>
@@ -35,8 +38,52 @@
     <div class="imagen">
         <img src="../../../../assets/pomerania.png">
     </div>
+
+    
+</div>
+
+<div class="d-flex flex-column justify-content-between mobile mx-3">
+    <div style="margin-top: 20px;">
+
+        <h2 class="titulo titulo-mobile">My Pelu, el manejo de tú Peluquería Canina en un solo lugar.</h2>
+    </div>
+    <div class="d-flex">
+
+        <div class="d-flex flex-column justify-content-start align-items-start w-50 mt-3">
+            <h3 class="subtitulo">Software de gestión integral para peluquerías caninas.</h3>
+                <button class=" fs-6 py-4 mt-3" mat-raised-button color="primary" (click)="mostrarRegistro=!mostrarRegistro" >
+                    Probar Ahora
+                </button>
+        </div>
+        <div class="imagen-mobile">
+            <img src="../../../../assets/pomerania.png">
+        </div>
+    </div>
+    
+
 </div>
 </div>
+<div class="fondo" *ngIf="abrirMenu" (click)="abrirMenu=!abrirMenu">
+
+
+    
+    <div #menu class="menu" style="z-index: 99;" >
+        
+        
+        <div class="item-menu" (click)="irLogin()">
+            <p>Ingresar</p><mat-icon>login</mat-icon>
+        </div>
+        <div class="item-menu" (click)="irRegistro()">
+            <p>Registrarme</p>
+        </div>
+        <div class="item-menu" (click)="abrirMenu = !abrirMenu">
+            <p>Ocultar</p>
+        </div>
+        
+    </div>
+    
+</div>
+
     
 <app-login *ngIf="mostrarLogin" (mostrarLogin)="mostrarLogin=$event" (mostrarRegistro)="mostrarRegistro=$event"></app-login>
 

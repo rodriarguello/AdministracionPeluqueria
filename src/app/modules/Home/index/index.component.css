@@ -1,28 +1,33 @@
 
 nav{
-    margin: 50px 200px 50px;
+    margin: 50px 30px;
+    flex-direction: row-reverse!important;
 }
 .imagen{
-   
     width: 400px;
     height: 600px;
 
 }
 
-.imagen img{
+.imagen-mobile{
+    width: 200px;
+    height: 300px;
+}
+
+.desktop, .botones{
+    display: none !important;
+}
+
+.imagen img,.imagen-mobile img{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.logo{
-    margin-left: 50px;
-}
-
 .container-texto-titulo{
-    width: 400px;
-    margin-right: 50px;
+    width: 100%;
     margin-top: 80px;
+    margin-left: 30px;
 }
 
 .titulo{
@@ -32,6 +37,12 @@ nav{
     letter-spacing: -1.9px !important;
 }
 
+.titulo-mobile{
+    font-size: 40px;
+    line-height: 52px;
+    margin: 0;
+}
+
 .subtitulo{
     font-size: 20px;
     font-weight: 400;
@@ -39,6 +50,123 @@ nav{
 
 }
 
+.logo{
+    width: 150px;
+    height: 50px;
+}
+
+.logo img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 button{
     border-radius: 25px;
+}
+
+.menu{
+    width: 300px;
+    height: 100vh;
+    padding-top: 50px;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.item-menu{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 20px;
+    cursor: pointer;
+
+
+  }
+
+  .item-menu p{
+    font-size: 16px;
+    margin: 0;
+    margin-right: 10px;
+    z-index: 99;
+  }
+
+  .item-menu:hover{
+    background-color: #683ab7;
+    color: white;
+  }
+
+  .fondo{
+    background-color: rgba(0, 0, 0, 0.404);
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+
+
+
+@media (min-width:600px) {
+    
+        .mobile{
+            display: none !important;
+        }
+       
+        .desktop{
+            display: flex!important;
+        }
+    
+        .container-texto-titulo{
+            width: 400px;
+            margin-left: 50px;
+            margin-right: 0;
+            margin-top: 80px;
+        }
+
+        .imagen img{
+            object-fit: contain;
+        }
+}
+
+
+
+@media (min-width:768px) {
+    
+   
+    .boton-menu{
+        display: none;
+    }
+    nav{
+        margin: 50px 100px;
+        flex-direction: row!important;
+    }
+
+    .imagen img{
+        object-fit: cover;
+    }
+
+    .botones{
+        display: flex !important;
+    }
+  
+
+}
+
+@media (min-width:1280px) {
+    
+   nav{
+        margin: 50px 200px;
+    }
+
+    .container-texto-titulo{
+        width: 400px;
+        margin-right: 50px;
+        margin-top: 80px;
+    }
+    
+
 }
