@@ -1,19 +1,19 @@
-<h1 class="text-center text-black mt-5 mb-2">Bienvenido/a {{(dataUsuario$| async)?.nombres}} </h1>
-<h2 class="text-center">Te mostramos el resumen de tu Peluqueria Canina: "{{(dataUsuario$|async)?.nombrePeluqueria}}"</h2>
+<h1 class="text-center text-black mt-5 mb-2">Bienvenido/a {{(dataUsuario$| async)?.nombres}}! </h1>
+<h2 class="text-center">Te mostramos el resumen de tu Peluqueria Canina.</h2>
 
 <div class="container d-flex justify-content-center">
 
 
 <div class="grid-container">
 
-<div class="mat-elevation-z15 mt-3 card">
+<div class="mat-elevation-z4 mt-3 card">
 
     <mat-card class="d-flex flex-column align-items-center p-3 card ">
         <mat-card-title class="mb-3">
             Turnos de hoy
         </mat-card-title>
         <mat-card-content *ngIf="listTurnosOcupados.length>0;else sinTurnos" class="card-content">
-        <div *ngFor="let turno of listTurnosOcupados" class="mat-elevation-z4 w-75 mb-3" [matMenuTriggerFor]="menu" (click)="turnoMenu=turno" >
+        <div *ngFor="let turno of listTurnosOcupados" class="mat-elevation-z4 w-100 mb-3" [matMenuTriggerFor]="menu" (click)="turnoMenu=turno" >
             
             <mat-card class=" w-100 p-3 turno" [ngClass]="{'asistio':turno.asistio}">
                 
@@ -31,7 +31,7 @@
     
 </div>
 
-<div class="mat-elevation-z15 mt-3 card">
+<div class="mat-elevation-z4 mt-3 card">
 
     <mat-card class="d-flex flex-column align-items-center p-3 card " >
         <mat-card-title class="mb-3">
@@ -40,7 +40,7 @@
 
         <mat-card-content *ngIf="listTurnosDisponibles.length>0;else sinTurnos" class="card-content">
             
-            <div *ngFor="let turno of listTurnosDisponibles" class="mat-elevation-z4 w-75 mb-3" [matMenuTriggerFor]="menu" (click)="turnoMenu=turno" >
+            <div *ngFor="let turno of listTurnosDisponibles" class="mat-elevation-z4 w-100 mb-3" [matMenuTriggerFor]="menu" (click)="turnoMenu=turno" >
                 
                 <mat-card class=" w-100 p-3 turno-disponible">
                     
@@ -62,7 +62,7 @@
 
 
 
-<div class="mat-elevation-z15 mt-3 card">
+<div class="mat-elevation-z4 mt-3 card">
 
     <mat-card class="p-3 card ">
         <mat-card-title class="text-center mt-3">Ingresos de hoy</mat-card-title>
@@ -72,7 +72,7 @@
     
 </div>
 
-<div class="mat-elevation-z15 mt-3 card">
+<div class="mat-elevation-z4 mt-3 card">
 
     <mat-card class="p-3 card ">
         <mat-card-title class="ms-4 mt-3">Clientes registrados</mat-card-title>
@@ -86,7 +86,7 @@
     
 </div>
 
-<div class="mat-elevation-z15 mt-3 card">
+<div class="mat-elevation-z4 mt-3 card">
 
     <mat-card class="p-3 card">
         <mat-card-title class="ms-4 mt-3">Mascotas registradas</mat-card-title>
@@ -98,9 +98,9 @@
     </mat-card>
     
 </div>
-<div class="mat-elevation-z15 mt-3 card">
+<div class="mat-elevation-z4 mt-3 card mb-5">
 
-    <mat-card class="p-3 card mt-3 ">
+    <mat-card class="p-3 card">
         <mat-card-title class="text-center">Ingreso Mensual</mat-card-title>
         
         <span class=" text-success fs-2 mt-5 text-center nuevos-registros">+ {{ingresoMensual.total| currency}}</span>
@@ -137,11 +137,11 @@
 <ng-template #sinTurnos>
     <mat-card-content  class="card-content">
             
-        <div class="mat-elevation-z4 w-75 mb-3"  >
+        <div class="mat-elevation-z4 w-100 mb-3"  >
             
             <mat-card class=" w-100 p-3 turno-disponible">
                 
-                <mat-card-title>No hay turnos</mat-card-title>
+                <mat-card-title class="text-center">No hay turnos</mat-card-title>
                 
                 
                 

@@ -2,6 +2,7 @@
 
 .turno{
     cursor: pointer;
+    width: 100% !important;
 }
 
 .turno:hover{
@@ -34,6 +35,9 @@
 }
 
 .card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     overflow-y: auto;
     overflow-x: hidden;
     width: 100%;
