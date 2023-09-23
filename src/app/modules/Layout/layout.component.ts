@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario';
@@ -11,6 +12,10 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent implements OnInit{
+
+  datosUsuario$:Observable<Usuario>;
+  @ViewChild('sideNav')private sideNav!:MatSidenav;
+
 
   constructor(private usuarioService:UsuariosService,private router:Router){
 
@@ -25,7 +30,6 @@ export class LayoutComponent implements OnInit{
     
   }
   
-  datosUsuario$:Observable<Usuario>;
 
   cerrarSesion():void{
 
@@ -54,6 +58,13 @@ export class LayoutComponent implements OnInit{
       this.usuarioService.obtenerDatosUsuario().subscribe();
       
     }
+  }
+
+  redireccionarA(ruta:string):void{
+
+    this.router.navigate([ruta]);
+    this.sideNav.toggle();
+
   }
 
 
