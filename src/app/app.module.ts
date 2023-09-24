@@ -11,8 +11,6 @@ import { JwtInterceptor } from './Interceptors/jwt.interceptor';
 import { SpinnerInterceptor } from './Interceptors/spinner.interceptor';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatPaginatorIntl } from '@angular/material/paginator';
-import { CustomMatPaginatorIntl } from './Reutilizable/MatPaginatorInt';
 
 @NgModule({
   declarations: [
@@ -31,8 +29,7 @@ import { CustomMatPaginatorIntl } from './Reutilizable/MatPaginatorInt';
     UsuariosService,
     UtilidadService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true},
-    {provide:HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi:true},
-    {provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl}
+    {provide:HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi:true}
   ],
   
   bootstrap: [AppComponent]
