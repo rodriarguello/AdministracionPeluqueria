@@ -1,5 +1,10 @@
+mat-dialog-content{
+    width: 80vw;
+}
 
 
-form{
-    width: 300px;
+@media (min-width:500px) {
+    mat-dialog-content{
+        width: 400px;
+    }
 }

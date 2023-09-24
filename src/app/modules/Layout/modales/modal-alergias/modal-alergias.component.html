@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>{{tituloAccion}}</h2>
+<h2 mat-dialog-title class="text-center">{{tituloAccion}}</h2>
 
 <mat-dialog-content>
 
-    <form [formGroup]="formAlergia" >
+    <form [formGroup]="formAlergia" class="w-100" >
 
         <mat-grid-list cols="1" rowHeight="110px">
 
@@ -23,7 +23,7 @@
         </mat-grid-list>
     </form>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions class="d-flex justify-content-center align-items-center mb-3">
     <button mat-raised-button color="primary" [disabled]="formAlergia.invalid||nombreAlergia == formAlergia.value.nombre" (click)="crearActualizarAlergia()">
         {{botonAccion}}
     </button>

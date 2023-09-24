@@ -7,22 +7,20 @@
   <div  class="col-12 col-lg-8 mt-5">
     
     
-        <button mat-raised-button color="primary" (click)="agregarAlergia()" class="mb-1 ms-4">
+        <button mat-raised-button color="primary" (click)="agregarAlergia()" class="mb-4">
           <mat-icon>add</mat-icon>
         Agregar Alergia
         </button>
   
     
     
-    <mat-divider class="ms-4 mb-3"></mat-divider>
-    <mat-card-content class="dashboard-card-content">
-        <mat-form-field class="w-100 mx-3 pe-0">
+        <mat-form-field class="w-100">
           <mat-label>Buscar</mat-label>
           <input matInput (keyup)="aplicarFiltroTabla($event)" #input>
         </mat-form-field>
       
-      <div class="mat-elevation-z20 m-3">
-        <table mat-table [dataSource]="dataListaAlergias" matSort>
+      <div class="mat-elevation-z15 w-100">
+        <table mat-table [dataSource]="dataListaAlergias" matSort class="w-100">
       
           <!-- ID Column -->
           <ng-container matColumnDef="Nombre" >
@@ -67,15 +65,5 @@
         </div>
       
       </div>
-    
-       
-    
-    
-      </mat-card-content>
-
-    
-
-
-
   </div>
 </div>
