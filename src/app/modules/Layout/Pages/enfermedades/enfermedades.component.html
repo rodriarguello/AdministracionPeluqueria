@@ -3,34 +3,33 @@
 
 
     <h1 class="text-dark mt-5 fs-2">ENFERMEDADES</h1>
-      <div  class="col-12 col-lg-8 mt-5">
+      <div  class="col-12 col-lg-8 mt-5 d-flex flex-column align-items-center">
+        
+        <div class="w-100 d-flex">
+          <button mat-raised-button color="primary" class="mb-1" (click)="agregarEnfermedad()">
+            <mat-icon>add</mat-icon>
+          Agregar Enfermedad
+          </button>
+    
+
+        </div>
         
         
-            <button mat-raised-button color="primary" class="mb-1 ms-4" (click)="agregarEnfermedad()">
-              <mat-icon>add</mat-icon>
-            Agregar Enfermedad
-            </button>
-      
-        
-        
-        <mat-divider class="ms-4 mb-3"></mat-divider>
-        <mat-card-content class="dashboard-card-content">
-            <mat-form-field class="w-100 mx-3 pe-0">
+            <mat-form-field class="w-100">
               <mat-label>Buscar</mat-label>
               <input matInput  (keyup)="aplicarFiltroTabla($event)" #input>
             </mat-form-field>
           
-          <div class="mat-elevation-z20 m-3">
-            <table mat-table [dataSource]="matDataSource" matSort>
+          <div class="mat-elevation-z20  w-100">
+            <table mat-table [dataSource]="matDataSource" matSort >
           
-              <!-- ID Column -->
+              
               <ng-container matColumnDef="Nombre" >
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Enfermedad </th>
                 <td mat-cell *matCellDef="let enfermedad"> {{enfermedad.nombre}}</td>
               </ng-container>
           
           
-              <!-- Name Column -->
               <ng-container matColumnDef="Acciones">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 80px;text-align: center;">Acciones</th>
                 <td mat-cell *matCellDef="let enfermedad" class="d-flex " style="height: 52px;"> 
@@ -57,24 +56,15 @@
               </tr>
             </table>
             
-          
-            <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons>
-    
+            <mat-paginator class="w-100" [pageSizeOptions]="[5,10,20]" showFirstLastButtons>
             </mat-paginator>
             <div style="width: 100%;height: 10px;">
     
             </div>
-          
+            
           </div>
-        
+          
+    
            
-        
-        
-          </mat-card-content>
-    
-        
-    
-    
-    
       </div>
     </div>
