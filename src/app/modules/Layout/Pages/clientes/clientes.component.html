@@ -3,9 +3,11 @@
 
 
     <h1 class="text-dark mt-5 fs-2">CLIENTES</h1>
+      <div class="col-12 col-lg-8 mt-5 d-flex flex-column align-items-center">
+
       
         
-        <div class="d-flex justify-content-start w-100">
+        <div class="d-flex w-100">
           <button mat-raised-button color="primary" class="my-3" (click)="agregarCliente()" >
             <mat-icon>add</mat-icon>
           Agregar Cliente
@@ -18,7 +20,7 @@
               <input matInput (keyup)="filtrarCliente($event)"  #input>
             </mat-form-field>
           
-          <div class="mat-elevation-z20 m-3 w-100">
+          <div class="mat-elevation-z20 w-100">
             <table mat-table [dataSource]="dataTableCliente" matSort>
           
           
@@ -90,7 +92,7 @@
             </div>
           
           </div>
-        
+        </div>
 </div>
 
 <mat-menu #menu="matMenu" >

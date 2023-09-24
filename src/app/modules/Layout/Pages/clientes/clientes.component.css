@@ -33,19 +33,9 @@
     }
 }
 
-@media (min-width:992px) {
-    .ajustar-texto{
-        width: 200px;
-    }
-    .email{
-        display: table-cell;
-    }
-}
 
 @media (min-width:1400px) {
-    .ajustar-texto{
-        width: 300px;
-    }
+   
     .email{
         display: table-cell;
     }
