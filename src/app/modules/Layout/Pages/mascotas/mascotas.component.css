@@ -1,0 +1,42 @@
+.propietario, .raza{
+    display: none ;
+
+}
+
+.ajustar-texto{
+    width:180px ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    white-space: nowrap ;
+}
+
+
+.botones{
+    display: none !important;
+}
+
+@media (min-width:500px) {
+    .menu{
+        display: none !important;
+    }
+
+    .botones{
+        display: flex !important;
+    }
+}
+
+@media (min-width:768px) {
+    
+    .propietario{
+        display: table-cell;
+    }
+}
+
+
+@media (min-width:1400px) {
+   
+    .raza{
+        display: table-cell;
+    }
+}
