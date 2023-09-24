@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>{{tituloAccion}}</h2>
-
 <mat-dialog-content>
+    
+    <h2 mat-dialog-title>{{tituloAccion}}</h2>
 
-    <form [formGroup]="formRazas">
+    <form [formGroup]="formRazas" class="w-100">
         <mat-grid-list cols="1" rowHeight="110px">
             <mat-grid-tile>
             
@@ -23,11 +23,11 @@
     </form>
    
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions class="d-flex justify-content-center mb-3">
     <button mat-raised-button [disabled]="formRazas.invalid||nombreRaza == formRazas.value.nombre " color="primary" (click)="agregarActualizarRaza()">
         {{botonAccion}}
     </button>
-    <button mat-raised-button mat-dialog-close color="warn" >
+    <button mat-raised-button mat-dialog-close color="warn" class="ms-4" >
         Cerrar
     </button>
 
