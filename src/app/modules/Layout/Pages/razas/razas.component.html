@@ -2,25 +2,25 @@
 
 
     <h1 class="text-dark mt-5 fs-2">RAZAS</h1>
-      <div  class="col-12 col-lg-8 mt-5">
-        
-        
-            <button mat-raised-button color="primary"class="mb-1 ms-4" (click)="agregarRaza()">
+      <div  class="col-12 col-lg-8 mt-5 d-flex flex-column align-items-center">
+      
+          <div class="d-flex w-100">
+            <button mat-raised-button color="primary"class="mb-1" (click)="agregarRaza()">
               <mat-icon>add</mat-icon>
             Agregar Raza
             </button>
+
+          </div>
       
         
         
-        <mat-divider class="ms-4 mb-3"></mat-divider>
-        <mat-card-content class="dashboard-card-content">
-            <mat-form-field class="w-100 mx-3 pe-0">
+            <mat-form-field class="w-100">
               <mat-label>Buscar</mat-label>
               <input matInput (keyup)="filtrarRaza($event)" #input>
             </mat-form-field>
           
-          <div class="mat-elevation-z20 m-3">
-            <table mat-table [dataSource]="razaTableDataSource" matSort>
+          <div class="w-100 mat-elevation-z20">
+            <table mat-table [dataSource]="razaTableDataSource"  matSort>
           
               <!-- ID Column -->
               <ng-container matColumnDef="Nombre" >
@@ -69,7 +69,6 @@
            
         
         
-          </mat-card-content>
     
         
     
