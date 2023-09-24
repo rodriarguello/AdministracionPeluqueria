@@ -16,9 +16,9 @@ export class ModalClientesComponent  implements OnInit{
     @Inject(MAT_DIALOG_DATA)public dataCliente:Cliente, private clientesService:ClientesService,private utilidadService:UtilidadService){
       
       this.formClientes = fb.group({
-        nombre:['',[Validators.required,Validators.minLength(2)]],
-        telefono:['',[Validators.required,Validators.minLength(7)]],
-        email:['',[Validators.email,Validators.required]]
+        nombre:['',[Validators.required,Validators.minLength(2),Validators.maxLength(40)]],
+        telefono:['',[Validators.required,Validators.max(9999999999999)]],
+        email:['',[Validators.email,Validators.required, Validators.maxLength(40)]]
       });
 
       this.tituloAccion="Agregar Cliente";
