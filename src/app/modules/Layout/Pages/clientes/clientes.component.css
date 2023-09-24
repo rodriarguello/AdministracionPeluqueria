@@ -1,0 +1,52 @@
+.email, .telefono{
+    display: none ;
+
+}
+
+.ajustar-texto{
+    width:180px ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    white-space: nowrap ;
+}
+
+
+.botones{
+    display: none !important;
+}
+
+@media (min-width:500px) {
+    .menu{
+        display: none !important;
+    }
+
+    .botones{
+        display: flex !important;
+    }
+}
+
+@media (min-width:768px) {
+    
+    .telefono{
+        display: table-cell;
+    }
+}
+
+@media (min-width:992px) {
+    .ajustar-texto{
+        width: 200px;
+    }
+    .email{
+        display: table-cell;
+    }
+}
+
+@media (min-width:1400px) {
+    .ajustar-texto{
+        width: 300px;
+    }
+    .email{
+        display: table-cell;
+    }
+}

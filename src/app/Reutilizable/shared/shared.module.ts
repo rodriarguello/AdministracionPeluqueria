@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
 
 //Componentes de angular MATERIAL
 
@@ -22,7 +21,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu'; 
 
 import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -32,6 +31,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MomentDateModule} from '@angular/material-moment-adapter';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { CustomMatPaginatorIntl } from '../MatPaginatorInt';
 
 
 
@@ -70,7 +70,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   ],
   providers:[
       MatDatepickerModule,
-      MatNativeDateModule
+      MatNativeDateModule,
+      {provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl}
   ]
 })
 export class SharedModule { }

@@ -1,33 +1,36 @@
 <mat-dialog-content>
 
     <h2 class="text-center mt-5 mb-4">Turnos de {{dataCliente.nombre}}</h2>
+<div class="contenedor-tabla" >
+    <div class="tabla" style="width: 75%;display: flex; justify-content: center;">
 
-    <table mat-table [dataSource]="listTurnos" class="mat-elevation-z8">
-                
-                
-                
-                <!-- Fecha -->
-                <ng-container matColumnDef="Fecha">
-                    <th mat-header-cell *matHeaderCellDef> Fecha </th>
-                    <td mat-cell *matCellDef="let turno"> {{turno.fecha.dia| date:'dd/MM/yyyy'}} </td>
-                </ng-container>
-                
-                <!-- Horario  -->
-                <ng-container matColumnDef="Horario">
-                    <th mat-header-cell *matHeaderCellDef> Horario </th>
-                    <td mat-cell *matCellDef="let turno"> {{turno.horario.hora| slice:0:5}} </td>
-                </ng-container>
-                
-                <!-- Nombre de Mascota -->
-                <ng-container matColumnDef="Nombre de Mascota">
-                    <th mat-header-cell *matHeaderCellDef class="text-center"> Nombre de Mascota </th>
-                    <td mat-cell *matCellDef="let turno" class="text-center"> {{turno.mascota.nombre}} </td>
-                </ng-container>
-                
-                <!-- Precio -->
-                <ng-container matColumnDef="Precio">
-                    <th mat-header-cell *matHeaderCellDef style="width: 10ch;"> Precio </th>
-                    <td mat-cell *matCellDef="let turno" style="width: 10ch;"> $ {{turno.precio}} </td>
+        
+        <table mat-table [dataSource]="listTurnos" class="mat-elevation-z8 mb-5">
+            
+            
+            
+            <!-- Fecha -->
+            <ng-container matColumnDef="Fecha">
+                <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                <td mat-cell *matCellDef="let turno"> {{turno.fecha.dia| date:'dd/MM/yyyy'}} </td>
+            </ng-container>
+            
+            <!-- Horario  -->
+            <ng-container matColumnDef="Horario">
+                <th mat-header-cell *matHeaderCellDef> Horario </th>
+                <td mat-cell *matCellDef="let turno"> {{turno.horario.hora| slice:0:5}} </td>
+            </ng-container>
+            
+            <!-- Nombre de Mascota -->
+            <ng-container matColumnDef="Nombre de Mascota" >
+                <th mat-header-cell *matHeaderCellDef class="text-center nombre-mascota"> Nombre de Mascota </th>
+                <td mat-cell *matCellDef="let turno" class="text-center nombre-mascota ajustar-texto"> {{turno.mascota.nombre}} </td>
+            </ng-container>
+            
+            <!-- Precio -->
+            <ng-container matColumnDef="Precio">
+                <th mat-header-cell *matHeaderCellDef class="precio"> Precio </th>
+                    <td mat-cell *matCellDef="let turno"  class="precio"> $ {{turno.precio}} </td>
                 </ng-container>
                 
                 <!-- Asistió -->
@@ -35,15 +38,17 @@
                     <th mat-header-cell *matHeaderCellDef> Asistió </th>
                     <td mat-cell *matCellDef="let turno"> {{turno.asistio?'Si':'No'}} </td>
                 </ng-container>
+                
+                <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnasTabla;"></tr>
+            </table>
+            
+        </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center" class="mb-4" >
+        <button  mat-raised-button mat-dialog-close color="primary" >
+            Cerrar
+        </button>
         
-            <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
-            <tr mat-row *matRowDef="let row; columns: columnasTabla;"></tr>
-        </table>
-
-</mat-dialog-content>
-<mat-dialog-actions align="center" class="mb-4" >
-    <button  mat-raised-button mat-dialog-close color="primary" >
-        Cerrar
-    </button>
-    
-</mat-dialog-actions>
+    </mat-dialog-actions>

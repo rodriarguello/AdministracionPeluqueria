@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>{{tituloAccion}}</h2>
 
 <mat-dialog-content>
-
-    <form [formGroup]="formClientes">
+    
+    <h2 mat-dialog-title>{{tituloAccion}}</h2>
+    <form [formGroup]="formClientes" class="w-100">
         <mat-grid-list cols="1" rowHeight="110px">
             <mat-grid-tile>
             
@@ -50,12 +50,12 @@
     </form>
    
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions class="d-flex justify-content-center align-items-center w-100 mb-4">
     <button mat-raised-button #button  color="primary" (click)="agregarActualizarCliente()"  
     [disabled]="formClientes.invalid||(nombreCliente == formClientes.value.nombre && telefonoCliente == formClientes.value.telefono && emailCliente == formClientes.value.email)">
         {{botonAccion}}
     </button>
-    <button mat-raised-button mat-dialog-close color="warn" >
+    <button mat-raised-button mat-dialog-close class="ms-4" color="warn" >
         Cerrar
     </button>
 
