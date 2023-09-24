@@ -9,9 +9,11 @@
     </div>
       
     
+    <div class="contenedor-tabla">
+
     
-                <div class=" w-100">
-            <table mat-table [dataSource]="matDataTable" matSort class="w-75">
+        <div class="tabla">
+            <table mat-table [dataSource]="matDataTable" matSort class="mat-elevation-z8 mb-3">
           
           
               <ng-container matColumnDef="Nombre" >
@@ -67,10 +69,10 @@
               
             </div>
             
-            
+          </div>
 
 
-        <mat-dialog-actions class="d-flex flex-column align-items-center my-4 w-75">
+        <mat-dialog-actions class="d-flex flex-column align-items-center mb-4 w-75">
             
           <button  mat-raised-button  color="accent" class="my-3" (click)="mostrarHistorialTurnos()">
             Ver Historial de Turnos

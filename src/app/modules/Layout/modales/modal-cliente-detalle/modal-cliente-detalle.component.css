@@ -3,14 +3,24 @@ mat-dialog-content{
     padding: 0 !important;
 }
 
-mat-dialog-actions{
-    border-top: solid 1px #55555560;
-}
+
 
 .fecha-nacimiento{
     display: none ;
 
 }
+
+.contenedor-tabla{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .tabla{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+  }
 
 .ajustar-texto{
     width:180px ;

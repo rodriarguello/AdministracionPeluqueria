@@ -1,4 +1,73 @@
-table {
-    width: 500px;
+mat-dialog-content{
+  width: 80vw;
+  padding: 0 !important;
+}
+
+.contenedor-tabla{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.tabla{
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+
+.precio{
+  width: 10ch;
+}
+
+.nombre-mascota, .precio{
+  display: none ;
+
+}
+
+.ajustar-texto{
+  width:180px ;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  white-space: nowrap ;
+}
+
+
+.contenedor-titulo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+
+@media (min-width:768px) {
+  
+  .fecha-nacimiento{
+      display: table-cell;
   }
+
+  .nombre-mascota{
+    display: table-cell;
+  }
+  mat-dialog-content{
+      width: 70vw;
+  }
+
+  .contenedor-titulo{
+      flex-direction: row;
+  }
+
+  .titulo-principal{
+      margin-right: 30px;
+  }
+}
+
+
+@media (min-width:1200px) {
+  .precio{
+    display: table-cell;
+  }
+}
 
