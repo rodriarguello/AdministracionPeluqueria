@@ -1,136 +1,98 @@
 <h2 mat-dialog-title class="text-center">Detalles Mascota</h2>
 
-<mat-dialog-content>
+<mat-dialog-content class="d-flex justify-content-center flex-wrap align-items-strech">
 
-   
-        <mat-grid-list cols="2" rowHeight="110px">
+    <mat-card class="mat-elevation-z8 card">
+        <mat-card-header>
+        <mat-card-title>Nombre</mat-card-title>
+        <mat-card-subtitle>{{mascota.nombre}}</mat-card-subtitle>
+        </mat-card-header>
+        
+    </mat-card>
             
-            
-            <mat-grid-tile>
-                <mat-card class="card">
-                     <mat-card-header>
-                     <mat-card-title>Nombre</mat-card-title>
-                     <mat-card-subtitle>{{mascota.nombre}}</mat-card-subtitle>
-                     </mat-card-header>
-                     
-                 </mat-card>
-             </mat-grid-tile>
-
-            <mat-grid-tile>
-               <mat-card class="card">
-                    <mat-card-header>
-                    <mat-card-title>Fecha de Nacimiento</mat-card-title>
-                    <mat-card-subtitle>{{mascota.fechaNacimiento | date:"dd/MM/yyyy"}}</mat-card-subtitle>
-                    </mat-card-header>
-                    
-                </mat-card>
-            </mat-grid-tile>    
-
-            <mat-grid-tile>
-                <mat-card class="card">
-                     <mat-card-header>
-                     <mat-card-title>Propietario</mat-card-title>
-                     <mat-card-subtitle>{{mascota.cliente.nombre}}</mat-card-subtitle>
-                     </mat-card-header>
-                     
-                 </mat-card>
-             </mat-grid-tile>    
+    <mat-card class="mat-elevation-z8 card">
+        <mat-card-header>
+        <mat-card-title>Fecha de Nacimiento</mat-card-title>
+        <mat-card-subtitle>{{mascota.fechaNacimiento | date:"dd/MM/yyyy"}}</mat-card-subtitle>
+        </mat-card-header>
+        
+    </mat-card>      
+                
  
-
-          
-
-
-             
-             <mat-grid-tile>
-                <mat-card class="card">
-                     <mat-card-header>
-                     <mat-card-title>Telefono</mat-card-title>
-                     <mat-card-subtitle>{{mascota.cliente.telefono}}</mat-card-subtitle>
-                     </mat-card-header>
-                     
-                 </mat-card>
-             </mat-grid-tile>    
- 
-
-            
-             <mat-grid-tile>
-                <mat-card class="card">
-                     <mat-card-header>
-                     <mat-card-title>Email</mat-card-title>
-                     <mat-card-subtitle>{{mascota.cliente.email || 'No tiene'}}</mat-card-subtitle>
-                     </mat-card-header>
-                     
-                 </mat-card>
-             </mat-grid-tile>    
-                    
-
-             
-            
-             <mat-grid-tile>
-                <mat-card class="card">
-                     <mat-card-header>
-                     <mat-card-title>Raza</mat-card-title>
-                     <mat-card-subtitle>{{mascota.raza.nombre}}</mat-card-subtitle>
-                     </mat-card-header>
-                     
-                 </mat-card>
-             </mat-grid-tile>    
-
-             
-            
-             <mat-grid-tile rowspan="{{mascota.enfermedades.length > 2 ?'2':'1'}}">
-                <mat-card class="card">
-                     <mat-card-header>
-                     <mat-card-title>Enfermedades</mat-card-title>
-                     <mat-card-subtitle *ngFor="let enfermedad of mascota.enfermedades">{{enfermedad.nombre}}</mat-card-subtitle>
-                     </mat-card-header>
-                     
-                 </mat-card>
-             </mat-grid-tile>    
-            
-             
-            
-             <mat-grid-tile rowspan="{{mascota.alergias.length>2?'2':'1'}}">
-                <mat-card class="card" >
-                     <mat-card-header>
-                     <mat-card-title>Alergias</mat-card-title>
-                     <mat-card-subtitle *ngFor="let alergia of mascota.alergias">{{alergia.nombre}}</mat-card-subtitle>
-                     </mat-card-header>
-                     
-                 </mat-card>
-             </mat-grid-tile>    
-
-             <mat-grid-tile colspan="2" rowspan="{{mascota.turnos.length==0?'1':mascota.turnos.length}}">
-                <mat-card class="card">
-                     <mat-card-header>
-                     <mat-card-title>Turnos</mat-card-title>
-                    <mat-card-subtitle *ngIf="mascota.turnos.length<1;else turnos">
-                        La mascota no posee Turnos.
-                    </mat-card-subtitle>
-                     <ng-template #turnos>
-                         <mat-card-subtitle *ngFor="let turno of mascota.turnos">Fecha:{{turno.fecha| date:'dd/MM/yyyy'}} - Asistió: {{turno.asistio?'Si':'No'}}
-                            <button mat-icon-button  color="primary" (click)="verDetalleTurno(turno)">
-                                <mat-icon >search</mat-icon>
+    <mat-card class="mat-elevation-z8 card">
+        <mat-card-header>
+        <mat-card-title>Propietario</mat-card-title>
+        <mat-card-subtitle>{{mascota.cliente.nombre}}</mat-card-subtitle>
+        </mat-card-header>
+        
+   </mat-card>
+                
+   <mat-card class="mat-elevation-z8 card">
+    <mat-card-header>
+        <mat-card-title>Telefono</mat-card-title>
+        <mat-card-subtitle>{{mascota.cliente.telefono}}</mat-card-subtitle>
+    </mat-card-header>
     
-                            </button></mat-card-subtitle>
-                         
-                    </ng-template>
-                        
-                     </mat-card-header>
-                     
-                 </mat-card>
-             </mat-grid-tile> 
+    </mat-card>
+
+    <mat-card class="mat-elevation-z8 card">
+        <mat-card-header>
+        <mat-card-title>Email</mat-card-title>
+        <mat-card-subtitle>{{mascota.cliente.email || 'No tiene'}}</mat-card-subtitle>
+        </mat-card-header>
+        
+    </mat-card>
 
 
+    <mat-card class="mat-elevation-z8 card">
+        <mat-card-header>
+        <mat-card-title>Raza</mat-card-title>
+        <mat-card-subtitle>{{mascota.raza.nombre}}</mat-card-subtitle>
+        </mat-card-header>
+        
+    </mat-card>         
+                
+ 
+    <mat-card class="mat-elevation-z8 card">
+        <mat-card-header>
+        <mat-card-title>Enfermedades</mat-card-title>
+        <mat-card-subtitle *ngFor="let enfermedad of mascota.enfermedades">{{enfermedad.nombre}}</mat-card-subtitle>
+        </mat-card-header>
+        
+    </mat-card>
 
+    
+    <mat-card class="mat-elevation-z8 card" >
+        <mat-card-header>
+        <mat-card-title>Alergias</mat-card-title>
+        <mat-card-subtitle *ngFor="let alergia of mascota.alergias">{{alergia.nombre}}</mat-card-subtitle>
+        </mat-card-header>
+        
+    </mat-card>
 
-        </mat-grid-list>
-     
-   
+    <mat-card class="mat-elevation-z8 card">
+        <mat-card-header>
+        <mat-card-title>Turnos</mat-card-title>
+       <mat-card-subtitle *ngIf="mascota.turnos.length<1;else turnos">
+           La mascota no posee Turnos.
+       </mat-card-subtitle>
+        <ng-template #turnos>
+            <mat-card-subtitle *ngFor="let turno of mascota.turnos">Fecha:{{turno.fecha| date:'dd/MM/yyyy'}} - Asistió: {{turno.asistio?'Si':'No'}}
+               <button mat-icon-button  color="primary" (click)="verDetalleTurno(turno)">
+                   <mat-icon >search</mat-icon>
+
+               </button></mat-card-subtitle>
+            
+       </ng-template>
+           
+        </mat-card-header>
+        
+    </mat-card>
+               
    
 </mat-dialog-content>
 
-<mat-dialog-actions align="center" class="mb-4" >
+<mat-dialog-actions  class="mb-4 d-flex justify-content-center" >
     <button  mat-raised-button mat-dialog-close color="primary" >
         Aceptar
     </button>
