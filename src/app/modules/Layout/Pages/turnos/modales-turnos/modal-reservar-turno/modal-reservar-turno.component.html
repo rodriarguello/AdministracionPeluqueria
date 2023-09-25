@@ -1,12 +1,18 @@
-<h2 mat-dialog-title>Reservar Turno del dia {{dataTurno.fecha}} y hora {{dataTurno.horario}}</h2>
 
 <mat-dialog-content>
 
-    <form [formGroup]="formReserva">
-        <mat-grid-list cols="1" rowHeight="110px">
+    <h2 >Reservar Turno</h2>
+    <div class="d-flex flex-column align-items-start w-100 mb-2">
+        <p>Dia : <span style="font-weight: 500;">{{dataTurno.fecha | date:'dd/MM/yyyy'}}</span></p>
+        <p>Hora: <span style="font-weight: 500;">{{dataTurno.horario | slice:0:5}}</span></p>
+
+    </div>
+    
+    <form [formGroup]="formReserva" class="w-100 d-flex flex-column align-items-center">
        
-            <mat-grid-tile>
-                <mat-form-field appearance="outline">
+            <div class="d-flex justify-content-center align-items-start w-100">
+
+                <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Mascota</mat-label>
                     <mat-select formControlName="idMascota" placeholder="Seleccione la Mascota" >
                     <mat-option *ngFor="let mascota of listMascotas" [value]="mascota.id" >
@@ -17,28 +23,30 @@
                 </mat-form-field>
 
                  
-                <button mat-line mat-mini-fab matTooltip="Agregar Mascota" color="primary" class="mb-3 ms-2" (click)="agregarMascota()">
+                <button mat-line mat-mini-fab matTooltip="Agregar Mascota" color="primary" class="ms-2 mt-2" (click)="agregarMascota()">
                     <mat-icon>add</mat-icon>
                 </button> 
 
-            </mat-grid-tile>
+            </div>
 
-            <mat-grid-tile>
-                <mat-form-field appearance="outline">
+            <div class="d-flex justify-content-center align-items-start w-100">
+                <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Precio</mat-label>
                     <input  matInput type="number" formControlName="precio" placeholder="Ingrese el Precio" >
                 </mat-form-field>
-            </mat-grid-tile>
+                <button mat-line mat-mini-fab color="primary" class="ms-2 mt-2 boton-money" >
+                    <mat-icon>attach_money</mat-icon>
+                </button> 
+            </div>
 
-        </mat-grid-list>
     </form>
    
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button class="mx-4 mb-4 " mat-raised-button #button  color="primary" (click)="reservarTurno()" [disabled]="formReserva.invalid">
+<mat-dialog-actions class="d-flex justify-content-center">
+    <button class="px-4 mb-4 me-3 " mat-raised-button #button  color="primary" (click)="reservarTurno()" [disabled]="formReserva.invalid">
         Reservar
     </button>
-    <button class="me-5 mb-4" mat-raised-button mat-dialog-close color="warn" >
+    <button class="px-4 mb-4" mat-raised-button mat-dialog-close color="warn" >
         Cerrar
     </button>
 
