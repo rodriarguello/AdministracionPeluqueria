@@ -55,3 +55,9 @@ ul{
     background-color: rgba(40, 167, 69, 1);
     color: white;
 }
+
+.contenedor-calendario{
+    width: 100%;
+    overflow-x: scroll;
+    padding-bottom: 30px;
+}
