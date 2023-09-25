@@ -3,7 +3,9 @@ mat-grid-list{
 }
 
 .card{
-    width: 95%;
-    
+    width: 300px;
+    margin: 20px 20px;
     color: black;
+    border-left: solid 8px rgb(103, 58, 183);
+
 }
