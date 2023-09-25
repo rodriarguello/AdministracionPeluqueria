@@ -1,47 +1,34 @@
 <mat-dialog-content>
+        <h2 class="text-center">Detalles de turno</h2>
+        <div class="d-flex flex-column align-items-start w-100 ps-3">
+
+            <p>Dia: <span> {{dataTurno.fecha|date:'dd/MM/yyyy'}}</span></p>
+            
+            <p>Hora: <span> {{dataTurno.horario|slice:0:5}}</span></p>
     
-   
-        <mat-card-title>
-            <span>Dia: </span>{{dataTurno.fecha|date:'dd/MM/yyyy'}}
-        </mat-card-title>
-
-        <mat-card-title>
-            <span>Hora: </span>{{dataTurno.horario|slice:0:5}}
-        </mat-card-title>
-
-
-        <mat-card-title>
-            <span>Mascota: </span>{{dataTurno.mascota.nombre}}
-        </mat-card-title>
-
-        <mat-card-title>
+            <p>Mascota: <span> {{dataTurno.mascota.nombre}}</span></p>
             
-                
-                <span>Precio: </span>
-                
-                <input type="number" disabled #inputPrecio [(ngModel)]="precio" >
-                <button mat-icon-button color="primary" (click)="inputPrecio.disabled=!inputPrecio.disabled">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <br>
-                <mat-hint *ngIf="precio<1"  class="text-danger" >
-                    El precio debe ser mayor a 0
-                </mat-hint>
-                
-        </mat-card-title>
+            <p>Asistio: <span> {{dataTurno.asistio?'Si':'No'}}</span></p>
+        </div>
+        
 
-        <mat-card-title>
-            <span>Asistió: {{dataTurno.asistio?'Si':'No'}} </span>
+        <mat-form-field appearance="outline" color="primary" class="w-100">
+            <mat-label >Precio</mat-label>
+            <input type="number" matInput  [disabled]="!habilitarBoton"  [(ngModel)]="precio" >
+            <mat-icon matIconSuffix color="primary" (click)="habilitarBoton = !habilitarBoton">edit</mat-icon>
+            <mat-hint *ngIf="precio<1"  class="text-danger mt-2" >
+                El precio debe ser mayor a 0
+            </mat-hint>
             
-        </mat-card-title>
-   
+        </mat-form-field>            
+                
     
 </mat-dialog-content>
-<mat-dialog-actions align="center">
-    <button mat-raised-button color="primary" #buttonActualizar [disabled]="precio===dataTurno.precio" (click)="modificarPrecio()">
+<mat-dialog-actions class="d-flex justify-content-center" >
+    <button mat-raised-button color="primary" class="mb-3 me-4" #buttonActualizar [disabled]="precio===dataTurno.precio" (click)="modificarPrecio()">
         Actualizar
     </button>
-    <button mat-raised-button color="warn" matDialogClose>
+    <button mat-raised-button color="warn" class="mb-3" matDialogClose>
         Cerrar
     </button>
 </mat-dialog-actions>
