@@ -11,8 +11,10 @@ mat-dialog-content{
     cursor: auto;
 }
 
+.color-primary{
 
-
+    color: rgb(103, 58, 183);
+}
 
 
 @media (min-width:600px) {
