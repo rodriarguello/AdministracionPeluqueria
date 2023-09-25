@@ -1,3 +1,28 @@
-form{
-    width: 500px;
+mat-form-field{
+    width: 100%!important;
+    margin: 20px;
+}
+
+mat-dialog-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0 !important;
+    
+}
+
+@media (min-width:500px) {
+   
+}
+
+
+@media (min-width:880px) {
+    mat-form-field{
+        width: 280px!important;
+    }
+    mat-dialog-content{
+        width: 700px;
+    }
+
 }
