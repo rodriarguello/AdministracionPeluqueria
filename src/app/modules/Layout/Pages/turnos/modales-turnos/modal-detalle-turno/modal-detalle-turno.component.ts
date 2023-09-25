@@ -15,11 +15,12 @@ export class ModalDetalleTurnoComponent implements OnInit{
   constructor(@Inject(MAT_DIALOG_DATA)public dataTurno:Turno, private nuevoDialog:MatDialog, private fb:FormBuilder, private turnoService:TurnosService,
   private dialogoActual:MatDialogRef<ModalDetalleTurnoComponent>, private utilidadService:UtilidadService){
 
-   
+   this.habilitarBoton = false;
     
   }
 
   precio!:number;
+  habilitarBoton:boolean;
  
 
   ngOnInit(): void {

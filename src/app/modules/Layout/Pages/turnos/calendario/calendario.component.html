@@ -11,24 +11,29 @@
     </div>
 
     
-    <div class="d-flex justify-content-between m-5">
-        <button mat-raised-button color="accent" (click)="semanaAnterior()">Semana Anterior</button>
+    <div class="d-flex flex-column align-items-center my-5">
+        <div class="d-flex w-100 justify-content-center mb-5">
 
-        <mat-form-field appearance="outline">
-            <mat-label>Fecha de Turno</mat-label>
-            <input matInput [matDatepicker]="picker"  [(ngModel)]="fecha" (dateChange)="mostrarTurnos()">
-            <mat-hint>Fecha Seleccionada</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Fecha de Turno</mat-label>
+                <input matInput [matDatepicker]="picker"  [(ngModel)]="fecha" (dateChange)="mostrarTurnos()">
+                <mat-hint>Fecha Seleccionada</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="d-flex w-100 justify-content-between px-4">
+            <button mat-raised-button color="accent" (click)="semanaAnterior()">Semana Anterior</button>
+
+            <button mat-raised-button color="accent" (click)="semanaSiguiente()">Semana Siguiente</button>
+        </div>
         
-        <button mat-raised-button color="accent" (click)="semanaSiguiente()">Semana Siguiente</button>
     </div>
 
 
     
 
-    <div class="d-flex">
+    <div class="d-flex contenedor-calendario">
 
 
 
@@ -151,17 +156,17 @@
           <span>Reservar</span>
         </button>
         <button mat-menu-item (click)="verDetalles(turnoMenu)" [disabled]="turnoMenu.disponible">
-          <mat-icon>search</mat-icon>
+            <mat-icon style="color: dodgerblue;">find_in_page</mat-icon>
           <span>Detalles</span>
         </button>
         <button mat-menu-item [disabled]="turnoMenu.disponible" (click)="cancelarReserva(turnoMenu)">
-          <mat-icon>notifications_off</mat-icon>
+            <mat-icon color="warn">event_busy</mat-icon>
           <span>Cancelar Reserva</span>
         </button>
         <button mat-menu-item [disabled]="turnoMenu.disponible" >
-            <mat-icon>notifications_off</mat-icon>
+            <mat-icon color="primary">ballot</mat-icon>
             <span>Asistió</span>
-            <input class="ms-2" type="checkbox" #inputAsistencia [checked]="turnoMenu.asistio" (click)="modificarAsistencia(turnoMenu, inputAsistencia.checked)">
+            <mat-checkbox class="ms-2" [checked]="turnoMenu.asistio" (change)="modificarAsistencia(turnoMenu, input.checked)" #input  color="primary"></mat-checkbox>
           </button>
       </mat-menu>
 

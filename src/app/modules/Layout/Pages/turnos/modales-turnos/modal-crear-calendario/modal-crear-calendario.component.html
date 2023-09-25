@@ -1,12 +1,9 @@
   <mat-dialog-content>
     
-    <mat-card-title> Nuevo Calendario </mat-card-title>
+    <mat-card-title class="fs-3 my-3"> Nuevo Calendario </mat-card-title>
       
-    <form [formGroup]="formCalendario">
+    <form [formGroup]="formCalendario" class="d-flex justify-content-center flex-wrap align-items-center w-100">
       
-      <mat-grid-list cols="2" rowHeight="110px">
-      
-        <mat-grid-tile>
       
           <mat-form-field appearance="outline">
       
@@ -18,11 +15,9 @@
               formControlName="nombre"
             />
           </mat-form-field>
-        </mat-grid-tile>
 
 
 
-        <mat-grid-tile>
           <mat-form-field appearance="outline">
             <mat-label>Fecha de Inicio</mat-label>
             <input
@@ -41,13 +36,8 @@
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-        </mat-grid-tile>
-
-        
 
 
-
-        <mat-grid-tile>
           <mat-form-field appearance="outline">
             <mat-label>Fecha de Fin</mat-label>
             <input
@@ -65,9 +55,7 @@
             ></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
-        </mat-grid-tile>
 
-        <mat-grid-tile>
 
           <mat-form-field appearance="outline">
             <mat-label>Hora Inicio</mat-label>
@@ -75,10 +63,8 @@
               <mat-option *ngFor="let horario of listHorarios" [value]="horario">{{horario|enteroAHora}} hs.</mat-option>
             </mat-select>
           </mat-form-field>
-        </mat-grid-tile>
 
         
-        <mat-grid-tile>
 
           <mat-form-field appearance="outline">
             <mat-label>Hora Fin</mat-label>
@@ -86,11 +72,9 @@
               <mat-option *ngFor="let horario of listHorarios" [value]="horario">{{horario|enteroAHora}} hs.</mat-option>
             </mat-select>
           </mat-form-field>
-        </mat-grid-tile>
 
 
         
-        <mat-grid-tile>
 
           <mat-form-field appearance="outline">
             <mat-label>Intervalo entre turnos</mat-label>
@@ -98,19 +82,17 @@
               <mat-option *ngFor="let intervalo of listInvervaloTurnos" [value]="intervalo">{{intervalo|formatearMinutos}}</mat-option>
             </mat-select>
           </mat-form-field>
-        </mat-grid-tile>
 
 
 
-      </mat-grid-list>
     </form>
   </mat-dialog-content>
 
   <mat-dialog-actions class="d-flex justify-content-evenly"> 
-    <button mat-raised-button color="primary" [disabled]="formCalendario.invalid" (click)="crearCalendario()"> 
+    <button mat-raised-button color="primary" class="px-5 my-3" [disabled]="formCalendario.invalid" (click)="crearCalendario()"> 
       Crear
     </button>
-    <button mat-raised-button color="warn" mat-dialog-close>
+    <button mat-raised-button color="warn" class="px-5 my-3" mat-dialog-close>
       Cerrar
     </button>
     

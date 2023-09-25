@@ -1,3 +1,27 @@
-form{
-    width: 400px;
+mat-dialog-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 80vw;
+}
+
+.boton-money{
+    background-color: rgb(41, 172, 41);
+    cursor: auto;
+}
+
+.color-primary{
+
+    color: rgb(103, 58, 183);
+}
+
+
+@media (min-width:600px) {
+    
+    mat-dialog-content{
+        width: 500px;
+       
+    }
+
 }
