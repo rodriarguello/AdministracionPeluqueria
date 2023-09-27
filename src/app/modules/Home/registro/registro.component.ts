@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
@@ -21,11 +21,46 @@ constructor(fb:FormBuilder, private usuarioService:UsuariosService, private util
     apellido:['',Validators.required],
     nombrePeluqueria:['',Validators.required],
     email:['',[Validators.required, Validators.email]],
-    password:['',Validators.required]
+    password:['', this.customPasswordValidator]
 
   })
   this.ocultarPassword = true;
 }
+
+//Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d]|[^ ]){6,15}$')
+customPasswordValidator(control: AbstractControl): { [key: string]: any } | null {
+  const value = control.value;
+  if(!value) {
+    return {required:true} //Error si el campo esta vacio
+  }
+
+  if(!/^\S*$/.test(value)){
+    return {espacioBlanco:true} //Error si tiene espacios en blanco
+  }
+
+  if (!/[a-z]/.test(value)) {
+    return { lowercase: true }; // Error si no hay minúsculas
+  }
+
+  if (!/[A-Z]/.test(value)) {
+    return { uppercase: true }; // Error si no hay mayúsculas
+  }
+
+  if (!/\d/.test(value)) {
+    return { digit: true }; // Error si no hay números
+  }
+
+  if (value.length < 6) {
+    return { minlength: true }; // Error si la longitud es menor a 8 caracteres
+  }
+
+  if (value.length > 15) {
+    return { maxlength: true }; // Error si la longitud es menor a 8 caracteres
+  }
+
+  return null; // La contraseña cumple con todas las validaciones
+}
+
   ngOnInit(): void {
 
 
