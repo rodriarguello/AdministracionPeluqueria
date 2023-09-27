@@ -17,6 +17,14 @@
     border-bottom-right-radius: 25%;
 }
 
+.contenedor-botones{
+
+    display: flex;
+    justify-content: center;
+    width: 75%;
+    flex-wrap: wrap;
+}
+
 
 @media (min-width:700px) {
     
