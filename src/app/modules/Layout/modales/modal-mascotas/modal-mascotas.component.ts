@@ -156,14 +156,14 @@ export class ModalMascotasComponent implements OnInit {
   }
 
   mostrarAlergias():void{
-    this.alergiaService.mostrarAlergias().subscribe({next:(res)=>{
-      if(res.resultado===1){
-        this.listAlergias = res.data;
+    this.alergiaService.getAll().subscribe({
+      next:(res)=>{
+        this.listAlergias = res;
+      },
+      error:()=>{
+
       }
-      else{
-        console.log(res);
-      }
-    }});
+  });
   }
 
 
@@ -178,7 +178,7 @@ export class ModalMascotasComponent implements OnInit {
     mascota.idCliente = this.formMascotas.value.cliente;
 
     const listIdAlergias:Alergia[] = this.formMascotas.value.alergias;
-    mascota.idAlergias = listIdAlergias.map(alergia=> alergia.id);
+    mascota.idAlergias = listIdAlergias.map(alergia=> alergia.id!);
 
 
     const listIdEnfermedades:Enfermedad[] = this.formMascotas.value.enfermedades;
@@ -213,7 +213,7 @@ export class ModalMascotasComponent implements OnInit {
 
     const listAlergias:Alergia[] = this.formMascotas.value.alergias;
 
-    mascota.idAlergias = listAlergias.map(alergia=> alergia.id);
+    mascota.idAlergias = listAlergias.map(alergia=> alergia.id!);
 
     const listEnfermedades:Enfermedad[] = this.formMascotas.value.enfermedades;
     
@@ -307,8 +307,11 @@ export class ModalMascotasComponent implements OnInit {
   }
 
   agregarAlergia():void{
-    const alergia = new Alergia();
-    alergia.id = -1;
+    const alergia:Alergia = {
+      id: -1,
+      nombre:null!
+
+    }
 
     this.nuevoDialog.open(ModalAlergiasComponent,{disableClose:true,data:alergia}).afterClosed().subscribe(
       (res)=>{

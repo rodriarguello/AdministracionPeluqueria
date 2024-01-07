@@ -1,5 +1,4 @@
-
-export class Alergia{
-    id!: number;
-    nombre!: string;
+export interface Alergia{
+    id?: number,
+    nombre: string
 }

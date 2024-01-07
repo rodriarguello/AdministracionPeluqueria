@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Alergia } from '../models/alergia';
-import { ResponseApi } from '../models/response-api';
 import { environment } from 'src/environments/environment';
 
 
@@ -27,28 +26,28 @@ httpOptions={ headers:new HttpHeaders({
 
 
 
-  mostrarAlergias():Observable<ResponseApi>{
+  getAll():Observable<Alergia[]>{
 
-    return this.http.get<ResponseApi>(this.urlApi, this.httpOptions);
+    return this.http.get<Alergia[]>(this.urlApi, this.httpOptions);
   }
 
-  cargarAlergia(nombre:string):Observable<ResponseApi>{
+  create(nombre:string):Observable<Alergia>{
 
-    const alergia = new Alergia();
-    alergia.nombre = nombre;
-
-    return this.http.post<ResponseApi>(this.urlApi, alergia,this.httpOptions);
+    const alergia:Alergia = {
+      nombre
+    } 
+    return this.http.post<Alergia>(this.urlApi, alergia,this.httpOptions);
   }
 
-  modificarAlergia(alergia:Alergia): Observable<ResponseApi>{
+  update(alergia:Alergia): Observable<Alergia>{
 
-    return this.http.put<ResponseApi>(this.urlApi,alergia,this.httpOptions);
+    return this.http.put<Alergia>(this.urlApi+"/"+alergia.id,alergia,this.httpOptions);
 
   }
 
-  eliminarAlergia(id:number):Observable<ResponseApi>{
+  delete(id:number):Observable<void>{
 
-    return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`,this.httpOptions);
+    return this.http.delete<void>(`${this.urlApi}/${id}`,this.httpOptions);
   }
 
 }
