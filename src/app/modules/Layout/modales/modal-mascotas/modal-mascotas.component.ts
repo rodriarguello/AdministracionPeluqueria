@@ -145,14 +145,14 @@ export class ModalMascotasComponent implements OnInit {
   }
 
   mostrarEnfermedades():void{
-    this.enfermedadService.mostrarEnfermedades().subscribe({next:(res)=>{
-      if(res.resultado ===1){
-        this.listEnfermedades = res.data;
+    this.enfermedadService.getAll().subscribe({
+      next:(res)=>{
+        this.listEnfermedades = res;
+      },
+      error:()=>{
+
       }
-      else{
-        console.log(res);
-      }
-    }});
+  });
   }
 
   mostrarAlergias():void{
@@ -182,7 +182,7 @@ export class ModalMascotasComponent implements OnInit {
 
 
     const listIdEnfermedades:Enfermedad[] = this.formMascotas.value.enfermedades;
-    mascota.idEnfermedades = listIdEnfermedades.map(enfermedad=> enfermedad.id);
+    mascota.idEnfermedades = listIdEnfermedades.map(enfermedad=> enfermedad.id!);
    
     
     
@@ -217,7 +217,7 @@ export class ModalMascotasComponent implements OnInit {
 
     const listEnfermedades:Enfermedad[] = this.formMascotas.value.enfermedades;
     
-    mascota.idEnfermedades = listEnfermedades.map(enfermedad=> enfermedad.id);
+    mascota.idEnfermedades = listEnfermedades.map(enfermedad=> enfermedad.id!);
     
     this.mascotaService.agregarMascota(mascota).subscribe({
        next:(res)=>{
@@ -291,8 +291,10 @@ export class ModalMascotasComponent implements OnInit {
 
   agregarEnfermedad():void{
 
-    const enfermedad=new Enfermedad();
-    enfermedad.id = -1;
+    const enfermedad= {
+      id: -1,
+      nombre:null!
+    }
 
     this.nuevoDialog.open(ModalEnfermedadesComponent,{disableClose:true,data:enfermedad}).afterClosed().subscribe(
       (res)=>{

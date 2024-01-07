@@ -7,6 +7,8 @@ import { EnfermedadesService } from 'src/app/services/enfermedades.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
 import swal from 'sweetalert2';
 import { ModalEnfermedadesComponent } from '../../modales/modal-enfermedades/modal-enfermedades.component';
+import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-enfermedades',
@@ -44,19 +46,13 @@ export class EnfermedadesComponent implements OnInit,AfterViewInit {
 
   mostrarEnfermedades():void{
 
-    this.enfermedadesService.mostrarEnfermedades().subscribe({
+    this.enfermedadesService.getAll().subscribe({
       next:(res)=>{
-        if(res.resultado === 1){
-          this.matDataSource.data = res.data;
+          this.matDataSource.data = res;
           if(this.matDataSource.data.length != 0) this.sinDatos = false;
-        }
-        else{
-          console.log(res.mensaje);
-        }
 
       },
       error:(error)=>{
-        console.log(error);
       }
     });
 
@@ -102,29 +98,25 @@ export class EnfermedadesComponent implements OnInit,AfterViewInit {
 
     }).then( (res)=>{
       if(res.isConfirmed){
-        this.enfermedadesService.eliminarEnfermedad(enfermedad.id).subscribe({
-          next:(res)=>{
-            if(res.resultado===1){
-              this.utilidadesService.mostrarAlerta("La Enfermedad se eliminó con éxito","Exito");
+        this.enfermedadesService.delete(enfermedad.id!).subscribe({
+          next:()=>{
+              Swal.fire('Ok','La enfermedad se eliminó con éxito','success');
               this.mostrarEnfermedades();
-            }
-            else if(res.resultado==2){
-              swal.fire({
-                title:'Error al eliminar',
-                text: `Para eliminar la enfermedad: "${enfermedad.nombre}", primero debe eliminar todas las mascotas que están asociadas a ella.`,
-                
-                width:'300px'
-                
-
-              });
-            }
-
-            else{
-              this.utilidadesService.mostrarAlerta("No se pudo eliminar la Enfermedad","Error");
-            }
           },
-          error:()=>{
-            this.utilidadesService.mostrarAlerta("No se pudo eliminar la Enfermedad","Error");
+          error:(err:HttpErrorResponse)=>{
+            if(err.status === 499){
+
+              Swal.fire(
+                'Error',
+                `Para eliminar la enfermedad: "${enfermedad.nombre}", primero debe eliminar todas las mascotas que están asociadas a ella.`,
+                'error'
+                );
+            }else{
+              Swal.fire(
+                'Error',
+                'No se pudo eliminar la enfermedad.',
+                'error')
+            }
           }
         });
       }
