@@ -7,6 +7,8 @@ import { RazasService } from 'src/app/services/razas.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
 import { ModalRazasComponent } from '../../modales/modal-razas/modal-razas.component';
 import swal from 'sweetalert2';
+import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-razas',
@@ -40,18 +42,13 @@ export class RazasComponent implements OnInit,AfterViewInit{
 
 
   mostrarRazas(): void{
-    this.razasService.mostrarRazas().subscribe({
+    this.razasService.getAll().subscribe({
       next:(res)=>{
-        if(res.resultado===1){
-          this.razaTableDataSource.data = res.data;
+          this.razaTableDataSource.data = res;
           if(this.razaTableDataSource.data.length !=0) this.sinDatos = false;
-        }
-        else{
-          console.log(res);
-        }
+        
       },
-      error:(error)=>{
-        console.log(error);
+      error:()=>{
       }
   });
 
@@ -91,27 +88,23 @@ export class RazasComponent implements OnInit,AfterViewInit{
     }).then( (res)=>{
 
       if(res.isConfirmed){
-        this.razasService.eliminarRaza(raza.id).subscribe({
-          next:(res)=>{
-            if(res.resultado===1){
-              this.utilidadService.mostrarAlerta("La Raza se eliminó con éxito","Exito");
-              this.mostrarRazas();
-            } 
-            else if(res.resultado==2){
-              swal.fire({
-                title:'Error al eliminar',
-                text: `Para eliminar la raza: "${raza.nombre}", primero debe eliminar todas las mascotas que están asociadas a ella.`,
-                
-                width:'300px'
-                
+        this.razasService.delete(raza.id!).subscribe({
+          next:()=>{
 
-              });
-            }
-            else this.utilidadService.mostrarAlerta("No se pudo eliminar la Raza","Error");
-          
+              Swal.fire('Ok',"La raza se eliminó con éxito.",'success');
+
+              this.mostrarRazas();
+            
+            
           },
-          error:()=>{
-            this.utilidadService.mostrarAlerta("No se pudo eliminar la Raza","Error");
+          error:(err:HttpErrorResponse)=>{
+
+            if(err.status === 499){
+              Swal.fire('Error',`Para eliminar la raza: "${raza.nombre}", primero debe eliminar todas las mascotas que están asociadas a ella.`,'error');
+            }else{
+              Swal.fire('Error',`No se pudo eliminar la raza.`,'error');
+            }
+
           }
 
         });

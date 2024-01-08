@@ -1,9 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Alergia } from 'src/app/models/alergia';
 import { AlergiasService } from 'src/app/services/alergias.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modal-alergias',
@@ -15,7 +17,7 @@ export class ModalAlergiasComponent implements OnInit {
   
    constructor(private modalActual:MatDialogRef<ModalAlergiasComponent>,
     @Inject(MAT_DIALOG_DATA) public dataAlergia:Alergia, private fb:FormBuilder, 
-    private servicioAlergias:AlergiasService, private servicioUtilidad:UtilidadService)
+    private servicioAlergias:AlergiasService)
     {
       this.formAlergia = this.fb.group({
         nombre:['', [Validators.required,Validators.minLength(3)]]
@@ -46,53 +48,69 @@ nombreAlergia:string;
 crearActualizarAlergia(){
 
   if(this.dataAlergia != null && this.dataAlergia.id != (-1)){
-    const alergia = new Alergia();
-    alergia.id = this.dataAlergia.id;
-    alergia.nombre = this.formAlergia.value.nombre;
+    const alergia:Alergia = {
+      id : this.dataAlergia.id,
+      nombre : this.formAlergia.value.nombre
+
+    }
     
-    this.servicioAlergias.modificarAlergia(alergia).subscribe({
-      next:(res)=>{
-        if(res.resultado===1){
-          this.servicioUtilidad.mostrarAlerta("La Alergia se modificó con éxito", "Exito");
+    this.servicioAlergias.update(alergia).subscribe({
+      next:()=>{
+          Swal.fire(
+            'Ok',
+            'La Alergia se modificó con éxito',
+            'success'
+          );
           this.modalActual.close("true");
-          
-        }
-        else
-        {
-       
-          this.servicioUtilidad.mostrarAlerta("No se pudo modificar la Alergia", "Error");
-        }
-        
       },
-      error:(error)=>{
-        this.servicioUtilidad.mostrarAlerta("No se pudo modificar la Alergia", "Error");
+      error:()=>{
+        Swal.fire(
+          'Error',
+          'No se pudo modificar la Alergia',
+          'error'
+        );
         
       }
 
     });
   }
   else{
-  this.servicioAlergias.cargarAlergia(this.formAlergia.value.nombre).subscribe({
+  this.servicioAlergias.create(this.formAlergia.value.nombre).subscribe({
     next:(res)=>{
-      if(res.resultado===1){
         if(this.dataAlergia != null){
           
           if(this.dataAlergia.id===(-1)){
-            this.modalActual.close(res.data.id);
+            this.modalActual.close(res.id);
           }
         }
         else{
 
           this.modalActual.close("true");
         }
-        this.servicioUtilidad.mostrarAlerta("Se agregó una nueva Alergia","Exito");
-      }
-      else
-        this.servicioUtilidad.mostrarAlerta("No se pudo agregar la Alergia","Error")
-      
+        Swal.fire(
+          'Ok',
+          'Se agregó una nueva Alergia',
+          'success'
+        );
     },
-    error:(error)=>{
-      this.servicioUtilidad.mostrarAlerta("No se pudo agregar la Alergia","Error")
+    error:(err:HttpErrorResponse)=>{
+
+      if(err.status===499){
+
+        Swal.fire(
+          'Error',
+          err.error,
+          'error'
+        );
+
+      }else{
+
+        Swal.fire(
+          'Error',
+          'No se pudo crear la alergia',
+          'error'
+        );
+      }
      
     }
   });

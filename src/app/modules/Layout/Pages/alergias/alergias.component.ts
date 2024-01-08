@@ -5,9 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAlergiasComponent } from '../../modales/modal-alergias/modal-alergias.component';
-
-import swal from 'sweetalert2';
-import { UtilidadService } from 'src/app/services/utilidad.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -22,8 +21,7 @@ export class AlergiasComponent implements OnInit, AfterViewInit {
     this.mostrarAlergias();
   }
   
-  constructor(private alergiasService:AlergiasService, private  matDialog:MatDialog, 
-    private utilidadService:UtilidadService){
+  constructor(private alergiasService:AlergiasService, private  matDialog:MatDialog){
       
       this.sinDatos = true;
 
@@ -45,16 +43,15 @@ sinDatos:boolean;
 
 mostrarAlergias():void{
 
-this.alergiasService.mostrarAlergias().subscribe({
+this.alergiasService.getAll().subscribe({
   next:(res)=>{
-    if(res.resultado === 1){
       
-      this.dataListaAlergias.data = res.data;
+      this.dataListaAlergias.data = res;
       if(this.dataListaAlergias.data.length != 0) this.sinDatos = false;  
-    }
-    else{
-      console.log(res.mensaje);
-    }
+    
+  },
+  error:()=>{
+
   }
 });
 
@@ -87,7 +84,7 @@ actualizarAlergia(alergia:Alergia):void{
 }
 
 eliminarAlergia(alergia:Alergia){
-   swal.fire({
+   Swal.fire({
     title:"¿Desea eliminar la alergia?",
     text: alergia.nombre,
     icon:"warning",
@@ -99,15 +96,20 @@ eliminarAlergia(alergia:Alergia){
     cancelButtonText:"No,volver"
    }).then((res)=>{
     if(res.isConfirmed){
-      this.alergiasService.eliminarAlergia(alergia.id).subscribe({
-        next:(res)=>{
-          if(res.resultado===1){
-            this.utilidadService.mostrarAlerta("La Alergia se eliminó con éxito","Exito");
+      this.alergiasService.delete(alergia.id!).subscribe({
+        next:()=>{
+            Swal.fire(
+              'Ok',
+              'La Alergia se eliminó con éxito',
+              'success'
+            );
             this.mostrarAlergias();
             
-          }
-          else if(res.resultado==2){
-            swal.fire({
+        },
+        error:(err:HttpErrorResponse)=>{
+
+          if(err.status === 499){
+            Swal.fire({
               title:'Error al eliminar',
               text: `Para eliminar la alergia: "${alergia.nombre}", primero debe eliminar todas las mascotas que están asociadas a ella.`,
               
@@ -115,13 +117,13 @@ eliminarAlergia(alergia:Alergia){
               
 
             });
+          }else{
+            Swal.fire(
+              'Error al eliminar',
+              'No se pudo eliminar la Alergia',
+              'error'
+              );
           }
-          else
-          this.utilidadService.mostrarAlerta("No se pudo eliminar la Alergia","Error");
-          
-        },
-        error:()=>{
-          this.utilidadService.mostrarAlerta("No se pudo eliminar la Alergia","Error");
         }
 
       }

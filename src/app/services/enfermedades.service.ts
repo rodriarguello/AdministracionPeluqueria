@@ -19,32 +19,24 @@ export class EnfermedadesService {
     'Content-Type':'application/json'
   })};
 
+  getAll():Observable<Enfermedad[]>{
 
-  mostrarEnfermedades():Observable<ResponseApi>{
-
-  return this.http.get<ResponseApi>(this.urlApi,this.httpOptions);
-
+  return this.http.get<Enfermedad[]>(this.urlApi,this.httpOptions);
   }
 
-  cargarEnfermedad(nombre:string):Observable<ResponseApi>{
-
-    const enfermedad = new Enfermedad();
-    enfermedad.nombre = nombre;
-
-    return this.http.post<ResponseApi>(this.urlApi,enfermedad, this.httpOptions);
+  create(nombre:string):Observable<Enfermedad>{
+    const enfermedad = {
+      nombre
+    } 
+    return this.http.post<Enfermedad>(this.urlApi,enfermedad, this.httpOptions);
   }
 
-  modificarEnfermedad(enfermedad:Enfermedad):Observable<ResponseApi>{
-
-
-    return this.http.put<ResponseApi>(this.urlApi, enfermedad,this.httpOptions);
-
+  update(enfermedad:Enfermedad):Observable<Enfermedad>{
+    return this.http.put<Enfermedad>(this.urlApi+'/'+enfermedad.id, enfermedad,this.httpOptions);
   }
 
-  eliminarEnfermedad(id:number):Observable<ResponseApi>{
-
-    return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`, this.httpOptions);
-
+  delete(id:number):Observable<void>{
+    return this.http.delete<void>(`${this.urlApi}/${id}`, this.httpOptions);
   }
 
 }

@@ -1,9 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit,Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Enfermedad } from 'src/app/models/enfermedad';
 import { EnfermedadesService } from 'src/app/services/enfermedades.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -48,23 +50,19 @@ export class ModalEnfermedadesComponent implements OnInit {
     //Metodo Modificar
     if(this.dataEnfermedad!=null && this.dataEnfermedad.id != (-1)){
        
-      const enfermedad = new Enfermedad();
-      enfermedad.id = this.dataEnfermedad.id;
-      enfermedad.nombre = this.formEnfermedades.value.nombre;
+      const enfermedad ={
+        id : this.dataEnfermedad.id,
+        nombre : this.formEnfermedades.value.nombre
+      };
       
-      this.serviceEnfermedades.modificarEnfermedad(enfermedad).subscribe({
+      this.serviceEnfermedades.update(enfermedad).subscribe({
 
-        next:(res)=>{
-          if(res.resultado === 1){
-            this.serviceUtilidades.mostrarAlerta("La Enfermedad se modificó con éxito", "Exito");
+        next:()=>{
+            Swal.fire('Ok','La enfermedad se modificó con éxito.','success');
             this.modalActual.close("true");
-          }
-          else{
-            this.serviceUtilidades.mostrarAlerta("No se pudo modificar la Enfermedad", "Error");
-          }
         },
-        error:(error)=>{
-          this.serviceUtilidades.mostrarAlerta("No se pudo modificar la Enfermedad", "Error");
+        error:()=>{
+          Swal.fire('Error','No se pudo modificar la enfermedad','error');
         }
     });
 
@@ -74,30 +72,30 @@ export class ModalEnfermedadesComponent implements OnInit {
     else
     {
 
-      this.serviceEnfermedades.cargarEnfermedad(this.formEnfermedades.value.nombre).subscribe({
+      this.serviceEnfermedades.create(this.formEnfermedades.value.nombre).subscribe({
 
         next:(res)=>{
-          if(res.resultado === 1){
             if(this.dataEnfermedad != null){
 
               if(this.dataEnfermedad.id === (-1)){
-                this.modalActual.close(res.data.id);
+                this.modalActual.close(res.id);
               }
             }
             else{
 
               this.modalActual.close("true");
             }
-            this.serviceUtilidades.mostrarAlerta("Se agregó una nueva Enfermedad", "Exito");
-
-          }
-          else{
-            this.serviceUtilidades.mostrarAlerta("No se pudo agregar la Enfermedad","Error");
-          }
+            Swal.fire('Ok','Se agregó una nueva enfermedad.','success');
         },
-        error:(error)=>{
+        error:(err:HttpErrorResponse)=>{
           
-          this.serviceUtilidades.mostrarAlerta("No se pudo agregar la Enfermedad","Error");
+          if(err.status === 499){
+            Swal.fire('Error',err.error,'error');
+
+          }else{
+            Swal.fire('Error','No se pudo agregar la enfermedad.','error');
+          }
+
         }
 
       });

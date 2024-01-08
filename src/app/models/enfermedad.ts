@@ -1,7 +1,4 @@
-export class Enfermedad {
-
-    id!:number;
-    nombre!:string;
-
-
+export interface Enfermedad {
+    id?:number,
+    nombre:string
 }
