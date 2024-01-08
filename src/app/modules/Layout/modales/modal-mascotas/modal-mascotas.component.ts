@@ -132,15 +132,14 @@ export class ModalMascotasComponent implements OnInit {
 
   mostrarRazas():void{
 
-    this.razaService.mostrarRazas().subscribe({next:(res)=>{
-      if(res.resultado===1){
-        this.listRazas = res.data;
+    this.razaService.getAll().subscribe({
+      next:(res)=>{
+        this.listRazas = res;
+      },
+      error:()=>{
 
       }
-      else{
-        console.log(res);
-      }
-    }});
+    });
 
   }
 
@@ -274,8 +273,11 @@ export class ModalMascotasComponent implements OnInit {
 
   agregarRaza():void{
 
-    const raza = new Raza();
-    raza.id = -1;
+    const raza:Raza = {
+        id: -1,
+        nombre: null!
+
+    };
     this.nuevoDialog.open(ModalRazasComponent,{disableClose:true,data:raza}).afterClosed().subscribe(
       (res)=>{
         if(res>0){

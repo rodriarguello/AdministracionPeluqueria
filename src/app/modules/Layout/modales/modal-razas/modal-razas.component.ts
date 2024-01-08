@@ -1,9 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit,Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Raza } from 'src/app/models/raza';
 import { RazasService } from 'src/app/services/razas.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modal-razas',
@@ -47,24 +49,22 @@ export class ModalRazasComponent implements OnInit {
     //Es para agregar una nueva raza, pero se le pasa data especifica por parametro DATA para despues diferenciar el tipo de respuesta
     if(this.dataRaza!=null && this.dataRaza.id !=(-1)){
       //Metodo modificar
-      const raza = new Raza();
-      raza.id = this.dataRaza.id;
-      raza.nombre = this.formRazas.value.nombre;
+      const raza :Raza = {
+        id:this.dataRaza.id,
+        nombre : this.formRazas.value.nombre
 
+      } ;
 
-      this.razaService.modificarRaza(raza).subscribe({
+      this.razaService.update(raza).subscribe({
 
-        next:(res)=>{
-          if(res.resultado===1){
+        next:()=>{
             this.modalActual.close("true");
-            this.utilidadService.mostrarAlerta("La Raza se modificó con éxito","Exito");
-          }
-          else{
-            this.utilidadService.mostrarAlerta("La Raza no se pudo modificar","Error");
-          }
+            Swal.fire('Ok','La raza se modificó con éxito.','success');
         },
         error:()=>{
-          this.utilidadService.mostrarAlerta("La Raza no se pudo modificar","Error");
+
+          Swal.fire('Error','La raza no se pudo modificar.','error');
+
         }
 
       });
@@ -73,30 +73,28 @@ export class ModalRazasComponent implements OnInit {
     else{
       //Metodo agregar
 
-      this.razaService.cargarRaza(this.formRazas.value.nombre).subscribe({
+      this.razaService.create(this.formRazas.value.nombre).subscribe({
         next:(res)=>{
-          if(res.resultado===1){
             //Aca se da una respuesta diferenciada segun el parametro pasado
             if(this.dataRaza != null){
 
               if(this.dataRaza.id===(-1)){
                 //Se le pasa el id del nuevo usuario para que se seleccione en el comboBox
-                this.modalActual.close(res.data.id)
+                this.modalActual.close(res.id)
               }
             }
-            
             else{
-              
               this.modalActual.close("true");
             }
-            this.utilidadService.mostrarAlerta("Se agregó una nueva Raza","Exito");
-          }
-          else{
-            this.utilidadService.mostrarAlerta("No se pudo agregar la Raza","Error");
-          }
+            Swal.fire('Ok','Se agregó una nueva raza.','success');
         },
-        error:()=>{
-          this.utilidadService.mostrarAlerta("No se pudo agregar la Raza","Error");
+        error:(err:HttpErrorResponse)=>{
+          if(err.status===499){
+            Swal.fire('Error',err.error,'error');
+          }else{
+
+            Swal.fire('Error','La raza no se pudo crear.','error');
+          }
         }
       });
 
