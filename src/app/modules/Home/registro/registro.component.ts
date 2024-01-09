@@ -71,19 +71,18 @@ customPasswordValidator(control: AbstractControl): { [key: string]: any } | null
 
 registrarUsuario():void{
 
-const usuario = new Usuario();
+const usuario:Usuario = {
 
-usuario.email = this.formularioRegistro.value.email;
+  email:this.formularioRegistro.value.email,
+  password: this.formularioRegistro.value.password,
+  nombres: this.formularioRegistro.value.nombres,
+  apellido: this.formularioRegistro.value.apellido,
+  nombrePeluqueria: this.formularioRegistro.value.nombrePeluqueria
+};
 
-usuario.password = this.formularioRegistro.value.password;
 
-usuario.nombres = this.formularioRegistro.value.nombres;
 
-usuario.apellido = this.formularioRegistro.value.apellido;
-
-usuario.nombrePeluqueria = this.formularioRegistro.value.nombrePeluqueria;
-
-this.usuarioService.crearUsuario(usuario).subscribe({
+this.usuarioService.registro(usuario).subscribe({
   next: ()=>{
     
     this.utilidadService.mostrarAlerta("Registro Exitoso", "REGISTRO");

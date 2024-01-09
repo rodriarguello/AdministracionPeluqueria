@@ -30,7 +30,7 @@ export class ResumenCajaDiarioComponent {
 
      this.usuarioService.getDatosUsuario.subscribe({
       next:(res)=>{
-        this.fechaCreacion =  res.fechaCreacion;
+        this.fechaCreacion =  res.fechaCreacion!;
       }
 
      });
