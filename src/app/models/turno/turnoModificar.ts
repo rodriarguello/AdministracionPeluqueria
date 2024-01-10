@@ -1,4 +1,4 @@
-export class TurnoModificar{
-    idMascota!:number;
-    precio!:number;
+export interface TurnoModificar{
+    idMascota:number,
+    precio:number
 }
