@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import swal from 'sweetalert2';
 import { ModalReservarTurnoComponent } from '../turnos/modales-turnos/modal-reservar-turno/modal-reservar-turno.component';
 import { ModalDetalleTurnoComponent } from '../turnos/modales-turnos/modal-detalle-turno/modal-detalle-turno.component';
+import * as moment from 'moment';
 
 
 @Component({
@@ -34,12 +35,21 @@ export class DashboardComponent implements OnInit {
       total:0
     }
 
-    this.turnoMenu = new Turno();
     this.cantidadClientes = 0;
     this.cantidadClientesNuevos = 0;
     this.cantidadMascotas = 0;
     this.cantidadMascotasNuevas = 0;
-    
+    this.turnoMenu = {
+      id:null!,
+      fecha:null!,
+      horario:null!,
+      disponible:null!,
+      mascota:null!,
+      asistio:null!,
+      precio:null!
+    };
+
+    moment.locale('es');
     
   }
   ngOnInit() {
@@ -113,10 +123,10 @@ export class DashboardComponent implements OnInit {
   }
   
   cancelarReserva(turno:Turno):void{
-    
+    const fecha = moment(turno.fecha.toString().slice(0,10));
     swal.fire({
       title:"¿Desea Cancelar el Turno?",
-      text: `Mascota: ${turno.mascota.nombre}\nDia: ${turno.fecha}\nHora:${turno.horario}`,
+      text: `De la mascota ${turno.mascota.nombre}, el día ${fecha.format('LL')} a las ${turno.horario.toString().slice(0,5)} horas.`,
       icon:"warning",
       iconColor:'red',
       confirmButtonColor:"#3085d6",
@@ -128,20 +138,12 @@ export class DashboardComponent implements OnInit {
     ).then((res)=>{
       if(res.isConfirmed){
         this.turnosService.cancelarTurno(turno.id).subscribe({
-          next:(res)=>{
-            if(res.resultado ===1){
-              this.utilidadService.mostrarAlerta("Se cancelo la reserva del turno","OK");
+          next:()=>{
+              this.utilidadService.alertaExito("Se cancelo la reserva del turno","OK");
               this.mostrarResumenDiario();
-            }
-            else{
-              this.utilidadService.mostrarAlerta("No se pudo cancelar la reserva del turno","ERROR");
-              console.log(res.mensaje);
-            }
-
           },
-          error:(err)=>{
-            this.utilidadService.mostrarAlerta("No se pudo cancelar la reserva del turno","ERROR");
-            console.log(err);
+          error:()=>{
+            this.utilidadService.alertaError("No se pudo cancelar la reserva del turno","ERROR");
           }
         });
       }
@@ -166,19 +168,13 @@ export class DashboardComponent implements OnInit {
         
         
         this.turnosService.modificarAsistencia(turno.id,value).subscribe({
-          next:(res)=>{
-          if(res.resultado===1){
-            this.utilidadService.mostrarAlerta("Se modificó la asistencia","OK")
+          next:()=>{
+            this.utilidadService.alertaExito("Se modificó la asistencia","OK")
             this.mostrarResumenDiario();
-          }
-          else{
-            this.utilidadService.mostrarAlerta("No se pudo modificar la asistencia","ERROR");
-            console.log(res.mensaje);
-          } 
+         
         },
-        error:(err)=>{
-          console.log(err);
-          this.utilidadService.mostrarAlerta("No se pudo modificar la asistencia","ERROR");
+        error:()=>{
+          this.utilidadService.alertaError("No se pudo modificar la asistencia","ERROR");
         }
         
       });
