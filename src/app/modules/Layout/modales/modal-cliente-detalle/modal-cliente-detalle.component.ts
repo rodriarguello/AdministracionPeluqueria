@@ -8,8 +8,8 @@ import { UtilidadService } from 'src/app/services/utilidad.service';
 import swal from 'sweetalert2';
 import { ModalMascotasDetalleComponent } from '../modal-mascotas-detalle/modal-mascotas-detalle.component';
 import { ModalMascotasComponent } from '../modal-mascotas/modal-mascotas.component';
-import { TurnosService } from 'src/app/services/turnos.service';
 import { ModalTurnosClienteComponent } from '../modal-turnos-cliente/modal-turnos-cliente.component';
+import { Mascota } from 'src/app/models/mascota/mascota';
 
 @Component({
   selector: 'app-modal-cliente-detalle',
@@ -19,25 +19,38 @@ import { ModalTurnosClienteComponent } from '../modal-turnos-cliente/modal-turno
 export class ModalClienteDetalleComponent implements OnInit {
 
 
-  constructor(@Inject(MAT_DIALOG_DATA)public dataCliente:Cliente, private mascotaService:MascotasService, private clienteService:ClientesService,
+  constructor(@Inject(MAT_DIALOG_DATA)idCliente:number, private mascotaService:MascotasService, private clienteService:ClientesService,
   private dialog:MatDialog,private modalActual:MatDialogRef<ModalClienteDetalleComponent>,private utilidadService:UtilidadService){
 
     this.sinDatos = true;
+    this.clienteService.getById(idCliente).subscribe({
+      next:(res)=>{
+        this.dataCliente = res;
+        this.matDataTable.data = res.mascotas!;
+      },
+      error:()=>{
+        this.modalActual.close();
+      }
+    });
   }
   
 
   ngOnInit(): void {
 
-    if(this.dataCliente.mascotas.length >0){
+    if(this.dataCliente && this.dataCliente.mascotas!.length >0){
+
+
       this.sinDatos = false;
+      
     }
 
 
   }
 
+  dataCliente!:Cliente;
   columnasTabla = ["Nombre","Fecha de Nacimiento", "Acciones"];  
   sinDatos:boolean;
-  matDataTable = new MatTableDataSource(this.dataCliente.mascotas);
+  matDataTable:MatTableDataSource<Mascota> = new MatTableDataSource(null!);
 
   modificoDato:boolean = false;
 
@@ -46,7 +59,6 @@ export class ModalClienteDetalleComponent implements OnInit {
     this.mascotaService.mostrarUnaMascota(idMascota).subscribe({
       next:(res)=>{
         if(res.resultado===1){
-          
           this.dialog.open(ModalMascotasDetalleComponent,{disableClose:true,data:res.data})
         }
         else{
@@ -122,18 +134,14 @@ export class ModalClienteDetalleComponent implements OnInit {
 
   mostrarMascotas():void{
 
-    this.clienteService.mostrarUnCliente(this.dataCliente.id).subscribe({
+    this.clienteService.getById(this.dataCliente.id!).subscribe({
       next:(res)=>{
-        if(res.resultado===1){
-          this.matDataTable.data = res.data.mascotas;
+          this.matDataTable.data = res.mascotas!;
           if(this.matDataTable.data.length<1) this.sinDatos = true;
-        }
-        else{
-          console.log(res);
-        }
+      
       },
-      error:(error)=>{
-        console.log(error);
+      error:()=>{
+        this.sinDatos = true;
       }
     });
 

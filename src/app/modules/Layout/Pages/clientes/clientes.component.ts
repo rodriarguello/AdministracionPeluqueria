@@ -8,6 +8,7 @@ import { UtilidadService } from 'src/app/services/utilidad.service';
 import { ModalClientesComponent } from '../../modales/modal-clientes/modal-clientes.component';
 import swal from 'sweetalert2';
 import { ModalClienteDetalleComponent } from '../../modales/modal-cliente-detalle/modal-cliente-detalle.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-clientes',
@@ -29,7 +30,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
     
-    this.mostrarClientes();
+    this.getAllClientes();
 
   }
 
@@ -46,20 +47,15 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   @ViewChild(MatPaginator)paginator!:MatPaginator;
 
 
-  mostrarClientes():void{
+  getAllClientes():void{
 
-    this.clientesService.mostrarClientes().subscribe({
+    this.clientesService.getAll().subscribe({
       next:(res)=>{
-        if(res.resultado === 1){
-          this.dataTableCliente.data = res.data;
+          this.dataTableCliente.data = res;
           if(this.dataTableCliente.data.length!=0) this.sinDatos=false;
-        }
-        else{
-          console.log(res.mensaje);
-        }
       },
-      error:(error)=>{
-        console.log(error);
+      error:()=>{
+        this.sinDatos = true;
       }
         
     });
@@ -70,7 +66,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   agregarCliente():void{
     this.matDialog.open(ModalClientesComponent,{disableClose:true}).afterClosed()
     .subscribe((res)=>{
-      if(res==="true") this.mostrarClientes();
+      if(res==="true") this.getAllClientes();
     });
     
 
@@ -80,7 +76,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   actualizarCliente(cliente:Cliente):void{
     this.matDialog.open(ModalClientesComponent,{disableClose:true,data:cliente}).afterClosed().subscribe((res)=>{
       if(res==="true"){
-        this.mostrarClientes();
+        this.getAllClientes();
       }
     });
   }
@@ -101,30 +97,19 @@ export class ClientesComponent implements OnInit, AfterViewInit{
     }).then((res)=>{
       if(res.isConfirmed){
 
-        this.clientesService.eliminarCliente(cliente.id).subscribe({
-          next:(res)=>{
-            if(res.resultado===1){
-              this.utilidadService.mostrarAlerta("El cliente se eliminó con éxito","Exito");
-              this.mostrarClientes();
-            }
-            else if(res.resultado==2){
-              swal.fire({
-                title:'Error al eliminar',
-                text: `Para eliminar el/la cliente: "${cliente.nombre}", primero debe eliminar todas las mascotas que están asociadas a el/ella.`,
-                
-                width:'300px'
-                
-
-              });
-            }
-            else{
-              console.log(res);
-              this.utilidadService.mostrarAlerta("No se pudo eliminar el cliente","Error");
-            }
+        this.clientesService.delete(cliente.id!).subscribe({
+          next:()=>{
+              this.utilidadService.alertaExito("El cliente se eliminó con éxito","Exito");
+              this.getAllClientes();
           },
-          error:(error)=>{
-            console.log(error);
-            this.utilidadService.mostrarAlerta("No se pudo eliminar el cliente","Error");
+          error:(error:HttpErrorResponse)=>{
+
+            if(error.status === 499){
+              this.utilidadService.alertaError(`Para eliminar el/la cliente: "${cliente.nombre}", primero debe eliminar todas las mascotas que están asociadas a el/ella.`,"Error");
+            }else{
+
+              this.utilidadService.alertaError("No se pudo eliminar el cliente","Error");
+            }
           }
         });
 
@@ -142,11 +127,11 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   }
 
 
-  mostrarDetalles(cliente:Cliente):void{
+  mostrarDetalles(idCliente:number):void{
 
-    this.matDialog.open(ModalClienteDetalleComponent,{disableClose:true,data:cliente}).afterClosed().subscribe((res)=>{
+    this.matDialog.open(ModalClienteDetalleComponent,{disableClose:true,data:idCliente}).afterClosed().subscribe((res)=>{
       if(res){
-        this.mostrarClientes();
+        this.getAllClientes();
       }
     });
 

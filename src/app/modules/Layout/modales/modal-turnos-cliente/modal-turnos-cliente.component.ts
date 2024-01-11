@@ -27,7 +27,7 @@ export class ModalTurnosClienteComponent implements OnInit{
   mostrarTurnosCliente():void{
 
 
-    this.turnoService.mostrarTurnosDeCliente(this.dataCliente.id).subscribe({
+    this.turnoService.mostrarTurnosDeCliente(this.dataCliente.id!).subscribe({
       next:(res)=>{
         if(res.resultado ===1){
           this.listTurnos = res.data;

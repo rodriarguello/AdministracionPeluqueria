@@ -118,16 +118,14 @@ export class ModalMascotasComponent implements OnInit {
 
 
   mostrarClientes():void{
-    this.clienteService.mostrarClientes().subscribe({next:(res)=>{
+    this.clienteService.getAll().subscribe({
+      next:(res)=>{
+        this.listClientes = res;
+      },
+      error:()=>{
 
-      if(res.resultado ===1){
-        this.listClientes = res.data;
       }
-      else{
-        console.log(res);
-      }
-
-    }});
+  });
   }
 
   mostrarRazas():void{
@@ -253,8 +251,14 @@ export class ModalMascotasComponent implements OnInit {
 
 
   agregarCliente():void{
-    const cliente = new Cliente();
-    cliente.id = -1;
+    const cliente :Cliente = {
+
+      id: -1,
+      nombre: null!,
+      email: null!,
+      telefono: null!
+    };
+    
     this.nuevoDialog.open(ModalClientesComponent,{disableClose:true,data:cliente}).afterClosed().subscribe(
       (res)=>{
         if(res>0){
