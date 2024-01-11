@@ -21,34 +21,34 @@ export class ClientesService {
 
   };
 
-  mostrarClientes():Observable<ResponseApi>{
+  getAll():Observable<Cliente[]>{
 
-    return this.http.get<ResponseApi>(this.urlApi,this.httpOptions);
+    return this.http.get<Cliente[]>(this.urlApi,this.httpOptions);
 
   }
 
-  mostrarUnCliente(idCliente:number):Observable<ResponseApi>{
+  getById(idCliente:number):Observable<Cliente>{
 
-    return this.http.get<ResponseApi>(`${this.urlApi}/${idCliente}`,this.httpOptions);
+    return this.http.get<Cliente>(`${this.urlApi}/${idCliente}`,this.httpOptions);
   }
   
-  agregarCliente(cliente:Cliente):Observable<ResponseApi>{
+  create(cliente:Cliente):Observable<Cliente>{
 
-    return this.http.post<ResponseApi>(this.urlApi,cliente,this.httpOptions);
+    return this.http.post<Cliente>(this.urlApi,cliente,this.httpOptions);
 
   }
 
  
-  actualizarCliente(cliente:Cliente):Observable<ResponseApi>{
+  update(cliente:Cliente):Observable<Cliente>{
 
-    return this.http.put<ResponseApi>(this.urlApi,cliente,this.httpOptions);
+    return this.http.put<Cliente>(this.urlApi+"/"+cliente.id,cliente,this.httpOptions);
   
   }
 
   
-  eliminarCliente(id:number):Observable<ResponseApi>{
+  delete(id:number):Observable<void>{
 
-    return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`,this.httpOptions);
+    return this.http.delete<void>(`${this.urlApi}/${id}`,this.httpOptions);
   
   }
   
