@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Cliente } from '../models/cliente';
 import { ResponseApi } from '../models/response-api';
 import { environment } from 'src/environments/environment';
+import { Turno } from '../models/turno/turno';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,12 @@ export class ClientesService {
 
     return this.http.get<Cliente>(`${this.urlApi}/${idCliente}`,this.httpOptions);
   }
-  
+  getTurnos(idCliente:number):Observable<Turno[]>{
+
+    return this.http.get<Turno[]>(`${this.urlApi}/turnos/${idCliente}`, this.httpOptions);
+  }
+
+
   create(cliente:Cliente):Observable<Cliente>{
 
     return this.http.post<Cliente>(this.urlApi,cliente,this.httpOptions);

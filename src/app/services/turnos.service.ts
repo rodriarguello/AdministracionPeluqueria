@@ -52,9 +52,4 @@ export class TurnosService {
     return this.http.put<void>(`${this.urlApi}/asistencia/${idTurno}`,asistencia,this.httpOptions);
   }
 
-  mostrarTurnosDeCliente(idCliente:number):Observable<ResponseApi>{
-
-    return this.http.get<ResponseApi>(`${this.urlApi}/cliente/${idCliente}`, this.httpOptions);
-  }
-
 }

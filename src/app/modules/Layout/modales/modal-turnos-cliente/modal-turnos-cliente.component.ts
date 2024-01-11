@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Cliente } from 'src/app/models/cliente';
 import { Turno } from 'src/app/models/turno/turno';
-import { TurnosService } from 'src/app/services/turnos.service';
+import { ClientesService } from 'src/app/services/clientes.service';
 
 @Component({
   selector: 'app-modal-turnos-cliente',
@@ -11,7 +11,7 @@ import { TurnosService } from 'src/app/services/turnos.service';
 })
 export class ModalTurnosClienteComponent implements OnInit{
 
-  constructor(@Inject(MAT_DIALOG_DATA) public dataCliente:Cliente, private turnoService:TurnosService){
+  constructor(@Inject(MAT_DIALOG_DATA) public dataCliente:Cliente, private clienteService:ClientesService){
     this.mostrarTurnosCliente();
   }
   ngOnInit(): void {
@@ -27,12 +27,12 @@ export class ModalTurnosClienteComponent implements OnInit{
   mostrarTurnosCliente():void{
 
 
-    this.turnoService.mostrarTurnosDeCliente(this.dataCliente.id!).subscribe({
+    this.clienteService.getTurnos(this.dataCliente.id!).subscribe({
       next:(res)=>{
-        if(res.resultado ===1){
-          this.listTurnos = res.data;
-          
-        }
+          this.listTurnos = res;
+      },
+      error:()=>{
+
       }
     });
 
