@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ResponseApi } from '../models/response-api';
 import { environment } from 'src/environments/environment';
+import { RespuestaCaja } from '../models/respuesta-caja';
 
 @Injectable({
   providedIn: 'root'
@@ -20,20 +20,20 @@ export class CajaService {
   })}
 
 
-  mostrarIngresosPorAnio(anio:number):Observable<ResponseApi>{
+  getIngresoAnual(anio:number):Observable<RespuestaCaja>{
 
-    return this.http.get<ResponseApi>(`${this.urlApi}/${anio}`, this.httpOptions);
+    return this.http.get<RespuestaCaja>(`${this.urlApi}/${anio}`, this.httpOptions);
 
   }
 
-  mostrarIngresosPorMes(anio:number,mes:number):Observable<ResponseApi>{
+  getIngresoMensual(anio:number,mes:number):Observable<RespuestaCaja>{
 
-    return this.http.get<ResponseApi>(`${this.urlApi}/${anio}/${mes}`, this.httpOptions);
+    return this.http.get<RespuestaCaja>(`${this.urlApi}/${anio}/${mes}`, this.httpOptions);
   }
 
-  mostrarIngresosPorDia(anio:number,mes:number,dia:number):Observable<ResponseApi>{
+  getIngresoDiario(anio:number,mes:number,dia:number):Observable<RespuestaCaja>{
 
-    return this.http.get<ResponseApi>(`${this.urlApi}/${anio}/${mes}/${dia}`, this.httpOptions);
+    return this.http.get<RespuestaCaja>(`${this.urlApi}/${anio}/${mes}/${dia}`, this.httpOptions);
   }
 
   
