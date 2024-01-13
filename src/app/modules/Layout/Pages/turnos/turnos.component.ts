@@ -44,18 +44,12 @@ export class TurnosComponent implements OnInit{
   }
   
   mostrarCalendario():void{
-    this.calendarioService.mostrarCalendario().subscribe({
+    this.calendarioService.get().subscribe({
       next:(res)=>{
-        if(res.resultado===1){
-          this.calendario = res.data; 
-          
-        }
-        else{
-          console.log(res);
-        }
+          this.calendario = res; 
+         
       },
-      error:(error)=>{
-        console.log(error);
+      error:()=>{
       }
     });
   }

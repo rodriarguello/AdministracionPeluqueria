@@ -39,27 +39,24 @@ export class ModalCalendarioComponent {
 
 
   crearCalendario():void{
-    const calendario = new Calendario();
-    calendario.nombre = this.formCalendario.value.nombre;
-    calendario.fechaInicio = this.formCalendario.value.fechaInicio;
-    calendario.fechaFin = this.formCalendario.value.fechaFin;
-    calendario.horaInicioTurnos = this.formCalendario.value.horaInicio;
-    calendario.horaFinTurnos = this.formCalendario.value.horaFin;
-    calendario.intervaloTurnos = this.formCalendario.value.intervaloTurnos;
+    const calendario :Calendario = {
+
+      nombre: this.formCalendario.value.nombre,
+      fechaInicio: this.formCalendario.value.fechaInicio,
+      fechaFin: this.formCalendario.value.fechaFin,
+      horaInicioTurnos: this.formCalendario.value.horaInicio,
+      horaFinTurnos: this.formCalendario.value.horaFin,
+      intervaloTurnos: this.formCalendario.value.intervaloTurnos
+    };
     
-    this.calendarioService.crearCalendario(calendario).subscribe({
-      next:(res)=>{
-        if(res.resultado ===1){
-          this.utilidadService.mostrarAlerta("El calendario se creo con éxito", "OK");
+    this.calendarioService.create(calendario).subscribe({
+      next:()=>{
+          this.utilidadService.alertaExito("El calendario se creo con éxito", "OK");
           this.dialogoActual.close(true);
-        }
-        else{
-          this.utilidadService.mostrarAlerta("No se pudo crear el calendario", "ERROR");
-          
-        }
+       
       },
       error:()=>{
-        this.utilidadService.mostrarAlerta("No se pudo crear el calendario", "ERROR");
+        this.utilidadService.alertaError("No se pudo crear el calendario", "ERROR");
         
       }
     });
