@@ -1,10 +1,10 @@
-export class AgregarMascota{
+export interface AgregarMascota{
 
-    nombre!:string;
-    fechaNacimiento!:string;
-    idCliente!:number;
-    idRaza!:number;
-    idEnfermedades!:number[];
-    idAlergias!:number[];
+    nombre:string,
+    fechaNacimiento:string,
+    idCliente:number,
+    idRaza:number,
+    idEnfermedades:number[],
+    idAlergias:number[]
 
 }

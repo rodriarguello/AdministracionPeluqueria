@@ -1,8 +1,8 @@
-export class MascotaSinDetalles{
+export interface MascotaSinDetalles{
 
-    id!:number;
-    nombre!:string;
-    fechaNacimiento!:string;
+    id:number,
+    nombre:string,
+    fechaNacimiento:string
 
 
 }
