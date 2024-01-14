@@ -40,17 +40,12 @@ export class ModalReservarTurnoComponent implements OnInit {
   listMascotas:Mascota[] = [];
 
   mostrarMascotas():void{
-    this.mascotaService.mostrarMascotas().subscribe({
+    this.mascotaService.getAll().subscribe({
       next:(res)=>{
-        if(res.resultado===1){
-          this.listMascotas = res.data;
-        }
-        else{
-          console.log(res.mensaje)
-        }
+          this.listMascotas = res;
+        
       },
-      error:(err)=>{
-        console.log(err);
+      error:()=>{
       }
     });
   }
@@ -76,8 +71,21 @@ export class ModalReservarTurnoComponent implements OnInit {
   }
 
   agregarMascota():void{
-    let mascota = new Mascota();
-    mascota.id = -1;
+    let mascota:Mascota = {
+      id: -1,
+      nombre:null!,
+      fechaNacimiento:null!,
+      idCliente:null!,
+      cliente:null!,
+      idRaza:null!,
+      raza:null!,
+      idAlergias:null!,
+      idEnfermedades:null!,
+      enfermedades:null!,
+      alergias:null!,
+      turnos:null!
+
+    }
     this.nuevoDialog.open(ModalMascotasComponent,{disableClose:true,data:mascota}).afterClosed().subscribe(
       (res)=>{
         if(res!=null){

@@ -10,6 +10,7 @@ import { ModalMascotasDetalleComponent } from '../modal-mascotas-detalle/modal-m
 import { ModalMascotasComponent } from '../modal-mascotas/modal-mascotas.component';
 import { ModalTurnosClienteComponent } from '../modal-turnos-cliente/modal-turnos-cliente.component';
 import { Mascota } from 'src/app/models/mascota/mascota';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-modal-cliente-detalle',
@@ -56,40 +57,29 @@ export class ModalClienteDetalleComponent implements OnInit {
 
   detalleMascota(idMascota:number):void{
 
-    this.mascotaService.mostrarUnaMascota(idMascota).subscribe({
+    this.mascotaService.getById(idMascota).subscribe({
       next:(res)=>{
-        if(res.resultado===1){
-          this.dialog.open(ModalMascotasDetalleComponent,{disableClose:true,data:res.data})
-        }
-        else{
-          console.log(res);
-        }
+          this.dialog.open(ModalMascotasDetalleComponent,{disableClose:true,data:res})
       },
-      error:(error)=>{
-        console.log(error);
+      error:()=>{
       }
       
     });
   }
 
   editarMascota(idMascota:number):void{
-    this.mascotaService.mostrarUnaMascota(idMascota).subscribe({
+    this.mascotaService.getById(idMascota).subscribe({
       next:(res)=>{
-        if(res.resultado===1){
           
-          this.dialog.open(ModalMascotasComponent,{disableClose:true,data:res.data}).afterClosed().subscribe((res)=>{
+          this.dialog.open(ModalMascotasComponent,{disableClose:true,data:res}).afterClosed().subscribe((res)=>{
             if(res==="true"){
               this.mostrarMascotas();
               this.modificoDato = true;
             }
           });
-        }
-        else{
-          console.log(res);
-        }
+        
       },
-      error:(error)=>{
-        console.log(error);
+      error:()=>{
       }
       
     });
@@ -108,22 +98,20 @@ export class ModalClienteDetalleComponent implements OnInit {
     cancelButtonText:"No,volver"
     }).then((res)=>{
       if(res.isConfirmed){
-          this.mascotaService.eliminarMascota(id).subscribe({
+          this.mascotaService.delete(id).subscribe({
           next:(res)=>{
-            if(res.resultado===1){
-              this.utilidadService.mostrarAlerta("La Mascota se eliminó con éxito","Exito");
+              this.utilidadService.alertaExito("La Mascota se eliminó con éxito","Exito");
               this.mostrarMascotas();
               this.modificoDato = true;
-            }
-            else{
-              this.utilidadService.mostrarAlerta("No se pudo eliminar la Mascota","Error");
-              console.log(res);
-            }
-          },
-          error:(error)=>{
             
-            this.utilidadService.mostrarAlerta("No se pudo eliminar la Mascota","Error");
-            console.log(error);
+          },
+          error:(err:HttpErrorResponse)=>{
+            if(err.status === 499){
+              this.utilidadService.alertaError(err.message,"ERROR");
+            }else{
+
+              this.utilidadService.alertaError("No se pudo eliminar la Mascota","Error");
+            }
           }
         });
       }

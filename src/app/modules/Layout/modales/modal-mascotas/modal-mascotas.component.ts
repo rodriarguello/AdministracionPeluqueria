@@ -35,7 +35,7 @@ export class ModalMascotasComponent implements OnInit {
 
 
     constructor(
-      private fb:FormBuilder, 
+      fb:FormBuilder, 
       private dialogoActual:MatDialogRef<ModalMascotasComponent>, 
       @Inject(MAT_DIALOG_DATA)public dataMascota:Mascota,
       private mascotaService:MascotasService,
@@ -167,82 +167,66 @@ export class ModalMascotasComponent implements OnInit {
   agregarActualizarMascota(){
 
    if(this.dataMascota !=null && this.dataMascota.id != -1){
-    const mascota = new Mascota();
-    mascota.id = this.dataMascota.id;
-    mascota.nombre = this.formMascotas.value.nombre;
-    mascota.fechaNacimiento = this.formMascotas.value.fechaNacimiento;
-    mascota.idRaza = this.formMascotas.value.raza;
-    mascota.idCliente = this.formMascotas.value.cliente;
+     const listAlergias:Alergia[] = this.formMascotas.value.alergias;
+     const listIdAlergias = listAlergias.map(alergia=> alergia.id!);
 
-    const listIdAlergias:Alergia[] = this.formMascotas.value.alergias;
-    mascota.idAlergias = listIdAlergias.map(alergia=> alergia.id!);
-
-
-    const listIdEnfermedades:Enfermedad[] = this.formMascotas.value.enfermedades;
-    mascota.idEnfermedades = listIdEnfermedades.map(enfermedad=> enfermedad.id!);
-   
+     const listEnfermedades:Enfermedad[] = this.formMascotas.value.enfermedades;
+     const listIdEnfermedades = listEnfermedades.map(enfermedad=> enfermedad.id!);
     
+     const mascota: AgregarMascota = {
+      nombre: this.formMascotas.value.nombre,
+      fechaNacimiento: this.formMascotas.value.fechaNacimiento,
+      idRaza: this.formMascotas.value.raza,
+      idCliente: this.formMascotas.value.cliente,
+      idAlergias:listIdAlergias,
+      idEnfermedades:listIdEnfermedades
+    };
     
 
-    this.mascotaService.actualizarMascota(mascota).subscribe({next:(res)=>{
-      if(res.resultado===1){
+    this.mascotaService.update(this.dataMascota.id, mascota).subscribe({next:(res)=>{
         this.dialogoActual.close("true");
-        this.utilidadService.mostrarAlerta("La Mascota se modificó con éxito","Exito");
-      }
-      else{
-        console.log(res);
-        this.utilidadService.mostrarAlerta("No se pudo modificar la Mascota","Error");
-      }
+        this.utilidadService.alertaExito("La Mascota se modificó con éxito","Exito");
+   
     },
-    error:(error)=>{
-      console.log(error);
-      this.utilidadService.mostrarAlerta("No se pudo modificar la Mascota","Error");
+    error:()=>{
+      this.utilidadService.alertaError("No se pudo modificar la Mascota","Error");
     }
   });  
   
   }
    else{
-    const mascota = new AgregarMascota();
-    mascota.nombre = this.formMascotas.value.nombre;
-    mascota.fechaNacimiento = this.formMascotas.value.fechaNacimiento;
-    mascota.idRaza = this.formMascotas.value.raza;
-    mascota.idCliente = this.formMascotas.value.cliente;
+     const listAlergias:Alergia[] = this.formMascotas.value.alergias;
+ 
+     const listIdAlergias = listAlergias.map(alergia=> alergia.id!);
+ 
+     const listEnfermedades:Enfermedad[] = this.formMascotas.value.enfermedades;
+     
+    const listIdEnfermedades = listEnfermedades.map(enfermedad=> enfermedad.id!);
+    const mascota:AgregarMascota = {
 
-    const listAlergias:Alergia[] = this.formMascotas.value.alergias;
+      nombre: this.formMascotas.value.nombre,
+      fechaNacimiento :this.formMascotas.value.fechaNacimiento,
+      idRaza :this.formMascotas.value.raza,
+      idCliente :this.formMascotas.value.cliente,
+      idAlergias: listIdAlergias,
+      idEnfermedades: listIdEnfermedades
+    };
 
-    mascota.idAlergias = listAlergias.map(alergia=> alergia.id!);
-
-    const listEnfermedades:Enfermedad[] = this.formMascotas.value.enfermedades;
     
-    mascota.idEnfermedades = listEnfermedades.map(enfermedad=> enfermedad.id!);
-    
-    this.mascotaService.agregarMascota(mascota).subscribe({
+    this.mascotaService.create(mascota).subscribe({
        next:(res)=>{
-
-         if(res.resultado===1){
-          
               if(this.dataMascota && this.dataMascota.id===-1){
-                this.dialogoActual.close(res.data.id);
+                this.dialogoActual.close(res.id);
               }
               else{
                 
                 this.dialogoActual.close("true");
               }
-              this.utilidadService.mostrarAlerta("Se agrego una nueva Mascota","Exito");
+              this.utilidadService.alertaExito("Se agrego una nueva Mascota","Exito");
 
-        }
-         
-        else
-        {
-          
-          this.utilidadService.mostrarAlerta("No se pudo agregar la Mascota","Error"); 
-          console.log(res);
-           
-        }
-       },
-       error:(error)=>{
-        this.utilidadService.mostrarAlerta("No se pudo agregar la Mascota","Error");
-        console.log(error);
+            },
+       error:()=>{
+        this.utilidadService.alertaError("No se pudo agregar la Mascota","Error");
        }
      });
      
