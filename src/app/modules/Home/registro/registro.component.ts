@@ -85,7 +85,7 @@ const usuario:Usuario = {
 this.usuarioService.registro(usuario).subscribe({
   next: ()=>{
     
-    this.utilidadService.mostrarAlerta("Registro Exitoso", "REGISTRO");
+    this.utilidadService.alertaExito("Registro Exitoso", "REGISTRO");
     this.formularioRegistro.patchValue({
       email:'',
       password:''
@@ -95,12 +95,10 @@ this.usuarioService.registro(usuario).subscribe({
 
     this.mostrarRegistro.emit(false);
     this.mostrarLogin.emit(true);
-    setTimeout(() => {
-      this.utilidadService.mostrarAlerta("Ahora tenés que iniciar sesión", "REGISTRO");
-    }, 3000);
+    
   },
   error:()=>{
-   this.utilidadService.mostrarAlerta("Error al registrarse","REGISTRO");
+   this.utilidadService.alertaError("Error al registrarse","REGISTRO");
   }
 });
 

@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
   },
   error:()=>{
     
-    this.utilidadService.mostrarAlerta("Error al iniciar sesion","LOGIN")
+    this.utilidadService.alertaError("Error al iniciar sesion","LOGIN")
   }
   
   
