@@ -159,14 +159,14 @@
             <mat-icon style="color: dodgerblue;">find_in_page</mat-icon>
           <span>Detalles</span>
         </button>
-        <button mat-menu-item [disabled]="turnoMenu.disponible" (click)="cancelarReserva(turnoMenu)">
+        <button mat-menu-item [disabled]="turnoMenu.disponible || turnoMenu.mascota === null || turnoMenu.asistio" (click)="cancelarReserva(turnoMenu)">
             <mat-icon color="warn">event_busy</mat-icon>
           <span>Cancelar Reserva</span>
         </button>
         <button mat-menu-item [disabled]="turnoMenu.disponible" >
             <mat-icon color="primary">ballot</mat-icon>
             <span>Asistió</span>
-            <mat-checkbox class="ms-2" [checked]="turnoMenu.asistio" (change)="modificarAsistencia(turnoMenu, input.checked)" #input  color="primary"></mat-checkbox>
+            <mat-checkbox class="ms-2" [checked]="turnoMenu.asistio" [disabled]="turnoMenu.mascota === null" (change)="modificarAsistencia(turnoMenu, input.checked)" #input  color="primary"></mat-checkbox>
           </button>
       </mat-menu>
 

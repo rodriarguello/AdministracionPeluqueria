@@ -26,7 +26,7 @@
                         
                     </ng-template>
                 </div>
-                <mat-card-subtitle class="subtitulo-turno">Mascota: {{turno.mascota.nombre}}</mat-card-subtitle>
+                <mat-card-subtitle class="subtitulo-turno">Mascota: {{turno.mascota?turno.mascota.nombre:'Mascota Eliminada'}}</mat-card-subtitle>
                 <mat-card-subtitle class="subtitulo-turno" >Asistió:{{turno.asistio?' Si':' Todavía no'}}</mat-card-subtitle>
                 
                 
@@ -126,14 +126,14 @@
             <mat-icon style="color: dodgerblue;">find_in_page</mat-icon>
             <span>Detalles</span>
         </button>
-        <button mat-menu-item [disabled]="turnoMenu.disponible" (click)="cancelarReserva(turnoMenu)">
+        <button mat-menu-item [disabled]="turnoMenu.disponible || turnoMenu.mascota === null || turnoMenu.asistio" (click)="cancelarReserva(turnoMenu)">
             <mat-icon color="warn">event_busy</mat-icon>
           <span>Cancelar Reserva</span>
         </button>
         <button mat-menu-item [disabled]="turnoMenu.disponible" >
             <mat-icon color="primary">ballot</mat-icon>
             <span>Asistió</span>
-            <mat-checkbox class="ms-2" #inputAsistencia [checked]="turnoMenu.asistio" (change)="modificarAsistencia(turnoMenu, inputAsistencia.checked)" color="primary"></mat-checkbox>
+            <mat-checkbox class="ms-2" #inputAsistencia [disabled]="turnoMenu.mascota === null" [checked]="turnoMenu.asistio" (change)="modificarAsistencia(turnoMenu, inputAsistencia.checked)" color="primary"></mat-checkbox>
           </button>
       </mat-menu>
     

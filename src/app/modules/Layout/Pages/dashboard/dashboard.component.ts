@@ -12,6 +12,7 @@ import swal from 'sweetalert2';
 import { ModalReservarTurnoComponent } from '../turnos/modales-turnos/modal-reservar-turno/modal-reservar-turno.component';
 import { ModalDetalleTurnoComponent } from '../turnos/modales-turnos/modal-detalle-turno/modal-detalle-turno.component';
 import * as moment from 'moment';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -126,7 +127,7 @@ export class DashboardComponent implements OnInit {
     const fecha = moment(turno.fecha.toString().slice(0,10));
     swal.fire({
       title:"¿Desea Cancelar el Turno?",
-      text: `De la mascota ${turno.mascota.nombre}, el día ${fecha.format('LL')} a las ${turno.horario.toString().slice(0,5)} horas.`,
+      text: `De la mascota ${turno.mascota!.nombre}, el día ${fecha.format('LL')} a las ${turno.horario.toString().slice(0,5)} horas.`,
       icon:"warning",
       iconColor:'red',
       confirmButtonColor:"#3085d6",
@@ -173,8 +174,14 @@ export class DashboardComponent implements OnInit {
             this.mostrarResumenDiario();
          
         },
-        error:()=>{
-          this.utilidadService.alertaError("No se pudo modificar la asistencia","ERROR");
+        error:(err:HttpErrorResponse)=>{
+          if(err.status === 499){
+            
+            this.utilidadService.alertaError(err.error,"ERROR");
+          }else{
+            
+            this.utilidadService.alertaError("No se pudo modificar la asistencia","ERROR");
+          }
         }
         
       });

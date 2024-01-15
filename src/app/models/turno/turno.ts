@@ -5,7 +5,7 @@ export interface Turno{
     fecha:Date,
     horario:string,
     disponible:boolean,
-    mascota:MascotaSinDetalles,
+    mascota?:MascotaSinDetalles,
     asistio:boolean,
     precio:number
     

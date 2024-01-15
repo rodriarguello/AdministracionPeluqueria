@@ -94,7 +94,7 @@ export class MascotasComponent implements OnInit, AfterViewInit{
           },
           error:(err:HttpErrorResponse)=>{
             if(err.status === 499){
-              this.utilidadService.alertaError(err.message,"Error");
+              this.utilidadService.alertaError(err.error,"Error");
             }else{
               
               this.utilidadService.alertaError("No se pudo eliminar la Mascota","Error");
