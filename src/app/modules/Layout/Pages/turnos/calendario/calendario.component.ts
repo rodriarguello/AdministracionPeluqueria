@@ -105,13 +105,13 @@ export class CalendarioComponent implements OnInit, OnChanges{
 
   mostrarTurnos(){
    
-    const fechaSeleccionada =  moment.utc(this.fecha);
+    const fechaSeleccionada =  moment.utc(this.fecha).subtract(3, 'hours');
     
+      
     if(fechaSeleccionada.isoWeekday() === 1){
-      this.fechaInicio = fechaSeleccionada.clone().subtract(6,'days');
-      this.fechaFin = fechaSeleccionada.clone();
-    }    
-
+      this.fechaInicio = fechaSeleccionada.clone();
+      this.fechaFin = this.fechaInicio.clone().add(6,'days');
+    }
     
     if(fechaSeleccionada.isoWeekday() === 2){
       this.fechaInicio = fechaSeleccionada.clone().subtract(1,'days');
@@ -144,13 +144,12 @@ export class CalendarioComponent implements OnInit, OnChanges{
       this.fechaInicio = fechaSeleccionada.clone().subtract(5,'days');
         this.fechaFin = this.fechaInicio.clone().add(6,'days');
     }
-
     if(fechaSeleccionada.isoWeekday() === 7){
-      this.fechaInicio = fechaSeleccionada.clone();
-      this.fechaFin = this.fechaInicio.clone().add(6,'days');
-    }
+      this.fechaInicio = fechaSeleccionada.clone().subtract(6,'days');
+      this.fechaFin = fechaSeleccionada.clone();
+    }  
 
-    this.turnosService.filtrarTurnos(this.calendario.id!,this.fechaInicio.utcOffset(-3).format('YYYY-MM-DD'),this.fechaFin.utcOffset(-3).format('YYYY-MM-DD')).subscribe({
+    this.turnosService.filtrarTurnos(this.calendario.id!,this.fechaInicio.format(),this.fechaFin.format()).subscribe({
       next:(res)=>{
 
         this.cabecerasFechas = [];

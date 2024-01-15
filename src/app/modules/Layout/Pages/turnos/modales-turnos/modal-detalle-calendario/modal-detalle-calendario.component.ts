@@ -28,7 +28,7 @@ export class ModalDetalleCalendarioComponent {
     swal.fire({
 
       title:"¿Desea eliminar el Calendario?",
-      text: calendario.nombre,
+      text: 'Si elimina el calendario, se eliminaran todos los turnos de forma definitiva. No se puede revertir esta accción.',
       icon:"warning",
       iconColor:'red',
       confirmButtonColor:"#3085d6",
