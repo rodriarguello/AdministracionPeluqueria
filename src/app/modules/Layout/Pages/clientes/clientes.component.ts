@@ -9,6 +9,7 @@ import { ModalClientesComponent } from '../../modales/modal-clientes/modal-clien
 import swal from 'sweetalert2';
 import { ModalClienteDetalleComponent } from '../../modales/modal-cliente-detalle/modal-cliente-detalle.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-clientes',
@@ -105,7 +106,21 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           error:(error:HttpErrorResponse)=>{
 
             if(error.status === 499){
-              this.utilidadService.alertaError(`Para eliminar el/la cliente: "${cliente.nombre}", primero debe eliminar todas las mascotas que están asociadas a el/ella.`,"Error");
+              Swal.fire({
+                title:"Error",
+                text: `Para eliminar el/la cliente: "${cliente.nombre}", primero debe eliminar todas las mascotas que están asociadas a el/ella.`,
+                icon:"warning",
+                iconColor:'red',
+                confirmButtonColor:"#3085d6",
+                confirmButtonText:"Ver mascotas",
+                showCancelButton:true,
+                cancelButtonColor:"#d33",
+                cancelButtonText:"Cerrar"
+                }).then((res)=>{
+                  if(res.isConfirmed){
+                      this.mostrarDetalles(cliente.id!);
+                  }
+                });
             }else{
 
               this.utilidadService.alertaError("No se pudo eliminar el cliente","Error");
