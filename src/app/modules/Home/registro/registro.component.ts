@@ -71,22 +71,21 @@ customPasswordValidator(control: AbstractControl): { [key: string]: any } | null
 
 registrarUsuario():void{
 
-const usuario = new Usuario();
+const usuario:Usuario = {
 
-usuario.email = this.formularioRegistro.value.email;
+  email:this.formularioRegistro.value.email,
+  password: this.formularioRegistro.value.password,
+  nombres: this.formularioRegistro.value.nombres,
+  apellido: this.formularioRegistro.value.apellido,
+  nombrePeluqueria: this.formularioRegistro.value.nombrePeluqueria
+};
 
-usuario.password = this.formularioRegistro.value.password;
 
-usuario.nombres = this.formularioRegistro.value.nombres;
 
-usuario.apellido = this.formularioRegistro.value.apellido;
-
-usuario.nombrePeluqueria = this.formularioRegistro.value.nombrePeluqueria;
-
-this.usuarioService.crearUsuario(usuario).subscribe({
+this.usuarioService.registro(usuario).subscribe({
   next: ()=>{
     
-    this.utilidadService.mostrarAlerta("Registro Exitoso", "REGISTRO");
+    this.utilidadService.alertaExito("Registro Exitoso", "REGISTRO");
     this.formularioRegistro.patchValue({
       email:'',
       password:''
@@ -96,12 +95,10 @@ this.usuarioService.crearUsuario(usuario).subscribe({
 
     this.mostrarRegistro.emit(false);
     this.mostrarLogin.emit(true);
-    setTimeout(() => {
-      this.utilidadService.mostrarAlerta("Ahora tenés que iniciar sesión", "REGISTRO");
-    }, 3000);
+    
   },
   error:()=>{
-   this.utilidadService.mostrarAlerta("Error al registrarse","REGISTRO");
+   this.utilidadService.alertaError("Error al registrarse","REGISTRO");
   }
 });
 

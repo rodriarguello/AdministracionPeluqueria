@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AgregarMascota } from '../models/mascota/agregarMascota';
 import { Mascota } from '../models/mascota/mascota';
-import { ResponseApi } from '../models/response-api';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -21,28 +20,28 @@ export class MascotasService {
   })}
 
 
-  mostrarMascotas():Observable<ResponseApi>{
+  getAll():Observable<Mascota[]>{
 
-    return this.http.get<ResponseApi>(this.urlApi,this.htttpOptions);
+    return this.http.get<Mascota[]>(this.urlApi,this.htttpOptions);
   }
 
-  mostrarUnaMascota(id:number):Observable<ResponseApi>{
+  getById(id:number):Observable<Mascota>{
     
-    return this.http.get<ResponseApi>(`${this.urlApi}/${id}`,this.htttpOptions);
+    return this.http.get<Mascota>(`${this.urlApi}/${id}`,this.htttpOptions);
   }
 
-  agregarMascota(mascota:AgregarMascota):Observable<ResponseApi>{
+  create(mascota:AgregarMascota):Observable<Mascota>{
 
-    return this.http.post<ResponseApi>(this.urlApi,mascota,this.htttpOptions);
+    return this.http.post<Mascota>(this.urlApi,mascota,this.htttpOptions);
   }
 
-  actualizarMascota(mascota:Mascota):Observable<ResponseApi>{
+  update(id:number, mascota:AgregarMascota):Observable<Mascota>{
 
-    return this.http.put<ResponseApi>(this.urlApi,mascota,this.htttpOptions);
+    return this.http.put<Mascota>(this.urlApi+'/'+id,mascota,this.htttpOptions);
   }
 
-  eliminarMascota(id:number):Observable<ResponseApi>{
+  delete(id:number):Observable<void>{
 
-    return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`,this.htttpOptions);
+    return this.http.delete<void>(`${this.urlApi}/${id}`,this.htttpOptions);
   }
 }

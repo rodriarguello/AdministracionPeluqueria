@@ -4,18 +4,18 @@ import { Enfermedad } from "../enfermedad";
 import { Raza } from "../raza";
 import { Turno } from "../turno/turno";
 
-export class Mascota{
+export interface Mascota{
     
-    id!:number;
-    nombre!:string;
-    fechaNacimiento!:string;
-    idCliente!:number;
-    cliente!:Cliente;
-    idRaza!:number;
-    raza!:Raza;
-    idEnfermedades!:number[];
-    enfermedades!:Enfermedad[];
-    idAlergias!:number[];
-    alergias!:Alergia[];
-    turnos!:Turno[];
+    id:number,
+    nombre:string,
+    fechaNacimiento:string,
+    idCliente:number,
+    cliente:Cliente,
+    idRaza:number,
+    raza:Raza,
+    idEnfermedades:number[],
+    enfermedades:Enfermedad[],
+    idAlergias:number[],
+    alergias?:Alergia[],
+    turnos?:Turno[]
 }

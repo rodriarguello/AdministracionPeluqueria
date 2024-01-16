@@ -64,29 +64,24 @@ export class ModalClientesComponent  implements OnInit{
       //Metodo modificar
       
       
-      const cliente = new Cliente();
-      cliente.id = this.dataCliente.id;
-      cliente.nombre = this.formClientes.value.nombre;
-      cliente.telefono = this.formClientes.value.telefono;
-      cliente.email = this.formClientes.value.email;
-      cliente.mascotas = this.dataCliente.mascotas;
+      const cliente:Cliente = {
+        
+        id: this.dataCliente.id,
+        nombre: this.formClientes.value.nombre,
+        telefono: this.formClientes.value.telefono,
+        email: this.formClientes.value.email,
+        mascotas: this.dataCliente.mascotas
+      };
  
 
-      this.clientesService.actualizarCliente(cliente).subscribe({
-        next:(res)=>{
-          if(res.resultado ===1){
-            this.utilidadService.mostrarAlerta("El cliente se modificó con éxito","Exito");
+      this.clientesService.update(cliente).subscribe({
+        next:()=>{
+            this.utilidadService.alertaExito("El cliente se modificó con éxito","Exito");
             this.modalActual.close("true");
-            
-          }
-          else{
-            console.log(res);
-            this.utilidadService.mostrarAlerta("No se pudo modificar el Cliente","Error");
-          }
+         
         },
-        error:(error)=>{
-          console.log(error);
-          this.utilidadService.mostrarAlerta("No se pudo modificar el Cliente","Error");
+        error:()=>{
+          this.utilidadService.alertaError("No se pudo modificar el Cliente","Error");
         }
       });
 
@@ -94,32 +89,26 @@ export class ModalClientesComponent  implements OnInit{
     else{
       //Metodo agregar
 
-      const cliente = new Cliente();
-      cliente.nombre = this.formClientes.value.nombre;
-      cliente.telefono = this.formClientes.value.telefono;
-      cliente.email = this.formClientes.value.email;
+      const cliente: Cliente ={
+        nombre: this.formClientes.value.nombre,
+        telefono: this.formClientes.value.telefono,
+        email: this.formClientes.value.email,
+      } 
 
-      this.clientesService.agregarCliente(cliente).subscribe({
+      this.clientesService.create(cliente).subscribe({
         next:(res)=>{
-          if(res.resultado ===1){ 
-            this.utilidadService.mostrarAlerta("Se agregó un nuevo Cliente","Exito");
+            this.utilidadService.alertaExito("Se agregó un nuevo Cliente","Exito");
             if(this.dataCliente != null){
               if(this.dataCliente.id===(-1))
-                this.modalActual.close(res.data.id);
+                this.modalActual.close(res.id);
             }
             else{
               
               this.modalActual.close("true");
             }
-          }
-          else{
-            this.utilidadService.mostrarAlerta("No se pudo agregar el Cliente","Error");
-            console.log(res);
-          }
         },
-        error:(error)=>{
-          this.utilidadService.mostrarAlerta("No se pudo agregar el Cliente","Error");
-          console.log(error);
+        error:()=>{
+          this.utilidadService.alertaError("No se pudo agregar el Cliente","Error");
         }
 
       });

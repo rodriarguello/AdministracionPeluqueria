@@ -4,24 +4,29 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpResponse
 } from '@angular/common/http';
-import { Observable, map, tap } from 'rxjs';
+import { Observable,tap, take } from 'rxjs';
 import { UsuariosService } from '../services/usuarios.service';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor(private usuarioService:UsuariosService, private router:Router) {}
+  constructor(private usuarioService:UsuariosService, private router:Router) {
 
+  }
+  token:string|null = null;
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-   const credencialesUsuario = this.usuarioService.getCredencialesUsuario;
-   if(credencialesUsuario) {
+   
+    this.usuarioService.getToken.pipe(take(1)).subscribe({
+      next:(res)=> this.token = res
+    });
+
+   if(this.token !== null) {
     request = request.clone({
 
       setHeaders:{
-        Authorization : `Bearer ${credencialesUsuario.token}`
+        Authorization : `Bearer ${this.token}`
       }
 
     });
@@ -38,7 +43,7 @@ export class JwtInterceptor implements HttpInterceptor {
         if(error.status ==401){
 
           localStorage.removeItem('token');
-          this.usuarioService.setCredencialesUsuario = null;
+          this.usuarioService.setToken = null!;
           this.router.navigate(['index']);
 
         }

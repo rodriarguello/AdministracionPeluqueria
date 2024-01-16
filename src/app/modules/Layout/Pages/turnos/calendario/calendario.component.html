@@ -40,7 +40,7 @@
     
     
     <ul *ngIf="listLunes.length!=0;else sinTurnoLunes">
-        <li class="headers fs-5">{{cabecerasFechas[0]| formatearTituloFechas}}</li>
+        <li class="headers fs-5 lunes">{{cabecerasFechas[0]| formatearTituloFechas}}</li>
         <li *ngFor="let turno of listLunes" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center" 
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}"  (click)="turnoMenu = turno">
             {{turno.horario|slice:0:5}}
@@ -50,7 +50,7 @@
 
     <ng-template #sinTurnoLunes>
         <ul>
-            <li class="headers fs-5">{{cabecerasFechas[0]| formatearTituloFechas}}</li>
+            <li class="headers fs-5 lunes">{{cabecerasFechas[0]| formatearTituloFechas}}</li>
             <li *ngFor="let horario of listHorarios" class="fs-6 py-2 text-center"><span >---</span></li>
         </ul>
     </ng-template>
@@ -136,7 +136,7 @@
 
 
     <ul *ngIf="listDomingo.length!=0;else sinTurnoDomingo">
-        <li class="headers fs-5">{{cabecerasFechas[6]| formatearTituloFechas}}</li>
+        <li class="headers fs-5 domingo">{{cabecerasFechas[6]| formatearTituloFechas}}</li>
         <li *ngFor="let turno of listDomingo" [matMenuTriggerFor]="menu" class="turno fs-6 py-2 text-center"
         [ngClass]="{'turno-disponible':turno.disponible,'turno-ocupado':!turno.disponible}" (click)="turnoMenu = turno">
         {{turno.horario|slice:0:5}}</li>
@@ -145,8 +145,8 @@
 
     <ng-template #sinTurnoDomingo>
         <ul>
-            <li class="headers fs-5">{{cabecerasFechas[6]| formatearTituloFechas}}</li>
-            <li *ngFor="let horario of listHorarios" class="fs-6 py-2 text-center"><span >---</span></li>
+            <li class="headers fs-5 domingo">{{cabecerasFechas[6]| formatearTituloFechas}}</li>
+            <li *ngFor="let horario of listHorarios" class="fs-6 py-2 text-center sin-turno"><span >---</span></li>
         </ul>
     </ng-template>
     
@@ -159,14 +159,14 @@
             <mat-icon style="color: dodgerblue;">find_in_page</mat-icon>
           <span>Detalles</span>
         </button>
-        <button mat-menu-item [disabled]="turnoMenu.disponible" (click)="cancelarReserva(turnoMenu)">
+        <button mat-menu-item [disabled]="turnoMenu.disponible || turnoMenu.mascota === null || turnoMenu.asistio" (click)="cancelarReserva(turnoMenu)">
             <mat-icon color="warn">event_busy</mat-icon>
           <span>Cancelar Reserva</span>
         </button>
         <button mat-menu-item [disabled]="turnoMenu.disponible" >
             <mat-icon color="primary">ballot</mat-icon>
             <span>Asistió</span>
-            <mat-checkbox class="ms-2" [checked]="turnoMenu.asistio" (change)="modificarAsistencia(turnoMenu, input.checked)" #input  color="primary"></mat-checkbox>
+            <mat-checkbox class="ms-2" [checked]="turnoMenu.asistio" [disabled]="turnoMenu.mascota === null" (change)="modificarAsistencia(turnoMenu, input.checked)" #input  color="primary"></mat-checkbox>
           </button>
       </mat-menu>
 

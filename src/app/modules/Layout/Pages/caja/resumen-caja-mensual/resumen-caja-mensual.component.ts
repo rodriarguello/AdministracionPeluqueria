@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as moment from 'moment';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { RespuestaCaja } from 'src/app/models/respuesta-caja';
 import { Usuario } from 'src/app/models/usuario';
 import { CajaService } from 'src/app/services/caja.service';
@@ -15,7 +15,7 @@ export class ResumenCajaMensualComponent {
 
   constructor(private cajaService:CajaService, usuarioService:UsuariosService){
 
-    this.datosUsuario$ = usuarioService.getDatosUsuario;
+     this.datosUsuario$ = usuarioService.getDatosUsuario;
     this.fechaActual = moment();
     this.anioSeleccionado = this.fechaActual.year();
     this.mesSeleccionado = this.fechaActual.month() + 1;
@@ -97,7 +97,7 @@ export class ResumenCajaMensualComponent {
   
     generarListaAnios():void{
   
-      this.datosUsuario$.subscribe({
+      this.datosUsuario$.pipe(take(1)).subscribe({
         next:(datosUsuario)=>{
   
           const fechaCreacion = moment(datosUsuario.fechaCreacion);
@@ -141,11 +141,9 @@ export class ResumenCajaMensualComponent {
 
       
       
-      this.cajaService.mostrarIngresosPorMes(this.anioSeleccionado,this.mesSeleccionado).subscribe({
+      this.cajaService.getIngresoMensual(this.anioSeleccionado,this.mesSeleccionado).subscribe({
         next:(res)=>{
-          if(res.resultado ===1){
-            this.ingresoMensual = res.data;
-          }
+            this.ingresoMensual = res;
         }
       });
   

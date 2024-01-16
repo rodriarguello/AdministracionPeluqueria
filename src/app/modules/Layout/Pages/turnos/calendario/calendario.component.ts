@@ -1,4 +1,4 @@
-import { Component,  Input, EventEmitter, OnInit, Output, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component,  Input, EventEmitter, OnInit, Output, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Turno } from 'src/app/models/turno/turno';
 import { TurnosService } from 'src/app/services/turnos.service';
@@ -12,6 +12,8 @@ import { MY_DATA_FORMATS } from 'src/app/spinner/spinner.component';
 import { ModalDetalleCalendarioComponent } from '../modales-turnos/modal-detalle-calendario/modal-detalle-calendario.component';
 import { ModalDetalleTurnoComponent } from '../modales-turnos/modal-detalle-turno/modal-detalle-turno.component';
 import { ModalReservarTurnoComponent } from '../modales-turnos/modal-reservar-turno/modal-reservar-turno.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 
 
@@ -29,9 +31,16 @@ import { ModalReservarTurnoComponent } from '../modales-turnos/modal-reservar-tu
 export class CalendarioComponent implements OnInit, OnChanges{
   
   constructor(private turnosService:TurnosService, private dialog:MatDialog, private utilidadService:UtilidadService,private calendarioService:CalendarioService){
-    
-      this.turnoMenu = new Turno();
       moment.locale("es");
+      this.turnoMenu = {
+        id:null!,
+        fecha:null!,
+        horario:null!,
+        disponible:null!,
+        mascota:null!,
+        asistio:null!,
+        precio:null!
+      };
      
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -66,7 +75,7 @@ export class CalendarioComponent implements OnInit, OnChanges{
   fechaFin!:any;
   fechaInicio!:any;
 
-  turnoMenu!:Turno;
+  turnoMenu:Turno;
 
   ngOnInit(): void {
 
@@ -96,16 +105,13 @@ export class CalendarioComponent implements OnInit, OnChanges{
 
   mostrarTurnos(){
    
-    const fechaSeleccionada =  moment.utc(this.fecha);
-
+    const fechaSeleccionada =  moment.utc(this.fecha).subtract(3, 'hours');
     
-    
+      
     if(fechaSeleccionada.isoWeekday() === 1){
       this.fechaInicio = fechaSeleccionada.clone();
       this.fechaFin = this.fechaInicio.clone().add(6,'days');
-      
     }
-
     
     if(fechaSeleccionada.isoWeekday() === 2){
       this.fechaInicio = fechaSeleccionada.clone().subtract(1,'days');
@@ -138,23 +144,15 @@ export class CalendarioComponent implements OnInit, OnChanges{
       this.fechaInicio = fechaSeleccionada.clone().subtract(5,'days');
         this.fechaFin = this.fechaInicio.clone().add(6,'days');
     }
-
-    
     if(fechaSeleccionada.isoWeekday() === 7){
       this.fechaInicio = fechaSeleccionada.clone().subtract(6,'days');
       this.fechaFin = fechaSeleccionada.clone();
-      
-      
-    }
+    }  
 
-    
-
-
-    this.turnosService.filtrarTurnos(this.calendario.id,this.fechaInicio.format(),this.fechaFin.format()).subscribe({
+    this.turnosService.filtrarTurnos(this.calendario.id!,this.fechaInicio.format(),this.fechaFin.format()).subscribe({
       next:(res)=>{
-        if(res.resultado===1){
 
-          this.cabecerasFechas = [];
+        this.cabecerasFechas = [];
           const fechaLun = this.fechaInicio;
           this.cabecerasFechas.push(fechaLun.format('ddd DD [de] MMMM'));
 
@@ -182,40 +180,33 @@ export class CalendarioComponent implements OnInit, OnChanges{
           this.inicializacionListas();
           this.listHorarios = [];
           
-          for (let index = 0; index < res.data.cantidadHorarios; index++) {
+          for (let index = 0; index < res.cantidadHorarios; index++) {
             this.listHorarios.push(index.toString()); 
             
           }
           
-          this.listLunes = res.data.lunes;
-          this.listMartes = res.data.martes;
-          this.listMiercoles = res.data.miercoles;
-          this.listJueves = res.data.jueves;
-          this.listViernes = res.data.viernes;
-          this.listSabado = res.data.sabado;
-          this.listDomingo = res.data.domingo;
-
-          
-
-        }
-        else{
-          this.cabecerasFechas = [];
-          this.cabecerasFechas.push(this.fechaInicio.format('DD-MMMM'));
-          this.cabecerasFechas.push(this.fechaInicio.clone().add(1,'days').format('DD-MMMM'));
-          this.cabecerasFechas.push(this.fechaInicio.clone().add(2,'days').format('DD-MMMM'));
-          this.cabecerasFechas.push(this.fechaInicio.clone().add(3,'days').format('DD-MMMM'));
-          this.cabecerasFechas.push(this.fechaInicio.clone().add(4,'days').format('DD-MMMM'));
-          this.cabecerasFechas.push(this.fechaInicio.clone().add(5,'days').format('DD-MMMM'));
-          this.cabecerasFechas.push(this.fechaFin.format('DD-MMMM'));
-          
-
-          
-          this.inicializacionListas();
-          
-        }
+          this.listLunes = res.lunes;
+          this.listMartes = res.martes;
+          this.listMiercoles = res.miercoles;
+          this.listJueves = res.jueves;
+          this.listViernes = res.viernes;
+          this.listSabado = res.sabado;
+          this.listDomingo = res.domingo;
+       
       },
-      error:(err)=>{
-        console.log(err);
+      error:()=>{
+        this.cabecerasFechas = [];
+        this.cabecerasFechas.push(this.fechaInicio.format('DD-MMMM'));
+        this.cabecerasFechas.push(this.fechaInicio.clone().add(1,'days').format('DD-MMMM'));
+        this.cabecerasFechas.push(this.fechaInicio.clone().add(2,'days').format('DD-MMMM'));
+        this.cabecerasFechas.push(this.fechaInicio.clone().add(3,'days').format('DD-MMMM'));
+        this.cabecerasFechas.push(this.fechaInicio.clone().add(4,'days').format('DD-MMMM'));
+        this.cabecerasFechas.push(this.fechaInicio.clone().add(5,'days').format('DD-MMMM'));
+        this.cabecerasFechas.push(this.fechaFin.format('DD-MMMM'));
+        
+
+        
+        this.inicializacionListas();
       }
     });
 
@@ -240,7 +231,7 @@ export class CalendarioComponent implements OnInit, OnChanges{
 
     swal.fire({
       title:"¿Desea Cancelar el Turno?",
-      text: `Mascota: ${turno.mascota.nombre}\nDia: ${turno.fecha}\nHora:${turno.horario}`,
+      text: `Mascota: ${turno.mascota!.nombre}\nDia: ${turno.fecha}\nHora:${turno.horario}`,
       icon:"warning",
       iconColor:'red',
       confirmButtonColor:"#3085d6",
@@ -252,20 +243,12 @@ export class CalendarioComponent implements OnInit, OnChanges{
     ).then((res)=>{
       if(res.isConfirmed){
         this.turnosService.cancelarTurno(turno.id).subscribe({
-          next:(res)=>{
-            if(res.resultado ===1){
-              this.utilidadService.mostrarAlerta("Se cancelo la reserva del turno","OK");
+          next:()=>{
+              this.utilidadService.alertaExito("Se cancelo la reserva del turno","OK");
               this.mostrarTurnos();
-            }
-            else{
-              this.utilidadService.mostrarAlerta("No se pudo cancelar la reserva del turno","ERROR");
-              console.log(res.mensaje);
-            }
-
           },
-          error:(err)=>{
-            this.utilidadService.mostrarAlerta("No se pudo cancelar la reserva del turno","ERROR");
-            console.log(err);
+          error:()=>{
+            this.utilidadService.alertaError("No se pudo cancelar la reserva del turno","ERROR");
           }
         });
       }
@@ -284,25 +267,27 @@ export class CalendarioComponent implements OnInit, OnChanges{
     );
   }
 
+  @ViewChild(MatCheckbox)input!:MatCheckbox;
+
   modificarAsistencia(turno:Turno,value:boolean){
    
     if(turno.asistio!=value){
      
     
       this.turnosService.modificarAsistencia(turno.id,value).subscribe({
-        next:(res)=>{
-          if(res.resultado===1){
-            this.utilidadService.mostrarAlerta("Se modificó la asistencia","OK")
+        next:()=>{
+            this.utilidadService.alertaExito("Se modificó la asistencia","OK")
             this.mostrarTurnos();
-          }
-          else{
-            this.utilidadService.mostrarAlerta("No se pudo modificar la asistencia","ERROR");
-            console.log(res.mensaje);
-          } 
         },
-        error:(err)=>{
-          console.log(err);
-          this.utilidadService.mostrarAlerta("No se pudo modificar la asistencia","ERROR");
+        error:(err:HttpErrorResponse)=>{
+          this.input.checked=false;
+          if(err.status === 499){
+            
+            this.utilidadService.alertaError(err.error,"ERROR");
+          }else{
+            
+            this.utilidadService.alertaError("No se pudo modificar la asistencia","ERROR");
+          }
         }
       
       });
@@ -313,33 +298,27 @@ export class CalendarioComponent implements OnInit, OnChanges{
 
     mostrarDetallesCalendario(){
       this.dialog.open(ModalDetalleCalendarioComponent, {data:this.calendario}).afterClosed().subscribe((res)=>{
-  
-        if(res.eliminado){
-          this.calendario = null!;
-          this.calendarioEliminado.next(true);
+        if(res){
+          if(res.eliminado){
+            this.calendario = null!;
+            this.calendarioEliminado.next(true);
+          }
+          
+          if(res.modificado){
+            this.mostrarCalendario();
+            this.mostrarTurnos();
+          }
         }
   
-        if(res.modificado){
-          this.mostrarCalendario();
-          this.mostrarTurnos();
-        }
       });
     }
 
     mostrarCalendario():void{
-      this.calendarioService.mostrarCalendario().subscribe({
+      this.calendarioService.get().subscribe({
         next:(res)=>{
-          if(res.resultado===1){
-            this.calendario = res.data; 
-           
-            
-          }
-          else{
-            console.log(res);
-          }
+            this.calendario = res; 
         },
-        error:(error)=>{
-          console.log(error);
+        error:()=>{
         }
       });
     }

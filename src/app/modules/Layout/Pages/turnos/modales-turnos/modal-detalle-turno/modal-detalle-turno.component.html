@@ -6,7 +6,7 @@
             
             <p>Hora: <span> {{dataTurno.horario|slice:0:5}}</span></p>
     
-            <p>Mascota: <span> {{dataTurno.mascota.nombre}}</span></p>
+            <p>Mascota: <span> {{dataTurno.mascota?dataTurno.mascota.nombre:'Mascota Eliminada'}}</span></p>
             
             <p>Asistio: <span> {{dataTurno.asistio?'Si':'No'}}</span></p>
         </div>

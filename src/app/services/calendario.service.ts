@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
-import { ResponseApi } from '../models/response-api';
 import { Calendario } from '../models/calendario';
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -18,30 +17,30 @@ export class CalendarioService {
     "Content-Type":"application/json"
   })}
 
-  mostrarCalendario():Observable<ResponseApi>{
+  get():Observable<Calendario>{
 
 
-    return this.http.get<ResponseApi>(this.urlApi,this.httpOptions);
+    return this.http.get<Calendario>(this.urlApi,this.httpOptions);
   }
 
-  crearCalendario(calendario:Calendario):Observable<ResponseApi>{
+  create(calendario:Calendario):Observable<Calendario>{
 
-    return this.http.post<ResponseApi>(this.urlApi,calendario,this.httpOptions);
+    return this.http.post<Calendario>(this.urlApi,calendario,this.httpOptions);
   }
 
-  eliminarCalendario(id:number):Observable<ResponseApi>{
+  delete(id:number):Observable<void>{
 
-    return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`,this.httpOptions);
+    return this.http.delete<void>(`${this.urlApi}/${id}`,this.httpOptions);
   }
 
-  agregarTurnos(fechaFin:string):Observable<ResponseApi>{
+  extend(fechaFin:string):Observable<Calendario>{
 
-    return this.http.post<ResponseApi>(`${this.urlApi}/agregarturnos/${fechaFin}`,this.httpOptions);
+    return this.http.post<Calendario>(`${this.urlApi}/agregarturnos/${fechaFin}`,this.httpOptions);
   }
 
-  eliminarTurnos(fechaFin:string):Observable<ResponseApi>{
+  reduce(fechaFin:string):Observable<Calendario>{
 
-    return this.http.put<ResponseApi>(`${this.urlApi}/eliminarturnos/${fechaFin}`,this.httpOptions);
+    return this.http.put<Calendario>(`${this.urlApi}/eliminarturnos/${fechaFin}`,this.httpOptions);
   }
 
 

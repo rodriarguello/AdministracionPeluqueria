@@ -40,11 +40,10 @@ export class LoginComponent implements OnInit {
 
   iniciarSesion():void{
 
-  const credencialesUsuario:Usuario = new Usuario();
+  const email = this.formularioLogin.value.email;
+  const  password = this.formularioLogin.value.password
 
-  credencialesUsuario.email = this.formularioLogin.value.email;
-  credencialesUsuario.password = this.formularioLogin.value.password;
-  this.usuariosService.iniciarSesion(credencialesUsuario).subscribe({
+  this.usuariosService.login(email, password).subscribe({
 
    next:()=> {
 
@@ -54,7 +53,7 @@ export class LoginComponent implements OnInit {
   },
   error:()=>{
     
-    this.utilidadService.mostrarAlerta("Error al iniciar sesion","LOGIN")
+    this.utilidadService.alertaError("Error al iniciar sesion","LOGIN")
   }
   
   

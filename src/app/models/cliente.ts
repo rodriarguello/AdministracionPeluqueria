@@ -1,11 +1,11 @@
 import { Mascota } from "./mascota/mascota";
 
-export class Cliente{
+export interface Cliente{
 
-    id!:number;
-    nombre!:string;
-    telefono!:number;
-    email!:string;
-    mascotas!:Mascota[];
+    id?:number,
+    nombre:string,
+    telefono:number,
+    email:string,
+    mascotas?:Mascota[]
 
 }

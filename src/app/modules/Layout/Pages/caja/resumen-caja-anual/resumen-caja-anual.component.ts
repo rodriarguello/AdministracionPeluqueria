@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { RespuestaCaja } from 'src/app/models/respuesta-caja';
 import { Usuario } from 'src/app/models/usuario';
 import { CajaService } from 'src/app/services/caja.service';
@@ -42,7 +42,7 @@ constructor(private cajaService:CajaService,usuarioService:UsuariosService){
 
   generarListaAnios():void{
 
-    this.datosUsuario$.subscribe({
+    this.datosUsuario$.pipe(take(1)).subscribe({
       next:(datosUsuario)=>{
 
         const fechaCreacion = moment(datosUsuario.fechaCreacion);
@@ -79,11 +79,9 @@ constructor(private cajaService:CajaService,usuarioService:UsuariosService){
     
     this.anioMostrado = this.anioSeleccionado;
     
-    this.cajaService.mostrarIngresosPorAnio(this.anioSeleccionado).subscribe({
+    this.cajaService.getIngresoAnual(this.anioSeleccionado).subscribe({
       next:(res)=>{
-        if(res.resultado ===1){
-          this.ingresoAnual = res.data;
-        }
+          this.ingresoAnual = res;
       }
     });
 

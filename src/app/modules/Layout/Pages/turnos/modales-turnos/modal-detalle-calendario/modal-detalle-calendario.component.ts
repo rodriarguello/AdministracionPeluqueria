@@ -28,7 +28,7 @@ export class ModalDetalleCalendarioComponent {
     swal.fire({
 
       title:"¿Desea eliminar el Calendario?",
-      text: calendario.nombre,
+      text: 'Si elimina el calendario, se eliminaran todos los turnos de forma definitiva. No se puede revertir esta accción.',
       icon:"warning",
       iconColor:'red',
       confirmButtonColor:"#3085d6",
@@ -41,18 +41,13 @@ export class ModalDetalleCalendarioComponent {
     ).then(((res)=>{
       if(res.isConfirmed){
 
-        this.calendarioService.eliminarCalendario(calendario.id).subscribe({
-          next:(res)=>{
-            if(res.resultado===1){
-              this.utilidadService.mostrarAlerta("El calendario se eliminó con éxito","EXITO");
+        this.calendarioService.delete(calendario.id!).subscribe({
+          next:()=>{
+              this.utilidadService.alertaExito("El calendario se eliminó con éxito","EXITO");
               this.dialogoActual.close({eliminado:true});
-            }
-            else{
-              this.utilidadService.mostrarAlerta("El calendario no se pudo eliminar","ERROR");
-            }
           },
           error:()=>{
-            this.utilidadService.mostrarAlerta("El calendario no se pudo eliminar","ERROR");
+            this.utilidadService.alertaError("El calendario no se pudo eliminar","ERROR");
           }
         });
 
@@ -63,11 +58,9 @@ export class ModalDetalleCalendarioComponent {
   }
 
   mostrarCalendario(){
-    this.calendarioService.mostrarCalendario().subscribe({
+    this.calendarioService.get().subscribe({
       next:(res)=>{
-        if(res.resultado === 1){
-          this.calendario = res.data;
-        }
+          this.calendario = res;
       }
     });
   }

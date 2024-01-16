@@ -2,6 +2,7 @@ mat-card{
     width: 80vw
 }
 
+
 @media (min-width:500px) {
     
     mat-card{

@@ -40,50 +40,52 @@ export class ModalReservarTurnoComponent implements OnInit {
   listMascotas:Mascota[] = [];
 
   mostrarMascotas():void{
-    this.mascotaService.mostrarMascotas().subscribe({
+    this.mascotaService.getAll().subscribe({
       next:(res)=>{
-        if(res.resultado===1){
-          this.listMascotas = res.data;
-        }
-        else{
-          console.log(res.mensaje)
-        }
+          this.listMascotas = res;
+        
       },
-      error:(err)=>{
-        console.log(err);
+      error:()=>{
       }
     });
   }
 
   reservarTurno():void{
     
-    const turnoModificar = new TurnoModificar();
-    turnoModificar.idMascota = this.formReserva.value.idMascota;
-    turnoModificar.precio = this.formReserva.value.precio;
-
+    const turnoModificar:TurnoModificar ={
+      idMascota: this.formReserva.value.idMascota,
+      precio: this.formReserva.value.precio
+    };
     
     this.turnoService.reservarTurno(this.dataTurno.id,turnoModificar).subscribe({
-      next:(res)=>{
-        if(res.resultado===1){
-          this.utilidadService.mostrarAlerta("El turno fue reservado","OK");
+      next:()=>{
+          this.utilidadService.alertaExito("El turno fue reservado","OK");
           this.dialogoActual.close(true);
-        }
-        else{
-          this.utilidadService.mostrarAlerta("No se pudo reservar el turno","ERROR");
-          console.log(res.mensaje);
-        }
+        
       },
-      error:(err)=>{
-        this.utilidadService.mostrarAlerta("No se pudo reservar el turno","ERROR");
-        console.log(err);
+      error:()=>{
+        this.utilidadService.alertaError("No se pudo reservar el turno","ERROR");
       }
     });
 
   }
 
   agregarMascota():void{
-    let mascota = new Mascota();
-    mascota.id = -1;
+    let mascota:Mascota = {
+      id: -1,
+      nombre:null!,
+      fechaNacimiento:null!,
+      idCliente:null!,
+      cliente:null!,
+      idRaza:null!,
+      raza:null!,
+      idAlergias:null!,
+      idEnfermedades:null!,
+      enfermedades:null!,
+      alergias:null!,
+      turnos:null!
+
+    }
     this.nuevoDialog.open(ModalMascotasComponent,{disableClose:true,data:mascota}).afterClosed().subscribe(
       (res)=>{
         if(res!=null){

@@ -5,7 +5,7 @@ import { CalendarioService } from 'src/app/services/calendario.service';
 import * as moment from 'moment';
 import { UtilidadService } from 'src/app/services/utilidad.service';
 import { MY_DATA_FORMATS } from 'src/app/spinner/spinner.component';
-import swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-modal-modificar-turnos',
@@ -30,58 +30,38 @@ export class ModalModificarTurnosComponent {
 
     if(this.data.accion == "agregar"){
 
-      this.calendarioService.agregarTurnos(this.nuevaFechaFin.format()).subscribe({
-        next:(res)=>{
-          if(res.resultado===1){
+      this.calendarioService.extend(this.nuevaFechaFin.format()).subscribe({
+        next:()=>{
             this.dialogoActual.close(true);
-            this.utilidadService.mostrarAlerta("Se agregaron los turnos con éxito","EXITO");
-  
-          }
-          else{
-            this.utilidadService.mostrarAlerta("Error al agregar los turnos","ERROR");
-          }
+            this.utilidadService.alertaExito("Se agregaron los turnos con éxito","EXITO");
         },
         error:()=>{
-          this.utilidadService.mostrarAlerta("Error al agregar los turnos","ERROR");
+          this.utilidadService.alertaError("Error al agregar los turnos","ERROR");
         }
       });
     }
 
     if(this.data.accion=="eliminar"){
      
-      this.calendarioService.eliminarTurnos(this.nuevaFechaFin.format()).subscribe({
-        next:(res)=>{
-          if(res.resultado===1){
+      this.calendarioService.reduce(this.nuevaFechaFin.format()).subscribe({
+        next:()=>{
             this.dialogoActual.close(true);
-            this.utilidadService.mostrarAlerta("Se eliminaron los turnos con éxito","EXITO");
-            
-          }
-          else if(res.resultado ===2){
-            swal.fire({
-              title:'Error al eliminar',
-              text: `${res.mensaje}`,
-              
-              width:'300px'
-              
-
-            });
-            
-          }
-          else{
-            this.utilidadService.mostrarAlerta("Error al eliminar los turnos","ERROR");
-          }
+            this.utilidadService.alertaExito("Se eliminaron los turnos con éxito","EXITO");
         },
-        error:(error)=>{
-          this.utilidadService.mostrarAlerta("Error al eliminar los turnos","ERROR");
-          
+        error:(err:HttpErrorResponse)=>{
+
+          if(err.status === 499){
+
+            this.utilidadService.alertaError(err.error,"ERROR");
+
+          }else{
+
+            this.utilidadService.alertaError("Error al eliminar los turnos","ERROR");
+          }
         }
       });
 
     }
-
-
-
-
   }
 
 

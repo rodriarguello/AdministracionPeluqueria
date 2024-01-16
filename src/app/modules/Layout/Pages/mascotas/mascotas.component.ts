@@ -8,6 +8,7 @@ import { ModalMascotasDetalleComponent } from '../../modales/modal-mascotas-deta
 import { ModalMascotasComponent } from '../../modales/modal-mascotas/modal-mascotas.component';
 import swal from 'sweetalert2';
 import { UtilidadService } from 'src/app/services/utilidad.service';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-mascotas',
   templateUrl: './mascotas.component.html',
@@ -41,21 +42,12 @@ export class MascotasComponent implements OnInit, AfterViewInit{
 
   mostrarMascotas():void{
 
-    this.mascotaService.mostrarMascotas().subscribe({
+    this.mascotaService.getAll().subscribe({
       next:(res)=>{
-        
-        if(res.resultado ===1){
-          
-          this.dataTableSource.data = res.data;
+          this.dataTableSource.data = res;
           if(this.dataTableSource.data.length>0) this.sinDatos = false;
-          
-        }
-        else{
-          console.log(res);
-        }
       },
-      error:(error)=>{
-        console.log(error);
+      error:()=>{
       }
 
     });
@@ -94,21 +86,19 @@ export class MascotasComponent implements OnInit, AfterViewInit{
     cancelButtonText:"No,volver"
     }).then((res)=>{
       if(res.isConfirmed){
-          this.mascotaService.eliminarMascota(mascota.id).subscribe({
-          next:(res)=>{
-            if(res.resultado===1){
-              this.utilidadService.mostrarAlerta("La Mascota se eliminó con éxito","Exito");
+          this.mascotaService.delete(mascota.id).subscribe({
+          next:()=>{
+              this.utilidadService.alertaExito("La Mascota se eliminó con éxito","Exito");
               this.mostrarMascotas();
-            }
-            else{
-              this.utilidadService.mostrarAlerta("No se pudo eliminar la Mascota","Error");
-              console.log(res);
-            }
-          },
-          error:(error)=>{
             
-            this.utilidadService.mostrarAlerta("No se pudo eliminar la Mascota","Error");
-            console.log(error);
+          },
+          error:(err:HttpErrorResponse)=>{
+            if(err.status === 499){
+              this.utilidadService.alertaError(err.error,"Error");
+            }else{
+              
+              this.utilidadService.alertaError("No se pudo eliminar la Mascota","Error");
+            }
           }
         });
       }

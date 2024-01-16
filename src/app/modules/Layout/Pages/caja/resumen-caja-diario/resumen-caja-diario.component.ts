@@ -5,6 +5,7 @@ import { MY_DATA_FORMATS } from 'src/app/spinner/spinner.component';
 import { RespuestaCaja } from 'src/app/models/respuesta-caja';
 import { CajaService } from 'src/app/services/caja.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { take } from 'rxjs';
 
 
 
@@ -28,9 +29,9 @@ export class ResumenCajaDiarioComponent {
 
   obtenerFechaCreacionUsuario(){
 
-     this.usuarioService.getDatosUsuario.subscribe({
+     this.usuarioService.getDatosUsuario.pipe(take(1)).subscribe({
       next:(res)=>{
-        this.fechaCreacion =  res.fechaCreacion;
+        this.fechaCreacion =  res.fechaCreacion!;
       }
 
      });
@@ -51,14 +52,12 @@ export class ResumenCajaDiarioComponent {
     
     
    
-    this.cajaService.mostrarIngresosPorDia(
+    this.cajaService.getIngresoDiario(
       this.fechaSeleccionada.year(),
       this.fechaSeleccionada.month()+1,
       this.fechaSeleccionada.date()).subscribe({
         next:(res)=>{
-            if(res.resultado ===1){
-              this.ingresoDiario = res.data;
-            }
+              this.ingresoDiario = res;
         }
       });
   }

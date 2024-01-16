@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Turno } from 'src/app/models/turno/turno';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
@@ -12,7 +11,7 @@ import { UtilidadService } from 'src/app/services/utilidad.service';
 })
 export class ModalDetalleTurnoComponent implements OnInit{
 
-  constructor(@Inject(MAT_DIALOG_DATA)public dataTurno:Turno, private nuevoDialog:MatDialog, private fb:FormBuilder, private turnoService:TurnosService,
+  constructor(@Inject(MAT_DIALOG_DATA)public dataTurno:Turno, private turnoService:TurnosService,
   private dialogoActual:MatDialogRef<ModalDetalleTurnoComponent>, private utilidadService:UtilidadService){
 
    this.habilitarBoton = false;
@@ -32,21 +31,12 @@ export class ModalDetalleTurnoComponent implements OnInit{
   modificarPrecio():void{
 
     this.turnoService.modificarPrecio(this.dataTurno.id,this.precio).subscribe({
-      next:(res)=>{
-        if(res.resultado===1){
-          this.utilidadService.mostrarAlerta("Se modificó el precio","OK")
+      next:()=>{
+          this.utilidadService.alertaExito("Se modificó el precio","OK")
           this.dialogoActual.close(true);
-        }
-        else{
-          this.utilidadService.mostrarAlerta("El precio no se pudo modificar","ERROR")
-          console.log(res.mensaje);
-
-        }
       },
-      error:(err)=>{
-        this.utilidadService.mostrarAlerta("El precio no se pudo modificar","ERROR")
-
-        console.log(err);
+      error:()=>{
+        this.utilidadService.alertaError("El precio no se pudo modificar","ERROR")
       }
     });
     
