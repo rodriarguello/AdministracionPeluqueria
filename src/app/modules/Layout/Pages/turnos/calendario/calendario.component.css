@@ -81,6 +81,22 @@ ul{
     border-bottom-left-radius: 5px;
 }
 
+.container-button-semana{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    margin: auto 0;
+}
+
+@media (min-width:500px) {
+    
+    .container-button-semana{
+        justify-content: space-between;
+    }
+}
+
 @media (min-width:1400px) {
     
     .headers{
