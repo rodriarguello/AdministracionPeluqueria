@@ -8,6 +8,8 @@
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
+
+          <p *ngIf="agregar === true"><mat-checkbox [formControl]="excluirDomingo" color="primary">Excluir Domingos</mat-checkbox></p>
           
     </mat-dialog-content>
     <mat-dialog-actions class="d-flex justify-content-center">

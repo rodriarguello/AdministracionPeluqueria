@@ -6,6 +6,8 @@ import * as moment from 'moment';
 import { UtilidadService } from 'src/app/services/utilidad.service';
 import { MY_DATA_FORMATS } from 'src/app/spinner/spinner.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormControl, Validators } from '@angular/forms';
+import { ExtenderCalendario } from 'src/app/models/calendario/extenderCalendario';
 
 @Component({
   selector: 'app-modal-modificar-turnos',
@@ -19,18 +21,26 @@ export class ModalModificarTurnosComponent {
   private utilidadService:UtilidadService){
     
    this.controlarAccion(data.minDate,data.maxDate,data.accion);
+   this.excluirDomingo = new FormControl(true,[Validators.required]);
+   if(this.data.accion === 'agregar') this.agregar = true;
   }
 
+  agregar:boolean = false;
   nuevaFechaFin:any;
   maxDate:any;
   minDate:any;
   tituloAccion!:string;
+  excluirDomingo:FormControl;
 
   modificarTurnos(){
 
-    if(this.data.accion == "agregar"){
+    if(this.agregar=== true){
+      const extenderCalendario:ExtenderCalendario = {
+        fechaFin: this.nuevaFechaFin.format(),
+        excluirDomingo:this.excluirDomingo.value
+      }
 
-      this.calendarioService.extend(this.nuevaFechaFin.format()).subscribe({
+      this.calendarioService.extend(extenderCalendario).subscribe({
         next:()=>{
             this.dialogoActual.close(true);
             this.utilidadService.alertaExito("Se agregaron los turnos con éxito","EXITO");
@@ -41,7 +51,7 @@ export class ModalModificarTurnosComponent {
       });
     }
 
-    if(this.data.accion=="eliminar"){
+    if(this.agregar=== false){
      
       this.calendarioService.reduce(this.nuevaFechaFin.format()).subscribe({
         next:()=>{

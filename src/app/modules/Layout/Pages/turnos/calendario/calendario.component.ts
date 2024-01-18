@@ -6,7 +6,7 @@ import swal from 'sweetalert2';
 import { UtilidadService } from 'src/app/services/utilidad.service';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import * as moment from 'moment';
-import { Calendario } from 'src/app/models/calendario';
+import { Calendario } from 'src/app/models/calendario/calendario';
 import { CalendarioService } from 'src/app/services/calendario.service';
 import { MY_DATA_FORMATS } from 'src/app/spinner/spinner.component';
 import { ModalDetalleCalendarioComponent } from '../modales-turnos/modal-detalle-calendario/modal-detalle-calendario.component';

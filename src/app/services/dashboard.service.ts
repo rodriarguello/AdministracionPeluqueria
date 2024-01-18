@@ -22,7 +22,7 @@ httpOptions={ headers:new HttpHeaders({
 })}
 
 
-resumenDiario():Observable<ResponseApi>{
+getResumen():Observable<ResponseApi>{
 
 
   return this.http.get<ResponseApi>(this.urlApi, this.httpOptions);

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MY_DATA_FORMATS } from 'src/app/spinner/spinner.component';
-import { Calendario } from 'src/app/models/calendario';
+import { Calendario } from 'src/app/models/calendario/calendario';
 import { CalendarioService } from 'src/app/services/calendario.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
 
@@ -26,7 +26,8 @@ export class ModalCalendarioComponent {
       fechaFin:['',Validators.required],
       horaInicio:[8,Validators.required],
       horaFin:[18,Validators.required],
-      intervaloTurnos:[30,Validators.required]
+      intervaloTurnos:[30,Validators.required],
+      excluirDomingo:[true,Validators.required]
     });
 
   }
@@ -46,7 +47,8 @@ export class ModalCalendarioComponent {
       fechaFin: this.formCalendario.value.fechaFin,
       horaInicioTurnos: this.formCalendario.value.horaInicio,
       horaFinTurnos: this.formCalendario.value.horaFin,
-      intervaloTurnos: this.formCalendario.value.intervaloTurnos
+      intervaloTurnos: this.formCalendario.value.intervaloTurnos,
+      excluirDomingo: this.formCalendario.value.excluirDomingo
     };
     
     this.calendarioService.create(calendario).subscribe({

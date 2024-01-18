@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Calendario } from 'src/app/models/calendario';
+import { Calendario } from 'src/app/models/calendario/calendario';
 import { CalendarioService } from 'src/app/services/calendario.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
 import swal from 'sweetalert2';
