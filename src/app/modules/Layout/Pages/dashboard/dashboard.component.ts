@@ -78,7 +78,7 @@ export class DashboardComponent implements OnInit {
   
   mostrarResumenDiario():void{
     
-    this.dashboardService.resumenDiario().subscribe({
+    this.dashboardService.getResumen().subscribe({
       next:(res)=>{
         if(res.resultado===1){
           
