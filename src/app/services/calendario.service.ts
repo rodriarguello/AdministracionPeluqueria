@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
-import { Calendario } from '../models/calendario';
+import { Calendario } from '../models/calendario/calendario';
 import { environment } from 'src/environments/environment';
+import { ExtenderCalendario } from '../models/calendario/extenderCalendario';
 @Injectable({
   providedIn: 'root'
 })
@@ -33,9 +34,9 @@ export class CalendarioService {
     return this.http.delete<void>(`${this.urlApi}/${id}`,this.httpOptions);
   }
 
-  extend(fechaFin:string):Observable<Calendario>{
+  extend(extenderCalendario:ExtenderCalendario):Observable<Calendario>{
 
-    return this.http.post<Calendario>(`${this.urlApi}/agregarturnos/${fechaFin}`,this.httpOptions);
+    return this.http.put<Calendario>(this.urlApi+'/agregarturnos',extenderCalendario,this.httpOptions);
   }
 
   reduce(fechaFin:string):Observable<Calendario>{
