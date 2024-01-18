@@ -6,6 +6,7 @@ export interface Calendario{
     fechaFin:Date,
     horaInicioTurnos:number,
     horaFinTurnos:number,
-    intervaloTurnos:number
+    intervaloTurnos:number,
+    excluirDomingo:boolean
 
 }
