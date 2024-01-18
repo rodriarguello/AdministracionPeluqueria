@@ -17,7 +17,7 @@ import { UtilidadService } from 'src/app/services/utilidad.service';
 })
 export class ModalCalendarioComponent {
 
-  constructor(private dialogoActual:MatDialogRef<ModalCalendarioComponent>, private fb:FormBuilder, private calendarioService:CalendarioService,
+  constructor(private dialogoActual:MatDialogRef<ModalCalendarioComponent>, fb:FormBuilder, private calendarioService:CalendarioService,
     private utilidadService:UtilidadService){
 
     this.formCalendario = fb.group({
@@ -30,7 +30,14 @@ export class ModalCalendarioComponent {
       excluirDomingo:[true,Validators.required]
     });
 
+    this.fecha.setFullYear(this.fecha.getFullYear() + 1);
+
   }
+
+  fechaActual= new Date();
+
+  fecha = new Date();
+  
 
   formCalendario:FormGroup;
 

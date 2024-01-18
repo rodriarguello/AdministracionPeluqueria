@@ -24,6 +24,7 @@
               matInput
               [matDatepicker]="picker"
               formControlName="fechaInicio"
+              [min]="fechaActual"
             />
             <mat-hint >DD/MM/YYYY</mat-hint>
             
@@ -44,6 +45,8 @@
               matInput
               [matDatepicker]="picker2"
               formControlName="fechaFin"
+              [min]="formCalendario.value.fechaInicio || fechaActual"
+              [max]="fecha"
              
             />
             
