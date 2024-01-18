@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MY_DATA_FORMATS } from 'src/app/spinner/spinner.component';
-import { Calendario } from 'src/app/models/calendario';
+import { Calendario } from 'src/app/models/calendario/calendario';
 import { CalendarioService } from 'src/app/services/calendario.service';
 import { UtilidadService } from 'src/app/services/utilidad.service';
 
