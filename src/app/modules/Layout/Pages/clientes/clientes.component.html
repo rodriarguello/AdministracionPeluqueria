@@ -98,7 +98,7 @@
 <mat-menu #menu="matMenu" >
   <ng-template  matMenuContent let-cliente="clienteMenu">
 
-    <button mat-menu-item (click)="mostrarDetalles(cliente)">
+    <button mat-menu-item (click)="mostrarDetalles(cliente.id)">
       <mat-icon color="accent" >search</mat-icon>
       <span>Detalle</span>
     </button>
