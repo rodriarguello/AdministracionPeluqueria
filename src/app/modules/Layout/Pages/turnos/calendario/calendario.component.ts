@@ -31,7 +31,6 @@ import { MatCheckbox } from '@angular/material/checkbox';
 export class CalendarioComponent implements OnInit, OnChanges{
   
   constructor(private turnosService:TurnosService, private dialog:MatDialog, private utilidadService:UtilidadService,private calendarioService:CalendarioService){
-      moment.locale("es");
       this.turnoMenu = {
         id:null!,
         fecha:null!,
@@ -105,7 +104,7 @@ export class CalendarioComponent implements OnInit, OnChanges{
 
   mostrarTurnos(){
    
-    const fechaSeleccionada =  moment.utc(this.fecha).subtract(3, 'hours');
+    const fechaSeleccionada =  moment.utc(this.fecha).subtract(3, 'hours').locale('es');
     
       
     if(fechaSeleccionada.isoWeekday() === 1){
