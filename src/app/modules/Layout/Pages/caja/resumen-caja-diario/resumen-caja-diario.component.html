@@ -19,10 +19,17 @@
       <button mat-raised-button color="primary" class="px-5" (click)="mostrarIngresoDiario()">Mostrar</button>
 
     </mat-card-actions>
-    <mat-card-content *ngIf="ingresoDiario" class="d-flex flex-column align-items-center mt-3">
+    <mat-card-content *ngIf="ingresoDiario && ingresoDiario.cantidadIngresos>0; else sinIngresos" class="d-flex flex-column align-items-center mt-3">
       <p>Cantidad de Ingresos: <span style="font-weight: bold;">{{ingresoDiario.cantidadIngresos}}</span></p>
       <p>Ingreso total: <span style="font-weight: bold;">${{ingresoDiario.total}}</span></p>
     </mat-card-content>
+
+    <ng-template #sinIngresos>
+      <mat-card-content class="d-flex flex-column align-items-center mt-3">
+        <p>No hay ingresos en el periodo seleccionado.</p>
+    </mat-card-content>
+
+    </ng-template>
   </mat-card>
   
 </div>
