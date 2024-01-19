@@ -66,7 +66,7 @@ export class ModalDetalleCalendarioComponent {
   }
 
   agregarTurnos(){
-    this.dialog.open(ModalModificarTurnosComponent,{data:{minDate:moment(this.calendario.fechaFin).add('1','days'),maxDate:moment("2030-12-31"),accion:"agregar"}}).afterClosed().subscribe(
+    this.dialog.open(ModalModificarTurnosComponent,{data:{minDate:moment(this.calendario.fechaFin).add('1','days'),maxDate:moment().add(1,'years'),accion:"agregar"}}).afterClosed().subscribe(
       {next:(res)=>{
           if(res === true){
             this.calendarioModificado = true;
